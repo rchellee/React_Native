@@ -24,17 +24,17 @@ const Profile = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={posts}
-        keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <VideoCard
-            title={item.title}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
-          />
-        )}
+        // data={posts}
+        // keyExtractor={(item) => item.$id}
+        // renderItem={({ item }) => (
+        //   <VideoCard
+        //     title={item.title}
+        //     thumbnail={item.thumbnail}
+        //     video={item.video}
+        //     creator={item.creator.username}
+        //     avatar={item.creator.avatar}
+        //   />
+        // )}
         ListEmptyComponent={() => (
           <EmptyState
             title="No Videos Found"

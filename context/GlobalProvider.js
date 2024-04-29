@@ -1,22 +1,23 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+
 import { getCurrentUser } from "../lib/appwrite";
 
 const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 
-const GLobalProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const GlobalProvider = ({ children }) => {
+  const [isLoggedIn, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getCurrentUser()
       .then((res) => {
         if (res) {
-          setIsLoggedIn(true);
+          setIsLogged(true);
           setUser(res);
         } else {
-          setIsLoggedIn(false);
+          setIsLogged(false);
           setUser(null);
         }
       })
@@ -24,23 +25,23 @@ const GLobalProvider = ({ children }) => {
         console.log(error);
       })
       .finally(() => {
-        setIsLoading(false);
+        setLoading(false);
       });
   }, []);
 
   return (
-    <GlobalContext.Provider value={{
+    <GlobalContext.Provider
+      value={{
         isLoggedIn,
-        setIsLoggedIn,
+        setIsLogged,
         user,
         setUser,
-        isLoading
-    }}>
-    {children}
-
+        loading,
+      }}
+    >
+      {children}
     </GlobalContext.Provider>
-
-  ) 
+  );
 };
 
-export default GLobalProvider;
+export default GlobalProvider;
