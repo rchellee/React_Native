@@ -9,9 +9,20 @@ import SearchInput from "../../components/SearchInput";
 import VideoCard from "../../components/VideoCard";
 import { Video } from "expo-av";
 
+const VideoComponent = ({ source }) => {
+  return (
+    <View style={{ width: '100%', height: 200, marginBottom: 16 }}>
+      <Video
+        source={source}
+        style={{ flex: 1 }}
+        useNativeControls
+      />
+    </View>
+  );
+};
 const Home = () => {
   return (
-    <SafeAreaView className="bg-white h-full">
+    <SafeAreaView className="bg-primary h-full">
       <FlatList
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
@@ -22,34 +33,26 @@ const Home = () => {
                   className="w-[46px] h-[46px] rounded-lg mr-2"
                   resizeMode="cover"
                 />
-                <Text className="text-xl font-psemibold text">
+                <Text className="text-xl font-psemibold text-white">
                   Ritchelle Rueras
                 </Text>
               </View>
             </View>
-            <View className="w-full flex-1 pt-5 pb-8">
-              <Text className="text-black-100 text-lg font-pregular mb-3">
+            <View className="">
+              <Text className="text-200 text-lg font-psemibold mb-3">
+              <Text style={{color: "darkmagenta"}}>
                 Pet Education
               </Text>
-              <Text className="text-black-100 text-lg font-pregular mb-3">
+              </Text>
+              <Text className="text-100 text-lg font-pregular mb-3 text-white">
                 Welcome! Here you'll find informative videos to help you become a better pet owner.
               </Text>
-              <View style={{ width: 300, height: 200 }}>
-                <Video
-                  source={require("../../assets/videos/educ1.mp4")}
-                  style={{ flex: 1 }}
-                  useNativeControls
-                /> 
-                <Video
-                  source={require("../../assets/videos/educ2.mp4")}
-                  style={{ flex: 1 }}
-                  useNativeControls
-                />
-        
-              </View>
-            </View> 
-          </View>
+              <VideoComponent source={require("../../assets/videos/educ1.mp4")} />
+            <VideoComponent source={require("../../assets/videos/educ2.mp4")} />
+            <VideoComponent source={require("../../assets/videos/educ3.mp4")} />
+          </View></View>
         )}
+   
       />
     </SafeAreaView>
   );
