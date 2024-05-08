@@ -5,9 +5,9 @@ import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { images } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
 import { getAllPosts } from "../../lib/appwrite";
-import EmptyState  from "../../components/EmptyState";
+import EmptyState from "../../components/EmptyState";
 import SearchInput from "../../components/SearchInput";
-import VideoCard from "../../components/VideoCard"
+import PetList from "../../components/PetList";
 
 const Adopt = () => {
   const { data: posts, refetch } = useAppwrite(getAllPosts);
@@ -32,7 +32,7 @@ const Adopt = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <VideoCard
+          <PetList
             title={item.title}
             thumbnail={item.thumnail}
             video={item.video}
@@ -56,7 +56,7 @@ const Adopt = () => {
             </View>
 
             <SearchInput />
-            
+
             <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-gray-100 text-lg font-pregular mb-3">
                 Meet our WanderPets, they've been waiting for you!
