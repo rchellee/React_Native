@@ -7,17 +7,20 @@ import { images } from "../../constants";
 
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 import { createUser } from "../../lib/appwrite";
 
 const SignUp = () => {
+  const { setUser, setIsLogged } = useGlobalContext();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submit = async () => {
     if (!form.username === "" || !form.email === "" || !form.password === "") {
@@ -27,7 +30,7 @@ const SignUp = () => {
     setIsSubmitting(true);
     try {
       const result = await createUser(form.email, form.password, form.username);
-      setStatusBarNetworkActivityIndicatorVisible(result);
+      setUser(result);
       setIsLogged(true);
 
       router.replace("/home");
