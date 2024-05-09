@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { ResizeMode, Video } from "expo-av";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 
 import { icons } from "../constants";
 
-const PetList = ({ title, creator, avatar, thumbnail, video }) => {
-  const [play, setPlay] = useState(false);
-
+const PetList = ({ name, creator, avatar, image }) => {
   return (
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
@@ -24,7 +21,7 @@ const PetList = ({ title, creator, avatar, thumbnail, video }) => {
               className="font-psemibold text-sm text-white"
               numberOfLines={1}
             >
-              {title}
+              {name}
             </Text>
             <Text
               className="text-xs text-gray-100 font-pregular"
@@ -40,38 +37,16 @@ const PetList = ({ title, creator, avatar, thumbnail, video }) => {
         </View>
       </View>
 
-      {play ? (
-        <Video
-          source={{ uri: video }}
-          className="w-full h-60 rounded-xl mt-3"
-          resizeMode={ResizeMode.CONTAIN}
-          useNativeControls
-          shouldPlay
-          onPlaybackStatusUpdate={(status) => {
-            if (status.didJustFinish) {
-              setPlay(false);
-            }
-          }}
+      <TouchableOpacity
+        activeOpacity={0.7}
+        className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
+      >
+        <Image
+          source={{ uri: image }}
+          className="w-full h-full rounded-xl mt-3"
+          resizeMode="cover"
         />
-      ) : (
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => setPlay(true)}
-          className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-        >
-          <Image
-            source={{ uri: thumbnail }}
-            className="w-full h-full rounded-xl mt-3"
-            resizeMode="cover"
-          />
-
-          <Image
-            source={icons.play}
-            className="w-12 h-12 absolute"
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      )}
+      </TouchableOpacity>
     </View>
   );
 };

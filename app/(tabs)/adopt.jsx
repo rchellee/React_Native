@@ -33,9 +33,8 @@ const Adopt = () => {
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <PetList
-            title={item.title}
-            thumbnail={item.thumnail}
-            video={item.video}
+            name={item.name}
+            image={item.image}
             creator={item.creator}
             avatar={item.avatar}
           />
@@ -66,8 +65,8 @@ const Adopt = () => {
         )}
         ListEmptyComponent={() => (
           <EmptyState
-            title="No Videos Found"
-            subtitle="No videos created yet"
+            title="No Pets Found"
+            subtitle="No Pets created yet"
           />
         )}
         refreshControl={

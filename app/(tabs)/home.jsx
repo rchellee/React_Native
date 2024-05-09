@@ -2,11 +2,6 @@ import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import { images } from "../../constants";
-import useAppwrite from "../../lib/useAppwrite";
-import { getAllPosts } from "../../lib/appwrite";
-import EmptyState  from "../../components/EmptyState";
-import SearchInput from "../../components/SearchInput";
-import VideoCard from "../../components/VideoCard";
 import { Video } from "expo-av";
 
 const VideoComponent = ({ source }) => {

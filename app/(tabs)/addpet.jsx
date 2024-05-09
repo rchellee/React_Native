@@ -12,21 +12,18 @@ import {
   ScrollView,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { icons } from "../../constants";
 import { createPetList } from "../../lib/appwrite";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import Date from "../../components/date";
 
 const Create = () => {
   const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     name: "",
-    age: "",
     breed: "",
     color: "",
     species: "",
@@ -39,8 +36,50 @@ const Create = () => {
     image: null,
   });
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
+  // Breeds
+  const breedOptions = {
+    Dog: [
+      { label: "Labrador", value: "Labrador" },
+      { label: "German Shepherd", value: "German Shepherd" },
+      { label: "Golden Retriever", value: "Golden Retriever" },
+      { label: "Poodle", value: "Poodle" },
+      { label: "French Bulldog", value: "French Bulldog" },
+      { label: "Beagle", value: "Beagle" },
+      { label: "Bulldog", value: "Bulldog" },
+      { label: "Yorkshire Terrier", value: "Yorkshire Terrier" },
+      { label: "Dachshund", value: "Dachshund" },
+      { label: "Boxer", value: "Boxer" },
+      { label: "Rottweiler", value: "Rottweiler" },
+      { label: "Doberman Pinscher", value:  "Doberman Pinscher" },
+      { label: "Australian Shepherd", value: "Australian Shepherd" },
+      { label: "Shih Tzu", value: "Shih Tzu" },
+      { label: "Pomeranian", value: "Pomeranian" },
+      { label: "Cavalier King Charles Spaniel", value: "Cavalier King Charles Spaniel" },
+      { label: "Basset Hound", value: "Basset Hound" },
+      { label: "Bichon Frise", value: "Bichon Frise" },
+      { label: "None", value: "None"},
+    ],
+    Cat: [
+      { label: "Maine Coon", value: "Maine Coon" },
+      { label: "Siamese", value: "Siamese" },
+      { label: "Persian", value: "Persian" },
+      { label: "British Shorthair", value: "British Shorthair" },
+      { label: "Ragdoll", value: "Ragdoll" },
+      { label: "Abyssinian", value: "Abyssinian" },
+      { label: "Scottish Fold", value: "Scottish Fold" },
+      { label: "Sphynx", value: "Sphynx" },
+      { label: "Bengal", value: "Bengal" },
+      { label: "Russian Blue", value: "Russian Blue" },
+      { label: "Norwegian Forest Cat", value: "Norwegian Forest Cat" },
+      { label: "Siberian Forest Cat", value: "Siberian Forest Cat" },
+      { label: "American Shorthair", value: "American Shorthair" },
+      { label: "Exotic Shorthair", value: "Exotic Shorthair" },
+      { label: "Bombay", value: "Bombay" },
+      { label: "Burmese", value: "Burmese" },
+      { label: "Oriental Shorthair", value: "Oriental Shorthair" },
+      { label: "None", value: "None"},
+    ],
+  };
   const openPicker = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -56,26 +95,9 @@ const Create = () => {
     }
   };
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date) => {
-    const formattedDate = `${
-      date.getMonth() + 1
-    }/${date.getDate()}/${date.getFullYear()}`;
-    setForm({ ...form, age: formattedDate });
-    hideDatePicker();
-  };
-
   const submit = async () => {
     if (
       !form.name ||
-      !form.age ||
       !form.breed ||
       !form.color ||
       !form.species ||
@@ -103,7 +125,6 @@ const Create = () => {
     } finally {
       setForm({
         name: "",
-        age: "",
         breed: "",
         color: "",
         species: "",
@@ -134,17 +155,14 @@ const Create = () => {
           handleChangeText={(e) => setForm({ ...form, name: e })}
           otherStyles="mt-10"
         />
-        
-        <Date form={form} setForm={setForm} />
 
         <View className="mt-7">
-          <Text className="text-base text-gray-100 font-pmedium">Species</Text>
+          <Text className="text-base text-gray-100 font-pmedium">Species & Breed</Text>
           <RNPickerSelect
             onValueChange={(value) => setForm({ ...form, species: value })}
             items={[
               { label: "Dog", value: "Dog" },
               { label: "Cat", value: "Cat" },
-              { label: "Bird", value: "Bird" },
             ]}
             style={{
               inputIOS: {
@@ -167,13 +185,34 @@ const Create = () => {
             }}
           />
         </View>
-        <FormField
-          title="Breed"
-          value={form.breed}
-          placeholder="Enter pet breed..."
-          handleChangeText={(e) => setForm({ ...form, breed: e })}
-          otherStyles="mt-7"
-        />
+        {form.species && (
+          <RNPickerSelect
+            onValueChange={(value) => setForm({ ...form, breed: value })}
+            value={form.breed}
+            items={breedOptions[form.species]}
+            style={{
+              inputIOS: {
+                paddingVertical: 12,
+                paddingHorizontal: 10,
+                color: "black",
+                paddingRight: 30,
+                backgroundColor: "white",
+                marginTop: 10,
+              },
+              inputAndroid: {
+                paddingVertical: 8,
+                paddingHorizontal: 10,
+                color: "black",
+                paddingRight: 30,
+                backgroundColor: "white",
+                marginTop: 10,
+              },
+              placeholder: {
+                color: "#7b7b8b",
+              },
+            }}
+          />
+        )}
         <FormField
           title="Color"
           value={form.color}
