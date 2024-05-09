@@ -24,10 +24,10 @@ const Search = () => {
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <PetList
-            name={item.name}
+            Name={item.Name}
             image={item.image}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
+            creator={item.creator ? item.creator.username : ""}
+            avatar={item.creator ? item.creator.avatar : ""}
           />
         )}
         ListHeaderComponent={() => (

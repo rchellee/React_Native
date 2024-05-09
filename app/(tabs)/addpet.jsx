@@ -23,15 +23,14 @@ const Create = () => {
   const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
-    name: "",
+    Name: "",
     breed: "",
     color: "",
     species: "",
     gender: "",
     size: "",
     description: "",
-    vaccination_status: false,
-    adoption_fee: 0.0,
+    adoption_fee: 0,
     adoption_status: "Available",
     image: null,
   });
@@ -97,7 +96,7 @@ const Create = () => {
 
   const submit = async () => {
     if (
-      !form.name ||
+      !form.Name ||
       !form.breed ||
       !form.color ||
       !form.species ||
@@ -105,7 +104,7 @@ const Create = () => {
       !form.size ||
       !form.description ||
       !form.adoption_status ||
-      form.adoption_fee === 0.0 ||
+      form.adoption_fee === 0 ||
       !form.image
     ) {
       return Alert.alert("Please provide all fields");
@@ -124,7 +123,7 @@ const Create = () => {
       Alert.alert("Error", error.message);
     } finally {
       setForm({
-        name: "",
+        Name: "",
         breed: "",
         color: "",
         species: "",
@@ -150,9 +149,9 @@ const Create = () => {
 
         <FormField
           title="Pet Name"
-          value={form.name}
+          value={form.Name}
           placeholder="Enter pet name..."
-          handleChangeText={(e) => setForm({ ...form, name: e })}
+          handleChangeText={(e) => setForm({ ...form, Name: e })}
           otherStyles="mt-10"
         />
 
@@ -263,49 +262,6 @@ const Create = () => {
           handleChangeText={(e) => setForm({ ...form, description: e })}
           otherStyles="mt-7"
         />
-
-        <View className="mt-7">
-          <Text className="text-base text-gray-100 font-pmedium">
-            Vaccination Status
-          </Text>
-          <View
-            style={{
-              borderWidth: 2,
-              borderColor: "#000000",
-              borderRadius: 8,
-              marginTop: 10,
-            }}
-          >
-            <RNPickerSelect
-              onValueChange={(value) =>
-                setForm({ ...form, vaccination_status: value })
-              }
-              items={[
-                { label: "Yes", value: "Yes" },
-                { label: "No", value: "No" },
-              ]}
-              style={{
-                inputIOS: {
-                  paddingVertical: 12,
-                  paddingHorizontal: 10,
-                  color: "black",
-                  paddingRight: 30,
-                  backgroundColor: "white",
-                },
-                inputAndroid: {
-                  paddingVertical: 8,
-                  paddingHorizontal: 10,
-                  color: "black",
-                  paddingRight: 30,
-                  backgroundColor: "white",
-                },
-                placeholder: {
-                  color: "#7b7b8b",
-                },
-              }}
-            />
-          </View>
-        </View>
 
         <FormField
           title="Adoption Fee"

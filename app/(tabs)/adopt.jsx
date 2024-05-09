@@ -8,8 +8,10 @@ import { getAllPosts } from "../../lib/appwrite";
 import EmptyState from "../../components/EmptyState";
 import SearchInput from "../../components/SearchInput";
 import PetList from "../../components/PetList";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Adopt = () => {
+  const { user} = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(getAllPosts);
 
   const [refreshing, setRefreshing] = useState(false);
@@ -33,7 +35,7 @@ const Adopt = () => {
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <PetList
-            name={item.name}
+            Name={item.Name}
             image={item.image}
             creator={item.creator}
             avatar={item.avatar}
@@ -44,12 +46,12 @@ const Adopt = () => {
             <View className="justify-between items-start flex-row mb-6">
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
-                  source={images.avatar}
+                  source={{ uri: user?.avatar }}
                   className="w-[46px] h-[46px] rounded-lg mr-2"
                   resizeMode="cover"
                 />
                 <Text className="text-xl font-psemibold text-white">
-                  Ritchelle Rueras
+                {user?.username}
                 </Text>
               </View>
             </View>
