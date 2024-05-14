@@ -11,7 +11,7 @@ import PetList from "../../components/PetList";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Adopt = () => {
-  const { user} = useGlobalContext();
+  const { user } = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(getAllPosts);
 
   const [refreshing, setRefreshing] = useState(false);
@@ -22,25 +22,17 @@ const Adopt = () => {
     setRefreshing(false);
   };
 
-  // one flatlist
-  // with list header
-  // and horizontal flatlist
-
-  //  we cannot do that with just scrollview as there's both horizontal and vertical scroll (two flat lists, within trending)
-
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <PetList
-            Name={item.Name}
-            image={item.image}
-            creator={item.creator}
-            avatar={item.avatar}
-          />
+          <PetList 
+            video={item}
+            />
         )}
+        
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
@@ -51,7 +43,7 @@ const Adopt = () => {
                   resizeMode="cover"
                 />
                 <Text className="text-xl font-psemibold text-white">
-                {user?.username}
+                  {user?.username}
                 </Text>
               </View>
             </View>
@@ -66,10 +58,7 @@ const Adopt = () => {
           </View>
         )}
         ListEmptyComponent={() => (
-          <EmptyState
-            title="No Pets Found"
-            subtitle="No Pets created yet"
-          />
+          <EmptyState title="No Pets Found" subtitle="No Pets created yet" />
         )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

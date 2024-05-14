@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 
 import { icons } from "../constants";
 
-const PetList = ({ Name, creator, avatar, image }) => {
+const PetList = ({ video: { Name, image, creator: { username, avatar }} }) => {
   return (
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
@@ -27,7 +27,7 @@ const PetList = ({ Name, creator, avatar, image }) => {
               className="text-xs text-gray-100 font-pregular"
               numberOfLines={1}
             >
-              {creator}
+              {username}
             </Text>
           </View>
         </View>

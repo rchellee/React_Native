@@ -23,20 +23,15 @@ const Search = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <PetList
-            Name={item.Name}
-            image={item.image}
-            creator={item.creator ? item.creator.username : ""}
-            avatar={item.creator ? item.creator.avatar : ""}
-          />
+          <PetList video={item} />
         )}
         ListHeaderComponent={() => (
-          <>
-            <View className="flex my-6 px-4">
+          
+            <View className="my-6 px-4">
               <Text className="font-pmedium text-gray-100 text-sm">
                 Search Results
               </Text>
-              <Text className="text-2xl font-psemibold text-white mt-1">
+              <Text className="text-2xl font-psemibold text-white">
                 {query}
               </Text>
 
@@ -44,7 +39,7 @@ const Search = () => {
                 <SearchInput initialQuery={query} refetch={refetch} />
               </View>
             </View>
-          </>
+
         )}
         ListEmptyComponent={() => (
           <EmptyState
