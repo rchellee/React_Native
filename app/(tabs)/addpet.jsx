@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { router } from "expo-router";
-import { ResizeMode, Video } from "expo-av";
 import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -12,6 +11,7 @@ import {
   ScrollView,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
+import { Checkbox } from "@react-native-community/checkbox";
 
 import { icons } from "../../constants";
 import { createPetList } from "../../lib/appwrite";
@@ -32,53 +32,57 @@ const Create = () => {
     description: "",
     adoption_fee: 0,
     adoption_status: "Available",
+    vaccination_status: false,
     image: null,
   });
 
-// Breeds
-const breedOptions = {
-  Dog: [
-    { label: "Labrador", value: "Labrador" },
-    { label: "German Shepherd", value: "German Shepherd" },
-    { label: "Golden Retriever", value: "Golden Retriever" },
-    { label: "Poodle", value: "Poodle" },
-    { label: "French Bulldog", value: "French Bulldog" },
-    { label: "Beagle", value: "Beagle" },
-    { label: "Bulldog", value: "Bulldog" },
-    { label: "Yorkshire Terrier", value: "Yorkshire Terrier" },
-    { label: "Dachshund", value: "Dachshund" },
-    { label: "Boxer", value: "Boxer" },
-    { label: "Rottweiler", value: "Rottweiler" },
-    { label: "Doberman Pinscher", value:  "Doberman Pinscher" },
-    { label: "Australian Shepherd", value: "Australian Shepherd" },
-    { label: "Shih Tzu", value: "Shih Tzu" },
-    { label: "Pomeranian", value: "Pomeranian" },
-    { label: "Cavalier King Charles Spaniel", value: "Cavalier King Charles Spaniel" },
-    { label: "Basset Hound", value: "Basset Hound" },
-    { label: "Bichon Frise", value: "Bichon Frise" },
-    { label: "None", value: "None"},
-  ],
-  Cat: [
-    { label: "Maine Coon", value: "Maine Coon" },
-    { label: "Siamese", value: "Siamese" },
-    { label: "Persian", value: "Persian" },
-    { label: "British Shorthair", value: "British Shorthair" },
-    { label: "Ragdoll", value: "Ragdoll" },
-    { label: "Abyssinian", value: "Abyssinian" },
-    { label: "Scottish Fold", value: "Scottish Fold" },
-    { label: "Sphynx", value: "Sphynx" },
-    { label: "Bengal", value: "Bengal" },
-    { label: "Russian Blue", value: "Russian Blue" },
-    { label: "Norwegian Forest Cat", value: "Norwegian Forest Cat" },
-    { label: "Siberian Forest Cat", value: "Siberian Forest Cat" },
-    { label: "American Shorthair", value: "American Shorthair" },
-    { label: "Exotic Shorthair", value: "Exotic Shorthair" },
-    { label: "Bombay", value: "Bombay" },
-    { label: "Burmese", value: "Burmese" },
-    { label: "Oriental Shorthair", value: "Oriental Shorthair" },
-    { label: "None", value: "None"},
-  ],
-};
+  // Breeds
+  const breedOptions = {
+    Dog: [
+      { label: "Labrador", value: "Labrador" },
+      { label: "German Shepherd", value: "German Shepherd" },
+      { label: "Golden Retriever", value: "Golden Retriever" },
+      { label: "Poodle", value: "Poodle" },
+      { label: "French Bulldog", value: "French Bulldog" },
+      { label: "Beagle", value: "Beagle" },
+      { label: "Bulldog", value: "Bulldog" },
+      { label: "Yorkshire Terrier", value: "Yorkshire Terrier" },
+      { label: "Dachshund", value: "Dachshund" },
+      { label: "Boxer", value: "Boxer" },
+      { label: "Rottweiler", value: "Rottweiler" },
+      { label: "Doberman Pinscher", value: "Doberman Pinscher" },
+      { label: "Australian Shepherd", value: "Australian Shepherd" },
+      { label: "Shih Tzu", value: "Shih Tzu" },
+      { label: "Pomeranian", value: "Pomeranian" },
+      {
+        label: "Cavalier King Charles Spaniel",
+        value: "Cavalier King Charles Spaniel",
+      },
+      { label: "Basset Hound", value: "Basset Hound" },
+      { label: "Bichon Frise", value: "Bichon Frise" },
+      { label: "None", value: "None" },
+    ],
+    Cat: [
+      { label: "Maine Coon", value: "Maine Coon" },
+      { label: "Siamese", value: "Siamese" },
+      { label: "Persian", value: "Persian" },
+      { label: "British Shorthair", value: "British Shorthair" },
+      { label: "Ragdoll", value: "Ragdoll" },
+      { label: "Abyssinian", value: "Abyssinian" },
+      { label: "Scottish Fold", value: "Scottish Fold" },
+      { label: "Sphynx", value: "Sphynx" },
+      { label: "Bengal", value: "Bengal" },
+      { label: "Russian Blue", value: "Russian Blue" },
+      { label: "Norwegian Forest Cat", value: "Norwegian Forest Cat" },
+      { label: "Siberian Forest Cat", value: "Siberian Forest Cat" },
+      { label: "American Shorthair", value: "American Shorthair" },
+      { label: "Exotic Shorthair", value: "Exotic Shorthair" },
+      { label: "Bombay", value: "Bombay" },
+      { label: "Burmese", value: "Burmese" },
+      { label: "Oriental Shorthair", value: "Oriental Shorthair" },
+      { label: "None", value: "None" },
+    ],
+  };
 
   const openPicker = async (selectType) => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -108,19 +112,24 @@ const breedOptions = {
   };
 
   const submit = async () => {
-    if (
-      !form.Name ||
-      !form.breed ||
-      !form.color ||
-      !form.species ||
-      !form.gender ||
-      !form.size ||
-      !form.description ||
-      !form.adoption_status ||
-      form.adoption_fee === 0 ||
-      !form.image
-    ) {
-      return Alert.alert("Please provide all fields");
+    const missingFields = [];
+    if (!form.Name) missingFields.push("Name");
+    if (!form.breed) missingFields.push("Breed");
+    if (!form.color) missingFields.push("Color");
+    if (!form.species) missingFields.push("Species");
+    if (!form.gender) missingFields.push("Gender");
+    if (!form.size) missingFields.push("Size");
+    if (!form.description) missingFields.push("Description");
+    if (!form.adoption_status) missingFields.push("Adoption Status");
+    if (!form.vaccination_status) missingFields.push("Vaccination Status")
+    if (!form.adoption_fee) form.adoption_fee = 0;
+    if (!form.image) missingFields.push("Image");
+
+    if (missingFields.length > 0) {
+      return Alert.alert(
+        "Please provide all fields",
+        `The following fields are required: ${missingFields.join(", ")}`
+      );
     }
 
     setUploading(true);
@@ -131,7 +140,7 @@ const breedOptions = {
       });
 
       Alert.alert("Success", "Pet details uploaded successfully");
-      router.push("/home");
+      router.push("/adopt");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
@@ -145,7 +154,7 @@ const breedOptions = {
         description: "",
         vaccination_status: false,
         adoption_fee: 0.0,
-        adoption_status: "",
+        adoption_status: "Available",
         image: null,
       });
 
@@ -156,7 +165,9 @@ const breedOptions = {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView className="px-4 my-6">
-        <Text className="text-2xl text-white font-psemibold">Add Pet Details</Text>
+        <Text className="text-2xl text-white font-psemibold">
+          Add Pet Details
+        </Text>
 
         <FormField
           title="Pet Name"
@@ -166,7 +177,7 @@ const breedOptions = {
           otherStyles="mt-10"
         />
 
-<View className="mt-7">
+        <View className="mt-7">
           <Text className="text-base text-gray-100 font-pmedium">
             Species & Breed
           </Text>
@@ -263,13 +274,52 @@ const breedOptions = {
           />
         </View>
 
-        <FormField
-          title="Size"
-          value={form.size}
-          placeholder="Enter pet size..."
-          handleChangeText={(e) => setForm({ ...form, size: e })}
-          otherStyles="mt-7"
-        />
+        <View className="mt-7">
+          <Text className="text-base text-gray-100 font-pmedium">Size</Text>
+          <RNPickerSelect
+            onValueChange={(value) => setForm({ ...form, size: value })}
+            items={[
+              { label: "Small", value: "Small" },
+              { label: "Medium", value: "Medium" },
+              { label: "Large", value: "Large" },
+            ]}
+            style={{
+              inputIOS: {
+                paddingVertical: 12,
+                paddingHorizontal: 10,
+                color: "black",
+                paddingRight: 30,
+                backgroundColor: "white",
+              },
+              inputAndroid: {
+                paddingVertical: 8,
+                paddingHorizontal: 10,
+                color: "black",
+                paddingRight: 30,
+                backgroundColor: "white",
+              },
+              placeholder: {
+                color: "#7b7b8b",
+              },
+            }}
+          />
+        </View>
+
+        <View className="mt-7">
+          <Text className="text-base text-gray-100 font-pmedium">
+            Vaccination Status
+          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Checkbox
+              value={form.vaccination_status}
+              onValueChange={(value) =>
+                setForm({ ...form, vaccination_status: value })
+              }
+            />
+            <Text style={{ color: "white", marginLeft: 8 }}>Vaccinated</Text>
+          </View>
+          
+        </View>
 
         <FormField
           title="Description"
@@ -318,7 +368,6 @@ const breedOptions = {
         </View>
 
         <View className="mt-7 space-y-2">
-
           <TouchableOpacity onPress={() => openPicker("image")}>
             {form.image ? (
               <Image
