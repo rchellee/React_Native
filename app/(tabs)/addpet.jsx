@@ -121,7 +121,7 @@ const Create = () => {
     if (!form.size) missingFields.push("Size");
     if (!form.description) missingFields.push("Description");
     if (!form.adoption_status) missingFields.push("Adoption Status");
-    if (!form.vaccination_status) missingFields.push("Vaccination Status")
+    if (!form.vaccination_status) missingFields.push("Vaccination Status");
     if (!form.adoption_fee) form.adoption_fee = 0;
     if (!form.image) missingFields.push("Image");
 
@@ -305,11 +305,12 @@ const Create = () => {
           />
         </View>
 
-        <View className="mt-7">
+        {/* <View className="mt-7">
           <Text className="text-base text-gray-100 font-pmedium">
             Vaccination Status
           </Text>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
+         
             <Checkbox
               value={form.vaccination_status}
               onValueChange={(value) =>
@@ -319,6 +320,40 @@ const Create = () => {
             <Text style={{ color: "white", marginLeft: 8 }}>Vaccinated</Text>
           </View>
           
+        </View> */}
+        <View className="mt-7">
+          <Text className="text-base text-gray-100 font-pmedium">
+            Vaccination Status
+          </Text>
+          <RNPickerSelect
+            onValueChange={(value) =>
+              setForm({ ...form, vaccination_status: value })
+            }
+            value={form.vaccination_status}
+            items={[
+              { label: "YES", value: true },
+              { label: "NO", value: false },
+            ]}
+            style={{
+              inputIOS: {
+                paddingVertical: 12,
+                paddingHorizontal: 10,
+                color: "black",
+                paddingRight: 30,
+                backgroundColor: "white",
+              },
+              inputAndroid: {
+                paddingVertical: 8,
+                paddingHorizontal: 10,
+                color: "black",
+                paddingRight: 30,
+                backgroundColor: "white",
+              },
+              placeholder: {
+                color: "#7b7b8b",
+              },
+            }}
+          />
         </View>
 
         <FormField
