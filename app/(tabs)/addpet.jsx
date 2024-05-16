@@ -30,6 +30,7 @@ const Create = () => {
     gender: "",
     size: "",
     description: "",
+    contact_num: "",
     adoption_fee: 0,
     adoption_status: "Available",
     vaccination_status: false,
@@ -120,8 +121,8 @@ const Create = () => {
     if (!form.gender) missingFields.push("Gender");
     if (!form.size) missingFields.push("Size");
     if (!form.description) missingFields.push("Description");
+    if (!form.contact_num) missingFields.push("Contact Number");
     if (!form.adoption_status) missingFields.push("Adoption Status");
-    if (!form.vaccination_status) missingFields.push("Vaccination Status");
     if (!form.adoption_fee) form.adoption_fee = 0;
     if (!form.image) missingFields.push("Image");
 
@@ -152,6 +153,7 @@ const Create = () => {
         gender: "",
         size: "",
         description: "",
+        contact_num: "",
         vaccination_status: false,
         adoption_fee: 0.0,
         adoption_status: "Available",
@@ -168,6 +170,57 @@ const Create = () => {
         <Text className="text-2xl text-white font-psemibold">
           Add Pet Details
         </Text>
+
+        <View className="mt-7 space-y-2">
+          <Text className="text-base text-gray-100 font-pmedium">
+            Upload Pet Image
+          </Text>
+
+          {/* <TouchableOpacity onPress={() => openPicker("video")}>
+            {form.video ? (
+              <Video
+                source={{ uri: form.video.uri }}
+                className="w-full h-64 rounded-2xl"
+                resizeMode={ResizeMode.COVER}
+              />
+            ) : (
+              <View className="w-full h-40 px-4 bg-black-100 rounded-2xl border border-black-200 flex justify-center items-center">
+                <View className="w-14 h-14 border border-dashed border-secondary-100 flex justify-center items-center">
+                  <Image
+                    source={icons.upload}
+                    resizeMode="contain"
+                    alt="upload"
+                    className="w-1/2 h-1/2"
+                  />
+                </View>
+              </View>
+            )}
+          </TouchableOpacity> */}
+        </View>
+
+        <View className="mt-7 space-y-2">
+          <TouchableOpacity onPress={() => openPicker("image")}>
+            {form.image ? (
+              <Image
+                source={{ uri: form.image.uri }}
+                resizeMode="cover"
+                className="w-full h-64 rounded-2xl"
+              />
+            ) : (
+              <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 flex justify-center items-center flex-row space-x-2">
+                <Image
+                  source={icons.upload}
+                  resizeMode="contain"
+                  alt="upload"
+                  className="w-5 h-5"
+                />
+                <Text className="text-sm text-gray-100 font-pmedium">
+                  Choose an Image
+                </Text>
+              </View>
+            )}
+          </TouchableOpacity>
+        </View>
 
         <FormField
           title="Pet Name"
@@ -357,6 +410,14 @@ const Create = () => {
         </View>
 
         <FormField
+          title="Contact Number"
+          value={form.contact_num}
+          placeholder="Enter contact number (09000000000)"
+          handleChangeText={(e) => setForm({ ...form, contact_num: e })}
+          otherStyles="mt-7"
+        />
+
+        <FormField
           title="Description"
           value={form.description}
           placeholder="Enter pet description..."
@@ -374,57 +435,6 @@ const Create = () => {
           }
           otherStyles="mt-7"
         />
-
-        <View className="mt-7 space-y-2">
-          <Text className="text-base text-gray-100 font-pmedium">
-            Upload Pet Image
-          </Text>
-
-          {/* <TouchableOpacity onPress={() => openPicker("video")}>
-            {form.video ? (
-              <Video
-                source={{ uri: form.video.uri }}
-                className="w-full h-64 rounded-2xl"
-                resizeMode={ResizeMode.COVER}
-              />
-            ) : (
-              <View className="w-full h-40 px-4 bg-black-100 rounded-2xl border border-black-200 flex justify-center items-center">
-                <View className="w-14 h-14 border border-dashed border-secondary-100 flex justify-center items-center">
-                  <Image
-                    source={icons.upload}
-                    resizeMode="contain"
-                    alt="upload"
-                    className="w-1/2 h-1/2"
-                  />
-                </View>
-              </View>
-            )}
-          </TouchableOpacity> */}
-        </View>
-
-        <View className="mt-7 space-y-2">
-          <TouchableOpacity onPress={() => openPicker("image")}>
-            {form.image ? (
-              <Image
-                source={{ uri: form.image.uri }}
-                resizeMode="cover"
-                className="w-full h-64 rounded-2xl"
-              />
-            ) : (
-              <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 flex justify-center items-center flex-row space-x-2">
-                <Image
-                  source={icons.upload}
-                  resizeMode="contain"
-                  alt="upload"
-                  className="w-5 h-5"
-                />
-                <Text className="text-sm text-gray-100 font-pmedium">
-                  Choose an Image
-                </Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        </View>
 
         <CustomButton
           title="Submit & Post"
