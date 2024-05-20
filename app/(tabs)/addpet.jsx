@@ -11,7 +11,6 @@ import {
   ScrollView,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import { Checkbox } from "@react-native-community/checkbox";
 
 import { icons } from "../../constants";
 import { createPetList } from "../../lib/appwrite";
@@ -24,6 +23,7 @@ const Create = () => {
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     Name: "",
+    age: "",
     breed: "",
     color: "",
     species: "",
@@ -34,7 +34,9 @@ const Create = () => {
     adoption_fee: 0,
     adoption_status: "Available",
     vaccination_status: false,
+    location: "",
     image: null,
+    created_at: ""
   });
 
   // Breeds
@@ -115,6 +117,7 @@ const Create = () => {
   const submit = async () => {
     const missingFields = [];
     if (!form.Name) missingFields.push("Name");
+    if (!form.age) missingFields.push("Age");
     if (!form.breed) missingFields.push("Breed");
     if (!form.color) missingFields.push("Color");
     if (!form.species) missingFields.push("Species");
@@ -123,6 +126,7 @@ const Create = () => {
     if (!form.description) missingFields.push("Description");
     if (!form.contact_num) missingFields.push("Contact Number");
     if (!form.adoption_status) missingFields.push("Adoption Status");
+    if (!form.location) missingFields.push("Location");
     if (!form.adoption_fee) form.adoption_fee = 0;
     if (!form.image) missingFields.push("Image");
 
@@ -135,9 +139,11 @@ const Create = () => {
 
     setUploading(true);
     try {
-      await createPetList({
-        ...form,
-        userId: user.$id,
+      const currentDate = new Date().toISOString().split('T')[0]; // Get current date and time in ISO format
+    await createPetList({
+      ...form,
+      created_at: currentDate, // Set created_at to the current date and time
+      userId: user.$id,
       });
 
       Alert.alert("Success", "Pet details uploaded successfully");
@@ -147,6 +153,7 @@ const Create = () => {
     } finally {
       setForm({
         Name: "",
+        age: "",
         breed: "",
         color: "",
         species: "",
@@ -156,8 +163,10 @@ const Create = () => {
         contact_num: "",
         vaccination_status: false,
         adoption_fee: 0.0,
+        location: "",
         adoption_status: "Available",
         image: null,
+        created_at: "",
       });
 
       setUploading(false);
@@ -175,27 +184,6 @@ const Create = () => {
           <Text className="text-base text-gray-100 font-pmedium">
             Upload Pet Image
           </Text>
-
-          {/* <TouchableOpacity onPress={() => openPicker("video")}>
-            {form.video ? (
-              <Video
-                source={{ uri: form.video.uri }}
-                className="w-full h-64 rounded-2xl"
-                resizeMode={ResizeMode.COVER}
-              />
-            ) : (
-              <View className="w-full h-40 px-4 bg-black-100 rounded-2xl border border-black-200 flex justify-center items-center">
-                <View className="w-14 h-14 border border-dashed border-secondary-100 flex justify-center items-center">
-                  <Image
-                    source={icons.upload}
-                    resizeMode="contain"
-                    alt="upload"
-                    className="w-1/2 h-1/2"
-                  />
-                </View>
-              </View>
-            )}
-          </TouchableOpacity> */}
         </View>
 
         <View className="mt-7 space-y-2">
@@ -227,6 +215,13 @@ const Create = () => {
           value={form.Name}
           placeholder="Enter your pet name..."
           handleChangeText={(e) => setForm({ ...form, Name: e })}
+          otherStyles="mt-10"
+        />
+        <FormField
+          title="Pet Age"
+          value={form.age}
+          placeholder="Enter your pet age..."
+          handleChangeText={(e) => setForm({ ...form, age: e })}
           otherStyles="mt-10"
         />
 
@@ -357,23 +352,6 @@ const Create = () => {
             }}
           />
         </View>
-
-        {/* <View className="mt-7">
-          <Text className="text-base text-gray-100 font-pmedium">
-            Vaccination Status
-          </Text>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-         
-            <Checkbox
-              value={form.vaccination_status}
-              onValueChange={(value) =>
-                setForm({ ...form, vaccination_status: value })
-              }
-            />
-            <Text style={{ color: "white", marginLeft: 8 }}>Vaccinated</Text>
-          </View>
-          
-        </View> */}
         <View className="mt-7">
           <Text className="text-base text-gray-100 font-pmedium">
             Vaccination Status
@@ -423,6 +401,13 @@ const Create = () => {
           placeholder="Enter pet description..."
           handleChangeText={(e) => setForm({ ...form, description: e })}
           otherStyles="mt-7"
+        />
+        <FormField
+          title="Location"
+          value={form.location}
+          placeholder="Enter your location..."
+          handleChangeText={(e) => setForm({ ...form, location: e })}
+          otherStyles="mt-10"
         />
 
         <FormField

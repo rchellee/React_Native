@@ -9,23 +9,43 @@ import {
   StyleSheet,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-// import { images } from "../constants";
-import { images } from "../../constants";
+import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 // const DetailsScreen = ({ navigation }) => {
 const DetailsScreen = () => {
-  // const pet = route.params;
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {
+    Name,
+    age,
+    species,
+    breed,
+    color,
+    gender,
+    size,
+    adoption_fee,
+    vaccination_status,
+    description,
+    contact_num,
+    location,
+    image,
+    created_at,
+    username,
+    avatar,
+  } = route.params;
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
       <StatusBar backgroundColor="#d0d8dc" />
-      <View style={{ height: 400, backgroundColor: "#d0d8dc" }}>
+
+      <View style={{ height: 480, backgroundColor: "#d0d8dc" }}>
         <ImageBackground
           resizeMode="contain"
-          source={images.avatar}
+          source={{ uri: image }}
           style={{
             height: 280,
-            top: 20,
+            top: 40,
           }}
         >
           {/* Render  Header */}
@@ -34,9 +54,8 @@ const DetailsScreen = () => {
               name="arrow-left"
               size={28}
               color="#616161"
-              // onPress={navigation.goBack}
+              onPress={() => navigation.navigate("adopt")}
             />
-            <Icon name="dots-vertical" size={28} color="#616161" />
           </View>
         </ImageBackground>
 
@@ -48,9 +67,15 @@ const DetailsScreen = () => {
             <Text
               style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
             >
-              Pet Name
+              {Name}
             </Text>
-            <Icon name="gender-male" size={25} color="#a8a8a8" />
+            <Text>
+              {gender === "Female" ? (
+                <Icon name="gender-female" size={25} color="#a8a8a8" />
+              ) : (
+                <Icon name="gender-male" size={25} color="#a8a8a8" />
+              )}
+            </Text>
           </View>
 
           {/* Render Pet type and age */}
@@ -61,34 +86,78 @@ const DetailsScreen = () => {
               marginTop: 5,
             }}
           >
-            <Text style={{ fontSize: 12, color: "#616161" }}>Pet Type</Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>Pet Age </Text>
+            <Text style={{ fontSize: 12, color: "#616161" }}>
+              Type: {species}
+            </Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>Age: {age} </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 5,
+            }}
+          >
+            <Text style={{ fontSize: 12, color: "#616161" }}>
+              Breed: {breed}
+            </Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>
+              Color: {color}{" "}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 5,
+            }}
+          >
+            <Text style={{ fontSize: 12, color: "#616161" }}>Size: {size}</Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>
+              Php: {adoption_fee}{" "}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 5,
+            }}
+          >
+            <Text style={{ fontSize: 12, color: "#616161" }}>
+              Vaxx: {vaccination_status ? "Yes" : "No"}
+            </Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>
+              {contact_num}
+            </Text>
           </View>
 
           {/* Render location and icon */}
           <View style={{ marginTop: 5, flexDirection: "row" }}>
             <Icon name="map-marker" color="#306060" size={20} />
             <Text style={{ fontSize: 14, color: "#a8a8a8", marginLeft: 5 }}>
-              5 Bulvarna-Kudriavska Street, Kyiv
+              {location}
             </Text>
           </View>
         </View>
       </View>
 
       {/* Comment container */}
-      <View style={{ marginTop: 80, justifyContent: "space-between", flex: 1 }}>
+      <View
+        style={{ marginTop: 100, justifyContent: "space-between", flex: 1 }}
+      >
         <View>
           {/* Render user image , name and date */}
           <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
             <Image
-              source={images.avatar}
+              source={{ uri: avatar }}
               style={{ height: 40, width: 40, borderRadius: 20 }}
             />
             <View style={{ flex: 1, paddingLeft: 10 }}>
               <Text
                 style={{ color: "#616161", fontSize: 12, fontWeight: "bold" }}
               >
-                JANE GARY
+                {username}
               </Text>
               <Text
                 style={{
@@ -101,13 +170,9 @@ const DetailsScreen = () => {
                 Owner
               </Text>
             </View>
-            <Text style={{ color: "#a8a8a8", fontSize: 12 }}>May 25, 2020</Text>
+            <Text style={{ color: "#a8a8a8", fontSize: 12 }}>{created_at}</Text>
           </View>
-          <Text style={style.comment}>
-            My job requires moving to another country. I don't have the
-            opputurnity to take the cat with me. I am looking for good people
-            who will shelter my Lily.
-          </Text>
+          <Text style={style.comment}>{description}</Text>
         </View>
 
         {/* Render footer */}

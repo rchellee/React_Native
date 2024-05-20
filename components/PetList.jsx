@@ -4,9 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 
 import { icons } from "../constants";
 
-const PetList = ({ video: { Name, image, creator: { username, avatar }} }) => {
+const PetList = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, creator: { username, avatar }} }) => {
   const navigation = useNavigation();
   return (
+    
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
         <View className="flex justify-center items-center flex-row flex-1">
@@ -42,7 +43,7 @@ const PetList = ({ video: { Name, image, creator: { username, avatar }} }) => {
       <TouchableOpacity
         activeOpacity={0.7}
         className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-        onPress={() => navigation.navigate('DetailsScreen')}
+        onPress={() => navigation.navigate('DetailsScreen', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, username, avatar })}
       >
         <Image
           source={{ uri: image }}

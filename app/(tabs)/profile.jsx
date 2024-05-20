@@ -8,10 +8,11 @@ import { getUserPosts, signOut } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import EmptyState from "../../components/EmptyState";
 import InfoBox from "../../components/InfoBox";
+import PetList from "../../components/PetList";
 
 const Profile = () => {
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
-  // const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
+  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
 
   const logout = async () => {
     await signOut();
@@ -24,17 +25,13 @@ const Profile = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        // data={posts}
-        // keyExtractor={(item) => item.$id}
-        // renderItem={({ item }) => (
-        //   <VideoCard
-        //     title={item.title}
-        //     thumbnail={item.thumbnail}
-        //     video={item.video}
-        //     creator={item.creator.username}
-        //     avatar={item.creator.avatar}
-        //   />
-        // )}
+        data={posts}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => (
+          <PetList
+          video={item}
+          />
+        )}
         ListEmptyComponent={() => (
           <EmptyState
             title="No Videos Found"
