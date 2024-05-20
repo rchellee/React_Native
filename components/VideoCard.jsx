@@ -24,7 +24,6 @@ const VideoCard = ({ source, title, description }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   card: {
     width: "100%",
