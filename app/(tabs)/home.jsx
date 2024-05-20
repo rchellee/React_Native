@@ -11,14 +11,14 @@ const Home = () => {
     'Poppins-Bold': require('../../assets/fonts/Poppins-Bold.ttf'),
   });
 
-  const [selectedCategory, setSelectedCategory] = useState("Pet Training 101");
+  const [selectedCategory, setSelectedCategory] = useState("Training 101");
 
   if (!fontsLoaded) {
     return null; // Optionally render a loading state
   }
 
   const renderVideoCards = () => {
-    if (selectedCategory === "Pet Training 101") {
+    if (selectedCategory === "Training 101") {
       return (
         <>
           <VideoCard
@@ -57,7 +57,7 @@ const Home = () => {
               <Text style={[styles.username, { fontFamily: 'Poppins-Bold' }]}>{user?.username}</Text>
             </View>
             <View style={styles.buttonsContainer}>
-              {["Pet Blog", "Pet Training 101", "Pet Medical", "Pet Article"].map((category) => (
+              {["Blog", "Training 101", "Medical", "Article"].map((category) => (
                 <TouchableOpacity
                   key={category}
                   style={[
