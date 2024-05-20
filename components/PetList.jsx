@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 import { icons } from "../constants";
 
 const PetList = ({ video: { Name, image, creator: { username, avatar }} }) => {
+  const navigation = useNavigation();
   return (
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
@@ -40,6 +42,7 @@ const PetList = ({ video: { Name, image, creator: { username, avatar }} }) => {
       <TouchableOpacity
         activeOpacity={0.7}
         className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
+        onPress={() => navigation.navigate('DetailsScreen')}
       >
         <Image
           source={{ uri: image }}
