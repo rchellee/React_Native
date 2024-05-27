@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Text,
   ImageBackground,
@@ -12,11 +11,12 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
 
-// const DetailsScreen = ({ navigation }) => {
 const DetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
   const {
     Name,
     age,
@@ -140,9 +140,7 @@ const DetailsScreen = () => {
               marginTop: 5,
             }}
           >
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              {email}
-            </Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>{email}</Text>
           </View>
 
           {/* Render location and icon */}
@@ -180,7 +178,7 @@ const DetailsScreen = () => {
                   marginTop: 2,
                 }}
               >
-                 {email}
+                {email}
               </Text>
             </View>
             <Text style={{ color: "#a8a8a8", fontSize: 12 }}>{created_at}</Text>
@@ -190,13 +188,28 @@ const DetailsScreen = () => {
 
         {/* Render footer */}
         <View style={style.footer}>
-          <View style={style.iconCon}>
-            <Icon name="heart-outline" size={22} color="#FFF" />
-          </View>
-          
-          <TouchableOpacity 
+          <TouchableOpacity
             style={style.btn}
-            onPress={() => navigation.navigate('adopt_form', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, username, email, })}
+            onPress={() =>
+              navigation.navigate("adopt_form", {
+                Name,
+                age,
+                species,
+                breed,
+                color,
+                gender,
+                size,
+                adoption_fee,
+                vaccination_status,
+                description,
+                contact_num,
+                location,
+                image,
+                created_at,
+                username,
+                email,
+              })
+            }
           >
             <Text style={{ color: "#FFF", fontWeight: "bold" }}>ADOPT</Text>
           </TouchableOpacity>
@@ -257,4 +270,5 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
+
 export default DetailsScreen;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Image, FlatList, TouchableOpacity, Text } from "react-native";
@@ -27,11 +27,9 @@ const Profile = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case "Likes":
-        return <Text>Likes Content</Text>; // Replace with actual content
       case "Notifications":
-        return  <Notifications />;
-      case "Adoption":
+        return <Notifications />;
+      case "Pending":
         return <Text>Requested Adoption to my Pets</Text>;
       case "My Pets":
       default:
@@ -53,12 +51,19 @@ const Profile = () => {
 
   return (
     <SafeAreaView className="bg-primary h-full">
-      <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
-        <TouchableOpacity onPress={logout} className="flex w-full items-end mb-10">
-          <Image source={icons.logout} resizeMode="contain" className="w-6 h-6" />
+      <View className="w-full flex justify-center items-center mt-1 mb-5 px-4">
+        <TouchableOpacity
+          onPress={logout}
+          className="flex w-full items-end mb-10"
+        >
+          <Image
+            source={icons.logout}
+            resizeMode="contain"
+            className="w-6 h-6"
+          />
         </TouchableOpacity>
 
-        <View className="w-16 h-16 border border-secondary rounded-lg flex justify-center items-center">
+        <View className="w-16 h-16 border border-secondary rounded-lg flex justify-center items-center ">
           <Image
             source={{ uri: user?.avatar }}
             className="w-[90%] h-[90%] rounded-lg"
@@ -66,21 +71,36 @@ const Profile = () => {
           />
         </View>
 
-        <InfoBox title={user?.username} containerStyles="mt-5" titleStyles="text-lg" />
+        <InfoBox
+          title={user?.username}
+          containerStyles="mt-5"
+          titleStyles="text-lg"
+        />
       </View>
 
       <View className="flex flex-row justify-around w-full mb-4 ">
-        <TouchableOpacity onPress={() => setActiveTab("Likes")}>
-          <Text className={activeTab === "Likes" ? "font-bold"  : "text-white" }>Likes</Text>
-        </TouchableOpacity>
         <TouchableOpacity onPress={() => setActiveTab("My Pets")}>
-          <Text className={activeTab === "My Pets" ? "font-bold" : "text-white"}>My Pets</Text>
+          <Text
+            className={activeTab === "My Pets" ? "font-bold" : "text-white"}
+          >
+            My Pets
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setActiveTab("Notifications")}>
-          <Text className={activeTab === "Notifications" ? "font-bold" : "text-white"}>My Request</Text>
+          <Text
+            className={
+              activeTab === "Notifications" ? "font-bold" : "text-white"
+            }
+          >
+            My Request
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setActiveTab("Adoption")}>
-          <Text className={activeTab === "Adoption" ? "font-bold" : "text-white"}>Adoption</Text>
+          <Text
+            className={activeTab === "Pending" ? "font-bold" : "text-white"}
+          >
+            Pending
+          </Text>
         </TouchableOpacity>
       </View>
 

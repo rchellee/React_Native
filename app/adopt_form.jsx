@@ -1,19 +1,13 @@
 import { useState } from "react";
 import { router } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   View,
   Text,
   Alert,
-  Image,
-  TouchableOpacity,
   ScrollView,
 } from "react-native";
-import RNPickerSelect from "react-native-picker-select";
 import { useRoute } from "@react-navigation/native";
-
-import { icons } from "../constants";
 import { createAdoptionRequest } from "../lib/appwrite";
 import FormField from "../components/FormField";
 import CustomButton from "../components/CustomButton";
@@ -39,7 +33,6 @@ const AdoptForm = () => {
     image,
     created_at,
     username,
-    avatar,
     email,
   } = route.params;
   const [form, setForm] = useState({
@@ -56,14 +49,14 @@ const AdoptForm = () => {
     if (!form.adopterContact) missingFields.push("Adopter Contact");
     if (!form.adopterAddress) missingFields.push("Adopter Address");
     if (!form.message) missingFields.push("Message");
-
+  
     if (missingFields.length > 0) {
       return Alert.alert(
         "Please provide all fields",
         `The following fields are required: ${missingFields.join(", ")}`
       );
     }
-
+  
     setUploading(true);
     try {
       const currentDate = new Date().toISOString().split('T')[0];
@@ -73,8 +66,20 @@ const AdoptForm = () => {
         PetName: Name,
         owner: username,
         userId: user.$id,
+        age,
+        species,
+        breed,
+        color,
+        gender,
+        size,
+        adoption_fee,
+        vaccination_status,
+        description,
+        contact_num,
+        location,
+        image
       });
-
+  
       Alert.alert("Success", "Adoption request submitted successfully");
       router.push("/adopt");
     } catch (error) {
@@ -87,10 +92,11 @@ const AdoptForm = () => {
         message: "",
         requested_at: "",
       });
-
+  
       setUploading(false);
     }
   };
+  
 
   return (
     <SafeAreaView className="bg-primary h-full">
