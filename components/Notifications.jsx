@@ -47,6 +47,7 @@ const Notifications = () => {
         <Text>Address: {item.adopterAddress}</Text>
         <Text className="mt-2">Message: {item.message}</Text>
         <Text className="mt-2 text-sm text-gray-500">Requested at: {item.requested_at}</Text>
+        <Text className="mt-2 text-sm text-gray-500">Status: {item.status}</Text>
         <View className="mt-4">
           <Text className="text-lg font-bold">Pet Information:</Text>
           <Text>Age: {petInfo.age || 'N/A'}</Text>

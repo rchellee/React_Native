@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import {
   Text,
   ImageBackground,
@@ -8,13 +8,24 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  FlatList,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
+import {
+    getAdoptionRequests,
+    updateAdoptionRequest,
+    updatePetAdoptionStatus,
+  } from "../lib/appwrite";
+  import { useGlobalContext } from "../context/GlobalProvider";
 
-// const DetailsScreen = ({ navigation }) => {
-const MyPetDetails = () => {
+
+const AdoptionDetails = () => {
+    const { user } = useGlobalContext();
+    const [requests, setRequests] = useState([]);
+    const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
   const route = useRoute();
   const {
@@ -35,7 +46,83 @@ const MyPetDetails = () => {
     username,
     avatar,
     email,
+    adoption_status,
   } = route.params;
+  
+
+  useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const data = await getAdoptionRequests(user.$id, true); // Fetch requests as owner
+        // Filter out requests with status "Declined"
+        const filteredData = data.filter((request) => request.status !== "Declined");
+        setRequests(filteredData);
+      } catch (error) {
+        Alert.alert("Error", error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRequests();
+  }, [user.$id]);
+
+  const handleDeclineRequest = async (requestId) => {
+    try {
+      console.log("Decline Request ID:", requestId); // Log the requestId
+      await updateAdoptionRequest(requestId, { status: "Declined" });
+      setRequests((prevRequests) =>
+        prevRequests.filter((request) => request.$id !== requestId)
+      );
+      Alert.alert("Success", "Adoption request declined successfully.");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+  };
+
+  const handleAcceptRequest = async (requestId, petName) => {
+    try {
+      if (!petName) {
+        throw new Error("Missing required parameter: 'petName'");
+      }
+  
+      console.log("Accept Request ID:", requestId); // Log the requestId
+      console.log("Pet Name:", petName); // Log the petName
+  
+      await updateAdoptionRequest(requestId, { status: "Accepted" });
+      await updatePetAdoptionStatus(petName, { adoption_status: "Pending" }); // Change adoption status to "Adopted"
+  
+      setRequests((prevRequests) =>
+        prevRequests.filter((request) => request.$id !== requestId)
+      );
+  
+      Alert.alert("Success", "Adoption request accepted successfully.");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+  };
+
+  const handleAdoptionComplete = async (requestId, petName) => {
+    try {
+      if (!petName) {
+        throw new Error("Missing required parameter: 'petName'");
+      }
+  
+      console.log("Accept Request ID:", requestId); // Log the requestId
+      console.log("Pet Name:", petName); // Log the petName
+  
+      await updateAdoptionRequest(requestId, { status: "Adopted" });
+      await updatePetAdoptionStatus(petName, { adoption_status: "Adopted" }); // Change adoption status to "Adopted"
+  
+      setRequests((prevRequests) =>
+        prevRequests.filter((request) => request.$id !== requestId)
+      );
+  
+      Alert.alert("Success", "Adoption Completed.");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+  };
+
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
@@ -140,6 +227,9 @@ const MyPetDetails = () => {
               marginTop: 5,
             }}
           >
+          <Text style={{ fontSize: 12, color: "#616161" }}>
+              Status: {adoption_status}
+            </Text>
             <Text style={{ fontSize: 13, color: "#616161" }}>
               {email}
             </Text>
@@ -193,6 +283,7 @@ const MyPetDetails = () => {
   );
 };
 
+
 const style = StyleSheet.create({
   detailsContainer: {
     height: 120,
@@ -244,4 +335,4 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
-export default MyPetDetails;
+export default AdoptionDetails;

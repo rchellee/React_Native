@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { icons } from "../constants";
 
-const MyPet = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, creator: { username, avatar, email }} }) => {
+const MyPet = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, adoption_status, creator: { username, avatar, email }} }) => {
   const navigation = useNavigation();
   return (
     
@@ -31,6 +31,12 @@ const MyPet = ({ video: { Name, age, species, breed, color, gender, size, adopti
               numberOfLines={1}
             >
               {username}
+            </Text>
+            <Text
+              className="text-xs text-gray-100 font-pregular"
+              numberOfLines={1}
+            >
+              {adoption_status}
             </Text>
           </View>
         </View>

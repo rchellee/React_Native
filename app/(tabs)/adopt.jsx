@@ -60,9 +60,6 @@ const Adopt = () => {
         ListEmptyComponent={() => (
           <EmptyState title="No Pets Found" subtitle="No Pets created yet" />
         )}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
       />
     </SafeAreaView>
   );

@@ -1,19 +1,16 @@
 import { useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, RefreshControl } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
 import { icons } from "../constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const PetList = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, adoption_status, contact_num, location, image, created_at, creator: { username, avatar, email, accountId }} }) => {
+const Adoption = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, adoption_status, creator: { username, avatar, email }} }) => {
   const navigation = useNavigation();
-
-  // Check if adoption status is "Adopted"
-  if (adoption_status === "Adopted") {
-    return null; // Hide the pet from the list
-  }
-
+  
   return (
-    
+    <SafeAreaView>
+   
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
         <View className="flex justify-center items-center flex-row flex-1">
@@ -38,6 +35,12 @@ const PetList = ({ video: { Name, age, species, breed, color, gender, size, adop
             >
               {username}
             </Text>
+            <Text
+              className="text-xs text-gray-100 font-pregular"
+              numberOfLines={1}
+            >
+              
+            </Text>
           </View>
         </View>
 
@@ -49,7 +52,7 @@ const PetList = ({ video: { Name, age, species, breed, color, gender, size, adop
       <TouchableOpacity
         activeOpacity={0.7}
         className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-        onPress={() => navigation.navigate('DetailsScreen', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, username, avatar, email, accountId })}
+        onPress={() => navigation.navigate('AdoptionDetails', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, adoption_status, username, avatar, email })}
       >
         <Image
           source={{ uri: image }}
@@ -58,7 +61,9 @@ const PetList = ({ video: { Name, age, species, breed, color, gender, size, adop
         />
       </TouchableOpacity>
     </View>
+    </SafeAreaView>
+    
   );
 };
 
-export default PetList;
+export default Adoption;

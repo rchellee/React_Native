@@ -125,7 +125,6 @@ const Create = () => {
     if (!form.size) missingFields.push("Size");
     if (!form.description) missingFields.push("Description");
     if (!form.contact_num) missingFields.push("Contact Number");
-    if (!form.adoption_status) missingFields.push("Adoption Status");
     if (!form.location) missingFields.push("Location");
     if (!form.adoption_fee) form.adoption_fee = 0;
     if (!form.image) missingFields.push("Image");

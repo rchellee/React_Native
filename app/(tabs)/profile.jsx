@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Image, FlatList, TouchableOpacity, Text } from "react-native";
+import { View, Image, FlatList, TouchableOpacity, Text, RefreshControl } from "react-native";
 
 import { icons } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
@@ -9,13 +9,23 @@ import { getUserPosts, signOut } from "../../lib/appwrite";
 import EmptyState from "../../components/EmptyState";
 import InfoBox from "../../components/InfoBox";
 import MyPet from "../../components/MyPet";
+import Adoption from "../../components/adoption";
 import Notifications from "../../components/Notifications";
+import Pending from "../../components/Pending";
 import { useGlobalContext } from "../../context/GlobalProvider";
+
 
 const Profile = () => {
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
-  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
+  const { data: posts, refetch } = useAppwrite(() => getUserPosts(user.$id));
   const [activeTab, setActiveTab] = useState("My Pets");
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
 
   const logout = async () => {
     await signOut();
@@ -27,10 +37,27 @@ const Profile = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case "Notifications":
+      case "My Request":
         return <Notifications />;
       case "Pending":
-        return <Text>Requested Adoption to my Pets</Text>;
+        return <Pending />;
+      case "Adoption":
+        return (
+          <FlatList
+            data={posts.filter(post => post.adoption_status === 'Pending')} // Filter posts with adoption status "pending"
+            keyExtractor={(item) => item.$id}
+            renderItem={({ item }) => <Adoption video={item} />}
+            ListEmptyComponent={() => (
+              <EmptyState
+                title="No Pending Adoption Requests"
+                subtitle="You have no pending adoption requests at the moment"
+              />
+            )}
+            refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+          />
+        );
       case "My Pets":
       default:
         return (
@@ -86,7 +113,7 @@ const Profile = () => {
             My Pets
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveTab("Notifications")}>
+        <TouchableOpacity onPress={() => setActiveTab("My Request")}>
           <Text
             className={
               activeTab === "Notifications" ? "font-bold" : "text-white"
@@ -95,11 +122,18 @@ const Profile = () => {
             My Request
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveTab("Adoption")}>
+        <TouchableOpacity onPress={() => setActiveTab("Pending")}>
           <Text
             className={activeTab === "Pending" ? "font-bold" : "text-white"}
           >
             Pending
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setActiveTab("Adoption")}>
+          <Text
+            className={activeTab === "Adoption" ? "font-bold" : "text-white"}
+          >
+            Adoption
           </Text>
         </TouchableOpacity>
       </View>

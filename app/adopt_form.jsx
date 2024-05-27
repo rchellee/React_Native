@@ -1,14 +1,9 @@
 import { useState } from "react";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  View,
-  Text,
-  Alert,
-  ScrollView,
-} from "react-native";
+import { View, Text, Alert, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { createAdoptionRequest } from "../lib/appwrite";
+import { createAdoptionRequest, updatePetAdoptionStatus } from "../lib/appwrite";
 import FormField from "../components/FormField";
 import CustomButton from "../components/CustomButton";
 import { useGlobalContext } from "../context/GlobalProvider";
@@ -34,13 +29,15 @@ const AdoptForm = () => {
     created_at,
     username,
     email,
+    adoption_status,
   } = route.params;
   const [form, setForm] = useState({
     adopterName: "",
     adopterContact: "",
     adopterAddress: "",
     message: "",
-    requested_at: ""
+    requested_at: "",
+    status: "Pending",
   });
 
   const submit = async () => {
@@ -49,17 +46,17 @@ const AdoptForm = () => {
     if (!form.adopterContact) missingFields.push("Adopter Contact");
     if (!form.adopterAddress) missingFields.push("Adopter Address");
     if (!form.message) missingFields.push("Message");
-  
+
     if (missingFields.length > 0) {
       return Alert.alert(
         "Please provide all fields",
         `The following fields are required: ${missingFields.join(", ")}`
       );
     }
-  
+
     setUploading(true);
     try {
-      const currentDate = new Date().toISOString().split('T')[0];
+      const currentDate = new Date().toISOString().split("T")[0];
       await createAdoptionRequest({
         ...form,
         requested_at: currentDate,
@@ -77,9 +74,11 @@ const AdoptForm = () => {
         description,
         contact_num,
         location,
-        image
+        image,
       });
-  
+
+      await updatePetAdoptionStatus(Name, { adoption_status: "Pending" });
+
       Alert.alert("Success", "Adoption request submitted successfully");
       router.push("/adopt");
     } catch (error) {
@@ -91,12 +90,12 @@ const AdoptForm = () => {
         adopterAddress: "",
         message: "",
         requested_at: "",
+        status: "Pending"
       });
-  
+
       setUploading(false);
     }
   };
-  
 
   return (
     <SafeAreaView className="bg-primary h-full">
