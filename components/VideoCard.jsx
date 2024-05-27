@@ -1,4 +1,3 @@
-// src/components/VideoCard.js
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Video } from "expo-av";
@@ -24,6 +23,7 @@ const VideoCard = ({ source, title, description }) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   card: {
     width: "100%",
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: "center",
     alignItems: "center",
+    position: "relative",
   },
   overlay: {
     position: "absolute",
