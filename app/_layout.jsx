@@ -38,6 +38,8 @@ const RootLayout = () => {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
         <Stack.Screen name="DetailsScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="adopt_form" options={{ headerShown: false }} />
+        <Stack.Screen name="MyPetDetails" options={{ headerShown: false }} />
       </Stack>
     </GlobalProvider>
   );

@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { icons } from "../constants";
 
-const PetList = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, creator: { username, avatar, email, accountId }} }) => {
+const MyPet = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, creator: { username, avatar, email }} }) => {
   const navigation = useNavigation();
   return (
     
@@ -43,7 +43,7 @@ const PetList = ({ video: { Name, age, species, breed, color, gender, size, adop
       <TouchableOpacity
         activeOpacity={0.7}
         className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-        onPress={() => navigation.navigate('DetailsScreen', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, username, avatar, email, accountId })}
+        onPress={() => navigation.navigate('MyPetDetails', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, username, avatar, email })}
       >
         <Image
           source={{ uri: image }}
@@ -55,4 +55,4 @@ const PetList = ({ video: { Name, age, species, breed, color, gender, size, adop
   );
 };
 
-export default PetList;
+export default MyPet;

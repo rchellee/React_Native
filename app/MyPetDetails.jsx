@@ -14,7 +14,7 @@ import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 
 // const DetailsScreen = ({ navigation }) => {
-const DetailsScreen = () => {
+const MyPetDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {
@@ -185,20 +185,17 @@ const DetailsScreen = () => {
             </View>
             <Text style={{ color: "#a8a8a8", fontSize: 12 }}>{created_at}</Text>
           </View>
-          <Text style={style.comment}>{description} </Text>
+          <Text style={style.comment}>{description}</Text>
         </View>
 
         {/* Render footer */}
         <View style={style.footer}>
-          <View style={style.iconCon}>
-            <Icon name="heart-outline" size={22} color="#FFF" />
-          </View>
           
           <TouchableOpacity 
             style={style.btn}
             onPress={() => navigation.navigate('adopt_form', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, username, email, })}
           >
-            <Text style={{ color: "#FFF", fontWeight: "bold" }}>ADOPT</Text>
+            <Text style={{ color: "#FFF", fontWeight: "bold" }}>ADOPTED</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -257,4 +254,4 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
-export default DetailsScreen;
+export default MyPetDetails;
