@@ -149,7 +149,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#121212",
+    backgroundColor: "#161622",
   },
   headerContainer: {
     marginVertical: 16,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   selectedButton: {
-    backgroundColor: "darkmagenta",
+    backgroundColor: "orange",
   },
   buttonText: {
     color: "#fff",
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "700",
-    color: "darkmagenta",
+    color: "orange",
     marginBottom: 8,
   },
   description: {
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: "100%",
-    backgroundColor: "#1e1e1e",
+    backgroundColor: "#161622",
     borderRadius: 10,
     padding: 20,
   },
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: "darkmagenta",
+    backgroundColor: "orange",
     borderRadius: 20,
   },
   closeButtonText: {

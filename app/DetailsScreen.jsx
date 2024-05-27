@@ -39,9 +39,9 @@ const DetailsScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
-      <StatusBar backgroundColor="#d0d8dc" />
+      <StatusBar backgroundColor="#444444" />
 
-      <View style={{ height: 480, backgroundColor: "#d0d8dc" }}>
+      <View style={{ height: 480, backgroundColor: "#161622" }}>
         <ImageBackground
           resizeMode="contain"
           source={{ uri: image }}
@@ -257,7 +257,7 @@ const style = StyleSheet.create({
     marginRight: 15,
   },
   btn: {
-    backgroundColor: "#306060",
+    backgroundColor: "#161622",
     flex: 1,
     height: 50,
     borderRadius: 12,
