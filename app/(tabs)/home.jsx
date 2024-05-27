@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { FlatList, Image, Text, View, StyleSheet, TouchableOpacity, Modal, ScrollView } from "react-native";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import VideoCard from "../../components/VideoCard";
 import { useFonts } from 'expo-font';
@@ -12,12 +12,19 @@ const Home = () => {
   });
 
   const [selectedCategory, setSelectedCategory] = useState("Training 101");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedImageData, setSelectedImageData] = useState(null);
 
   if (!fontsLoaded) {
     return null; // Optionally render a loading state
   }
 
-  const renderVideoCards = () => {
+  const openModal = (imageData) => {
+    setSelectedImageData(imageData);
+    setModalVisible(true);
+  };
+
+  const renderContent = () => {
     if (selectedCategory === "Training 101") {
       return (
         <>
@@ -38,8 +45,42 @@ const Home = () => {
           />
         </>
       );
+    } else if (selectedCategory === "Medical") {
+      return (
+        <>
+          <TouchableOpacity style={styles.imageCard} onPress={() => openModal({
+            image: require("../../assets/images/petvaccine.jpg"),
+            title: "Pet Vaccination"
+
+          })}>
+            <Image
+              source={require("../../assets/images/petvaccine.jpg")}
+              style={styles.image}
+              resizeMode="cover"
+            />
+            <Text style={styles.imageTitle}>Pet Vaccination</Text>
+            <Text style={styles.imageDescription}>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.imageCard} onPress={() => openModal({
+            image: require("../../assets/images/medical1.png"),
+            title: "Regular Check-ups",
+            description: "Importance of regular vet check-ups for your pet's health."
+          })}>
+            <Image
+              source={require("../../assets/images/logo.png")}
+              style={styles.image}
+              resizeMode="cover"
+            />
+            <Text style={styles.imageTitle}>Regular Check-ups</Text>
+            <Text style={styles.imageDescription}>
+              Importance of regular vet check-ups for your pet's health.
+            </Text>
+          </TouchableOpacity>
+        </>
+      );
     }
-    // Add other categories with their respective video content here.
+    // Add other categories with their respective content here.
     return <Text style={styles.noContent}>No content available for this category.</Text>;
   };
 
@@ -75,11 +116,33 @@ const Home = () => {
               <Text style={styles.description}>
                 Welcome! Here you'll find informative videos to help you become a better pet owner.
               </Text>
-              {renderVideoCards()}
+              {renderContent()}
             </View>
           </View>
         )}
       />
+
+      {selectedImageData && (
+        <Modal
+          visible={modalVisible}
+          transparent={true}
+          animationType="slide"
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <ScrollView>
+                <Image source={selectedImageData.image} style={styles.modalImage} resizeMode="cover" />
+                <Text style={styles.modalTitle}>{selectedImageData.title}</Text>
+                <Text style={styles.modalDescription}>{selectedImageData.description}</Text>
+              </ScrollView>
+              <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
+                <Text style={styles.closeButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      )}
     </SafeAreaView>
   );
 };
@@ -146,6 +209,68 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     marginTop: 20,
+  },
+  imageCard: {
+    marginBottom: 16,
+    backgroundColor: "#1e1e1e",
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  image: {
+    width: "100%",
+    height: 200,
+  },
+  imageTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
+    padding: 8,
+  },
+  imageDescription: {
+    fontSize: 14,
+    color: "#bbb",
+    padding: 8,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+  },
+  modalContent: {
+    width: "90%",
+    backgroundColor: "#1e1e1e",
+    borderRadius: 10,
+    padding: 16,
+  },
+  modalImage: {
+    width: "100%",
+    height: 300,
+    borderRadius: 10,
+    marginBottom: 16,
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 8,
+  },
+  modalDescription: {
+    fontSize: 16,
+    color: "#bbb",
+    marginBottom: 16,
+  },
+  closeButton: {
+    alignSelf: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: "darkmagenta",
+    borderRadius: 20,
+  },
+  closeButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 
