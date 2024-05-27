@@ -8,6 +8,7 @@ import { useFonts } from 'expo-font';
 const Home = () => {
   const { user } = useGlobalContext();
   const [fontsLoaded] = useFonts({
+    'Poppins-Regular': require('../../assets/fonts/Poppins-Regular.ttf'),
     'Poppins-Bold': require('../../assets/fonts/Poppins-Bold.ttf'),
   });
 
@@ -49,9 +50,9 @@ const Home = () => {
       return (
         <>
           <TouchableOpacity style={styles.imageCard} onPress={() => openModal({
-            image: require("../../assets/images/petvaccine.jpg"),
-            title: "Pet Vaccination"
-
+            image: require("../../assets/images/petvax.png"),
+            title: "Pet Vaccination",
+            description: "Essential vaccinations to keep your pet safe and healthy."
           })}>
             <Image
               source={require("../../assets/images/petvaccine.jpg")}
@@ -59,8 +60,6 @@ const Home = () => {
               resizeMode="cover"
             />
             <Text style={styles.imageTitle}>Pet Vaccination</Text>
-            <Text style={styles.imageDescription}>
-            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.imageCard} onPress={() => openModal({
             image: require("../../assets/images/medical1.png"),
@@ -68,7 +67,7 @@ const Home = () => {
             description: "Importance of regular vet check-ups for your pet's health."
           })}>
             <Image
-              source={require("../../assets/images/logo.png")}
+              source={require("../../assets/images/petvaccine.jpg")}
               style={styles.image}
               resizeMode="cover"
             />
@@ -107,13 +106,13 @@ const Home = () => {
                   ]}
                   onPress={() => setSelectedCategory(category)}
                 >
-                  <Text style={styles.buttonText}>{category}</Text>
+                  <Text style={[styles.buttonText, { fontFamily: 'Poppins-Regular' }]}>{category}</Text>
                 </TouchableOpacity>
               ))}
             </View>
             <View style={styles.content}>
               <Text style={[styles.title, { fontFamily: 'Poppins-Bold' }]}>Pet Education</Text>
-              <Text style={styles.description}>
+              <Text style={[styles.description, { fontFamily: 'Poppins-Regular' }]}>
                 Welcome! Here you'll find informative videos to help you become a better pet owner.
               </Text>
               {renderContent()}
@@ -133,11 +132,11 @@ const Home = () => {
             <View style={styles.modalContent}>
               <ScrollView>
                 <Image source={selectedImageData.image} style={styles.modalImage} resizeMode="cover" />
-                <Text style={styles.modalTitle}>{selectedImageData.title}</Text>
-                <Text style={styles.modalDescription}>{selectedImageData.description}</Text>
+                <Text style={[styles.modalTitle, { fontFamily: 'Poppins-Bold' }]}>{selectedImageData.title}</Text>
+                <Text style={[styles.modalDescription, { fontFamily: 'Poppins-Regular' }]}>{selectedImageData.description}</Text>
               </ScrollView>
               <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
-                <Text style={styles.closeButtonText}>Close</Text>
+                <Text style={[styles.closeButtonText, { fontFamily: 'Poppins-Bold' }]}>Close</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -189,7 +188,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 14,
-    fontFamily: 'Poppins-Bold',
   },
   content: {
     marginTop: 16,
@@ -236,12 +234,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.8)",
+    padding: 20,
   },
   modalContent: {
-    width: "90%",
+    width: "100%",
     backgroundColor: "#1e1e1e",
     borderRadius: 10,
-    padding: 16,
+    padding: 20,
   },
   modalImage: {
     width: "100%",
@@ -254,11 +253,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
     marginBottom: 8,
+    textAlign: "center",
   },
   modalDescription: {
     fontSize: 16,
     color: "#bbb",
     marginBottom: 16,
+    textAlign: "center",
   },
   closeButton: {
     alignSelf: "center",
