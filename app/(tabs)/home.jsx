@@ -49,37 +49,49 @@ const Home = () => {
     } else if (selectedCategory === "Medical") {
       return (
         <>
-          <TouchableOpacity style={styles.imageCard} onPress={() => openModal({
-            image: require("../../assets/images/petvax.png"),
-            title: "Pet Vaccination",
-            description: "Essential vaccinations to keep your pet safe and healthy."
-          })}>
-            <Image
-              source={require("../../assets/images/petvaccine.jpg")}
-              style={styles.image}
-              resizeMode="cover"
-            />
-            <Text style={styles.imageTitle}>Pet Vaccination</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.imageCard} onPress={() => openModal({
-            image: require("../../assets/images/medical1.png"),
-            title: "Regular Check-ups",
-            description: "Importance of regular vet check-ups for your pet's health."
-          })}>
-            <Image
-              source={require("../../assets/images/petvaccine.jpg")}
-              style={styles.image}
-              resizeMode="cover"
-            />
-            <Text style={styles.imageTitle}>Regular Check-ups</Text>
-            <Text style={styles.imageDescription}>
-              Importance of regular vet check-ups for your pet's health.
-            </Text>
-          </TouchableOpacity>
+          <View style={styles.gridContainer}>
+            <TouchableOpacity style={styles.card} onPress={() => openModal({
+              image: require("../../assets/images/petvax.png"),
+              title: "Pet Vaccination"
+            })}>
+              <Image
+                source={require("../../assets/images/petvaccine.jpg")}
+                style={styles.cardImage}
+                resizeMode="cover"
+              />
+              <View style={styles.overlay}>
+                <Text style={styles.cardTitle}>Pet Vaccination</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.card} onPress={() => openModal({
+              image: require("../../assets/images/medical1.png"),
+              title: "Regular Check-ups",
+            })}>
+              <Image
+                source={require("../../assets/images/petvaccine.jpg")}
+                style={styles.cardImage}
+                resizeMode="cover"
+              />
+              <View style={styles.overlay}>
+                <Text style={styles.cardTitle}>Regular Check-ups</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </>
+      );
+    } else if (selectedCategory === "Article") {
+      return (
+        <>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+          image: require("../../assets/images/article1.png"),
+          description: "If your cat or dog is coughing, the good news is that it’s probably not due to COVID-19. Experts from the U.S. Centers for Disease Control and Prevention (CDC) and the World Organization for Animal Health (OIE) agree that COVID-19 is predominantly a human illness, and it’s unlikely for pets to be infected with the coronavirus that causes COVID-19. There are many types of viruses that can make cats or dogs sick. So, your veterinarian will check your pet to make sure that the symptoms aren’t being caused by a more common virus or other health problem. If your cat or dog is sick, the best thing to do is speak with your veterinarian. Be sure to let them know if your pet has been exposed to anyone who has COVID-19. Your veterinarian will let you know what to do and will work with public health authorities to determine if a test is recommended."
+        })}>
+          <Text style={styles.articleTitle}>Should my pet be tested for COVID-19?</Text>
+          <Text style={styles.articleDesciption}>Reviewed on: Friday, April 17, 2020</Text>
+        </TouchableOpacity>
         </>
       );
     }
-    // Add other categories with their respective content here.
     return <Text style={styles.noContent}>No content available for this category.</Text>;
   };
 
@@ -113,7 +125,7 @@ const Home = () => {
             <View style={styles.content}>
               <Text style={[styles.title, { fontFamily: 'Poppins-Bold' }]}>Pet Education</Text>
               <Text style={[styles.description, { fontFamily: 'Poppins-Regular' }]}>
-                Welcome! Here you'll find informative videos to help you become a better pet owner.
+                Welcome! Here you'll find informative to help you become a better pet owner.
               </Text>
               {renderContent()}
             </View>
@@ -131,7 +143,9 @@ const Home = () => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <ScrollView>
-                <Image source={selectedImageData.image} style={styles.modalImage} resizeMode="cover" />
+                {selectedImageData.image && (
+                  <Image source={selectedImageData.image} style={styles.modalImage} resizeMode="cover" />
+                )}
                 <Text style={[styles.modalTitle, { fontFamily: 'Poppins-Bold' }]}>{selectedImageData.title}</Text>
                 <Text style={[styles.modalDescription, { fontFamily: 'Poppins-Regular' }]}>{selectedImageData.description}</Text>
               </ScrollView>
@@ -200,34 +214,50 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color: "#fff",
+    color: "white",
     marginBottom: 16,
   },
   noContent: {
-    color: "#fff",
+    color: "white",
     textAlign: "center",
     marginTop: 20,
   },
-  imageCard: {
-    marginBottom: 16,
-    backgroundColor: "#1e1e1e",
+  gridContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  card: {
+    width: "48%",
+    backgroundColor: "",
     borderRadius: 10,
+    marginBottom: 16,
     overflow: "hidden",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
-  image: {
+  cardImage: {
     width: "100%",
-    height: 200,
+    height: 150,
   },
-  imageTitle: {
+  overlay: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "",
+    padding: 8,
+  },
+  cardTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#fff",
-    padding: 8,
+    color: "black",
   },
-  imageDescription: {
+  cardDescription: {
     fontSize: 14,
     color: "#bbb",
-    padding: 8,
   },
   modalContainer: {
     flex: 1,
@@ -273,6 +303,32 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-});
+    articleCard: {
+      backgroundColor: 'orange',
+      borderRadius: 8,
+      padding: 16,
+      marginBottom: 16,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 2,
+      elevation: 2,
+    },
+      articleContent: {
+        marginBottom: 8,
+      },
+      articleTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 8,
+      },
+      description: {
+        fontSize: 16,
+        color: '#555',
+        textAlign: "justify"
+      },
+    });
+    
+  
 
 export default Home;
