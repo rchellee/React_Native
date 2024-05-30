@@ -51,8 +51,8 @@ const Home = () => {
         <>
           <View style={styles.gridContainer}>
             <TouchableOpacity style={styles.card} onPress={() => openModal({
-              image: require("../../assets/images/petvax.png"),
-              title: "Pet Vaccination"
+              title: "Pet Vaccination",
+              description: "Importance of Pet Vaccination: Protection from Diseases: Vaccinations stimulate the immune system to produce antibodies that fight off specific diseases. By vaccinating your pet, you can help prevent diseases such as canine distemper, parvovirus, rabies, feline panleukopenia, and respiratory infections in cats. Public Health: Some pet diseases, such as rabies, can also be transmitted to humans. Vaccinating your pets not only protects them but also helps prevent the spread of diseases to people. Community Immunity: Vaccinating your pet contributes to community immunity, also known as herd immunity. When a large portion of the pet population is vaccinated, it helps control the spread of diseases, protecting even those pets who cannot receive vaccinations due to medical reasons"
             })}>
               <Image
                 source={require("../../assets/images/petvaccine.jpg")}
@@ -91,6 +91,25 @@ const Home = () => {
         </TouchableOpacity>
         </>
       );
+    } else if (selectedCategory === "Blog") {
+      return (
+        <>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            title: "How to Choose the Right Pet for Your Family",
+            description: "Choosing the right pet for your family is an important decision. It depends on various factors such as the pet's temperament, the amount of space you have, and the time you can dedicate to a pet. Research different types of pets and consider your family's lifestyle before making a decision."
+          })}>
+            <Text style={styles.articleTitle}>How to Choose the Right Pet for Your Family</Text>
+            <Text style={styles.articleDesciption}>Posted on: January 15, 2024</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            title: "The Benefits of Adopting a Shelter Pet",
+            description: "Adopting a pet from a shelter can be one of the most rewarding experiences. Shelter pets are often loving and grateful to have a second chance at a happy life. Plus, by adopting, you're helping to reduce the overpopulation of pets and giving an animal a loving home."
+          })}>
+            <Text style={styles.articleTitle}>The Benefits of Adopting a Shelter Pet</Text>
+            <Text style={styles.articleDesciption}>Posted on: February 10, 2024</Text>
+          </TouchableOpacity>
+        </>
+      );
     }
     return <Text style={styles.noContent}>No content available for this category.</Text>;
   };
@@ -125,7 +144,7 @@ const Home = () => {
             <View style={styles.content}>
               <Text style={[styles.title, { fontFamily: 'Poppins-Bold' }]}>Pet Education</Text>
               <Text style={[styles.description, { fontFamily: 'Poppins-Regular' }]}>
-                Welcome! Here you'll find informative to help you become a better pet owner.
+                Welcome! Here you'll find informative content to help you become a better pet owner.
               </Text>
               {renderContent()}
             </View>
@@ -216,6 +235,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "white",
     marginBottom: 16,
+    textAlign: "justify",
   },
   noContent: {
     color: "white",
@@ -229,7 +249,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "48%",
-    backgroundColor: "",
+    backgroundColor: "#444",
     borderRadius: 10,
     marginBottom: 16,
     overflow: "hidden",
@@ -247,34 +267,34 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 8,
   },
   cardTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "black",
+    color: "white",
   },
   cardDescription: {
-    fontSize: 14,
+    fontSize: 12,
     color: "#bbb",
   },
   modalContainer: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "rgba(0, 0, 0, 0.8)",
     padding: 20,
   },
   modalContent: {
     width: "100%",
     backgroundColor: "#161622",
-    borderRadius: 10,
+    borderRadius: 5,
     padding: 20,
   },
   modalImage: {
     width: "100%",
-    height: 300,
+    height: 200,
     borderRadius: 10,
     marginBottom: 16,
   },
@@ -289,7 +309,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#bbb",
     marginBottom: 16,
-    textAlign: "center",
+    textAlign: "justify",
   },
   closeButton: {
     alignSelf: "center",
@@ -303,32 +323,29 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-    articleCard: {
-      backgroundColor: 'orange',
-      borderRadius: 8,
-      padding: 16,
-      marginBottom: 16,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 2,
-      elevation: 2,
-    },
-      articleContent: {
-        marginBottom: 8,
-      },
-      articleTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 8,
-      },
-      description: {
-        fontSize: 16,
-        color: '#555',
-        textAlign: "justify"
-      },
-    });
-    
-  
+  articleCard: {
+    backgroundColor: 'orange',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2,
+    borderWidth: 2,
+  },
+  articleTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 8,
+  },
+  articleDesciption: {
+    fontSize: 14,
+    color: '#fff',
+  },
+});
 
 export default Home;
+
