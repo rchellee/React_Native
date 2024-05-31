@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, FlatList, TouchableOpacity, Alert, Image } from "react-native";
-import { getAdoptionRequests, deleteAdoptionRequest } from "../lib/appwrite";
+import { getAdoptionRequests, deleteAdoptionRequest, updatePetAdoptionStatus } from "../lib/appwrite";
 import EmptyState from "../components/EmptyState";
 import { useGlobalContext } from "../context/GlobalProvider";
 
@@ -24,8 +24,12 @@ const Notifications = () => {
     fetchRequests();
   }, [user.$id]);
 
-  const handleCancelRequest = async (requestId) => {
+  const handleCancelRequest = async (requestId, petName) => {
     try {
+      // Update the pet's adoption status to "Available"
+      await updatePetAdoptionStatus(petName, { adoption_status: "Available" });
+
+      // Delete the adoption request
       await deleteAdoptionRequest(requestId);
       setRequests((prevRequests) =>
         prevRequests.filter((request) => request.$id !== requestId)
@@ -66,7 +70,7 @@ const Notifications = () => {
         )}
         </View>
         <TouchableOpacity
-          onPress={() => handleCancelRequest(item.$id)}
+          onPress={() => handleCancelRequest(item.$id, item.PetName)}
           className="mt-4 bg-red-500 p-2 rounded-lg"
         >
           <Text className="text-white text-center">Cancel Request</Text>
@@ -75,9 +79,6 @@ const Notifications = () => {
     );
   };
   
-  
-  
-
   return (
     <SafeAreaView className="bg-primary flex-1">
       {loading ? (
