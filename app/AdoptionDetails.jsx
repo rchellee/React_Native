@@ -8,7 +8,6 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
   Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -66,7 +65,6 @@ const AdoptionDetails = () => {
 
   const handleDeclineRequest = async (requestId) => {
     try {
-      console.log("Decline Request ID:", requestId); // Log the requestId
       await updateAdoptionRequest(requestId, { status: "Declined" });
       setRequests((prevRequests) =>
         prevRequests.filter((request) => request.$id !== requestId)
@@ -83,11 +81,8 @@ const AdoptionDetails = () => {
         throw new Error("Missing required parameter: 'petName'");
       }
 
-      console.log("Accept Request ID:", requestId); // Log the requestId
-      console.log("Pet Name:", petName); // Log the petName
-
       await updateAdoptionRequest(requestId, { status: "Accepted" });
-      await updatePetAdoptionStatus(petName, { adoption_status: "Pending" }); // Change adoption status to "Adopted"
+      await updatePetAdoptionStatus(petName, { adoption_status: "Pending" }); // Change adoption status to "Pending"
 
       setRequests((prevRequests) =>
         prevRequests.filter((request) => request.$id !== requestId)
@@ -104,9 +99,6 @@ const AdoptionDetails = () => {
       if (!petName) {
         throw new Error("Missing required parameter: 'petName'");
       }
-
-      console.log("Accept Request ID:", requestId); // Log the requestId
-      console.log("Pet Name:", petName); // Log the petName
 
       await updateAdoptionRequest(requestId, { status: "Adopted" });
       await updatePetAdoptionStatus(petName, { adoption_status: "Adopted" }); // Change adoption status to "Adopted"
@@ -267,74 +259,125 @@ const AdoptionDetails = () => {
                   marginTop: 2,
                 }}
               >
-                 {email}
+                {email}
               </Text>
             </View>
             <Text style={{ color: "#a8a8a8", fontSize: 12 }}>{created_at}</Text>
           </View>
-          <Text style={style.comment}>{description}</Text>
+
+          {/* Render comment text */}
+          <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
+            <Text style={{ color: "#616161", fontSize: 12, marginTop: 10 }}>
+              {description}
+            </Text>
+          </View>
         </View>
       </View>
 
-      {/* Accept and Decline Buttons */}
-      <View style={style.footer}>
-        <TouchableOpacity
-          style={[style.btn, { backgroundColor: "#d9534f", marginRight: 10 }]}
-          onPress={() => handleDeclineRequest(/* Pass the request ID here */)}
-        >
-          <Text style={{ color: "#FFF", fontWeight: "bold" }}>Decline</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[style.btn, { backgroundColor: "#5cb85c" }]}
-          onPress={() => handleAcceptRequest(/* Pass the request ID and pet name here */)}
-        >
-          <Text style={{ color: "#FFF", fontWeight: "bold" }}>Accept</Text>
-        </TouchableOpacity>
+      {/* Requester Information */}
+      <View style={style.requesterContainer}>
+        <Text style={style.sectionTitle}>Requester Information</Text>
+        {loading ? (
+          <Text>Loading...</Text>
+        ) : requests.length === 0 ? (
+          <Text>No requests found.</Text>
+        ) : (
+          requests.map((request) => (
+            <View key={request.$id} style={style.requesterDetails}>
+              <Text style={style.requesterText}>
+                Name: {request.adopterName}
+              </Text>
+              <Text style={style.requesterText}>
+                Contact: {request.adopterContact}
+              </Text>
+              <Text style={style.requesterText}>
+                Address: {request.adopterAddress}
+              </Text>
+              <Text style={style.requesterText}>Message: {request.message}</Text>
+            </View>
+          ))
+        )}
       </View>
+      <View style={style.buttonContainer}>
+                <TouchableOpacity
+                  style={style.declineButton}
+                  onPress={() => handleDeclineRequest(request.$id)}
+                >
+                  <Text style={style.buttonText}>Decline</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={style.acceptButton}
+                  onPress={() =>
+                    handleAcceptRequest(request.$id, Name)
+                  }
+                >
+                  <Text style={style.buttonText}>Accept</Text>
+                </TouchableOpacity>
+              </View>
     </SafeAreaView>
   );
 };
 
 const style = StyleSheet.create({
-  detailsContainer: {
-    height: 120,
-    backgroundColor: "#FFF",
-    marginHorizontal: 20,
-    flex: 1,
-    bottom: -60,
-    borderRadius: 18,
-    elevation: 10,
-    padding: 20,
-    justifyContent: "center",
-  },
-  comment: {
-    marginTop: 10,
-    fontSize: 12.5,
-    color: "#616161",
-    lineHeight: 20,
-    marginHorizontal: 20,
-  },
-  footer: {
-    height: 100,
-    backgroundColor: "#f5f5f5",
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+  header: {
+    marginTop: 40,
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
     justifyContent: "space-between",
   },
-  btn: {
-    flex: 1,
-    height: 50,
-    borderRadius: 12,
+  detailsContainer: {
+    height: 120,
+    backgroundColor: "#FFF",
+    marginHorizontal: 20,
+    flexDirection: "column",
+    padding: 15,
+    borderRadius: 10,
     justifyContent: "center",
-    alignItems: "center",
+    elevation: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    marginTop: 50,
   },
-  header: {
+  requesterContainer: {
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#616161",
+  },
+  requesterDetails: {
+    backgroundColor: "#f8f8f8",
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 8,
+  },
+  requesterText: {
+    fontSize: 14,
+    color: "#616161",
+  },
+  buttonContainer: {
     flexDirection: "row",
-    padding: 20,
     justifyContent: "space-between",
+    marginTop: 10,
+  },
+  declineButton: {
+    backgroundColor: "#ff4d4d",
+    padding: 10,
+    borderRadius: 5,
+  },
+  acceptButton: {
+    backgroundColor: "#4caf50",
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 
