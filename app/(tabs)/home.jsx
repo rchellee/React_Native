@@ -17,7 +17,7 @@ const Home = () => {
   const [selectedImageData, setSelectedImageData] = useState(null);
 
   if (!fontsLoaded) {
-    return null; // Optionally render a loading state
+    return null; 
   }
 
   const openModal = (imageData) => {
@@ -52,7 +52,7 @@ const Home = () => {
           <View style={styles.gridContainer}>
             <TouchableOpacity style={styles.card} onPress={() => openModal({
               title: "Pet Vaccination",
-              description: "Importance of Pet Vaccination: Protection from Diseases: Vaccinations stimulate the immune system to produce antibodies that fight off specific diseases. By vaccinating your pet, you can help prevent diseases such as canine distemper, parvovirus, rabies, feline panleukopenia, and respiratory infections in cats. Public Health: Some pet diseases, such as rabies, can also be transmitted to humans. Vaccinating your pets not only protects them but also helps prevent the spread of diseases to people. Community Immunity: Vaccinating your pet contributes to community immunity, also known as herd immunity. When a large portion of the pet population is vaccinated, it helps control the spread of diseases, protecting even those pets who cannot receive vaccinations due to medical reasons"
+              description: "Importance of Pet Vaccination: Protection from Diseases: Vaccinations stimulate the immune system to produce antibodies that fight off specific diseases. By vaccinating your pet, you can help prevent diseases such as canine distemper, parvovirus, rabies, feline panleukopenia, and respiratory infections in cats. Public Health: Some pet diseases, such as rabies, can also be transmitted to humans. Vaccinating your pets not only protects them but also helps prevent the spread of diseases to people. Community Immunity: Vaccinating your pet contributes to community immunity, also known as herd immunity. When a large portion of the pet population is vaccinated, it helps control the spread of diseases, protecting even those pets who cannot receive vaccinations due to medical reasons."
             })}>
               <Image
                 source={require("../../assets/images/petvaccine.jpg")}
@@ -66,6 +66,7 @@ const Home = () => {
             <TouchableOpacity style={styles.card} onPress={() => openModal({
               image: require("../../assets/images/medical1.png"),
               title: "Regular Check-ups",
+              description: "Regular veterinary check-ups are crucial to detect and prevent health issues early. Ensure your pet visits the vet at least once a year for a comprehensive health check."
             })}>
               <Image
                 source={require("../../assets/images/petvaccine.jpg")}
@@ -76,37 +77,60 @@ const Home = () => {
                 <Text style={styles.cardTitle}>Regular Check-ups</Text>
               </View>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.card} onPress={() => openModal({
+              image: require("../../assets/images/petvaccine.jpg"),
+              title: "Pet Dental Care",
+              description: "Pet dental care is often overlooked but is essential for your pet's overall health. Just like humans, pets need regular dental care to prevent dental diseases such as periodontal disease, tooth decay, and gum infections. Regular brushing of your pet's teeth, providing dental treats, and ensuring your pet has professional cleanings can significantly reduce the risk of dental problems. Dental diseases in pets can lead to pain, difficulty eating, and even more severe health issues if left untreated. Consult your veterinarian for advice on the best dental care practices for your pet and schedule regular dental check-ups."
+            })}>
+              <Image
+                source={require("../../assets/images/petvaccine.jpg")}
+                style={styles.cardImage}
+                resizeMode="cover"
+              />
+              <View style={styles.overlay}>
+                <Text style={styles.cardTitle}>Pet Dental Care</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.card} onPress={() => openModal({
+              image: require("../../assets/images/petvaccine.jpg"),
+              title: "Recognizing Common Pet Illnesses",
+              description: "Recognizing the signs of common pet illnesses early can help ensure timely treatment and prevent more serious health issues. Some common illnesses in pets include:\n-Respiratory Infections: Symptoms include coughing, sneezing, nasal discharge, and difficulty breathing. These can be caused by viruses, bacteria, or other pathogens.\n-Gastrointestinal Issues: Look for symptoms such as vomiting, diarrhea, loss of appetite, and weight loss. Causes can range from dietary indiscretion to infections and chronic conditions.\n-Skin Problems: Itching, redness, hair loss, and sores can indicate allergies, parasites, infections, or other skin conditions.\n-Ear Infections: Common signs include head shaking, ear scratching, discharge, and an unpleasant odor from the ears.\n-Urinary Tract Issues: Symptoms include frequent urination, straining, blood in the urine, and accidents in the house.\nIf you notice any of these symptoms, consult your veterinarian promptly for diagnosis and treatment. Early intervention can improve the prognosis and quality of life for your pet."
+            })}>
+              <Image
+                source={require("../../assets/images/petvaccine.jpg")}
+                style={styles.cardImage}
+                resizeMode="cover"
+              />
+              <View style={styles.overlay}>
+                <Text style={styles.cardTitle}>Recognizing Common Pet Illnesses</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-        </>
-      );
-    } else if (selectedCategory === "Article") {
-      return (
-        <>
-          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
-          image: require("../../assets/images/article1.png"),
-          description: "If your cat or dog is coughing, the good news is that it’s probably not due to COVID-19. Experts from the U.S. Centers for Disease Control and Prevention (CDC) and the World Organization for Animal Health (OIE) agree that COVID-19 is predominantly a human illness, and it’s unlikely for pets to be infected with the coronavirus that causes COVID-19. There are many types of viruses that can make cats or dogs sick. So, your veterinarian will check your pet to make sure that the symptoms aren’t being caused by a more common virus or other health problem. If your cat or dog is sick, the best thing to do is speak with your veterinarian. Be sure to let them know if your pet has been exposed to anyone who has COVID-19. Your veterinarian will let you know what to do and will work with public health authorities to determine if a test is recommended."
-        })}>
-          <Text style={styles.articleTitle}>Should my pet be tested for COVID-19?</Text>
-          <Text style={styles.articleDesciption}>Reviewed on: Friday, April 17, 2020</Text>
-        </TouchableOpacity>
         </>
       );
     } else if (selectedCategory === "Blog") {
       return (
         <>
-          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
-            title: "How to Choose the Right Pet for Your Family",
-            description: "Choosing the right pet for your family is an important decision. It depends on various factors such as the pet's temperament, the amount of space you have, and the time you can dedicate to a pet. Research different types of pets and consider your family's lifestyle before making a decision."
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            title: "Understanding Cat Behavior",
+            description: "Cats exhibit a variety of behaviors that can be puzzling to their owners. Here are some common cat behaviors and their meanings: 1. Purring: Often a sign of contentment, but can also indicate pain or distress. 2. Kneading: A comforting behavior. 3. Scratching: Marking territory and maintaining claw health. 4. Hiding: Seeking safety or comfort. 5. Chattering: Excitement or frustration. 6. Slow blinking: A sign of trust and affection."
           })}>
-            <Text style={styles.articleTitle}>How to Choose the Right Pet for Your Family</Text>
-            <Text style={styles.articleDesciption}>Posted on: January 15, 2024</Text>
+            <Text style={styles.blogTitle}>Understanding Cat Behavior</Text>
+            <Text style={styles.blogDesciption}>Posted on: April 20, 2024</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
-            title: "The Benefits of Adopting a Shelter Pet",
-            description: "Adopting a pet from a shelter can be one of the most rewarding experiences. Shelter pets are often loving and grateful to have a second chance at a happy life. Plus, by adopting, you're helping to reduce the overpopulation of pets and giving an animal a loving home."
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            title: "Healthy Pet Diets",
+            description: "A balanced diet is essential for your pet's health. Just like humans, pets require a mix of proteins, fats, carbohydrates, vitamins, and minerals to thrive. Here are some key points to consider when planning your pet's diet:\n- **High-Quality Proteins**: Ensure that the primary ingredient in your pet's food is a high-quality protein source such as chicken, beef, or fish. Protein is crucial for muscle development and overall health.\n- **Balanced Nutrients**: A good pet diet should include a balanced mix of fats and carbohydrates to provide energy, along with essential vitamins and minerals for overall well-being.\n- **Avoiding Fillers**: Avoid pet foods that contain excessive fillers such as corn, wheat, and soy, which offer little nutritional value.\n- **Tailored Diets**: Consider your pet's age, size, breed, and health conditions when choosing their diet. Puppies, adult dogs, senior dogs, and pets with specific health issues may require specialized diets.\n- **Hydration**: Always provide fresh, clean water for your pet. Proper hydration is vital for their health.\nConsult your veterinarian for recommendations on the best diet for your pet, and consider any special dietary needs they may have."
           })}>
-            <Text style={styles.articleTitle}>The Benefits of Adopting a Shelter Pet</Text>
-            <Text style={styles.articleDesciption}>Posted on: February 10, 2024</Text>
+            <Text style={styles.blogTitle}>Healthy Pet Diets</Text>
+            <Text style={styles.blogDesciption}>Posted on: May 12, 2024</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            title: "Exercise Tips for Pets",
+            description: "Regular exercise is vital for your pet's physical and mental well-being. Here are some tips to ensure your pet gets the exercise they need:\n- **Daily Walks**: For dogs, daily walks are essential. They provide physical exercise and mental stimulation as your dog explores their environment.\n- **Interactive Play**: Engage in interactive play with your pet using toys like balls, frisbees, and tug ropes. This helps to strengthen your bond and keep them active.\n- **Training Sessions**: Incorporate training sessions into playtime. Teaching new commands and tricks can be mentally stimulating and physically engaging for your pet.\n- **Puzzle Toys**: Use puzzle toys and treat dispensers to challenge your pet's mind and keep them occupied.\n- **Socialization**: Arrange playdates with other pets. Social interaction can be an excellent way for your pet to burn off energy.\n- **Safe Environment**: Ensure that your pet exercises in a safe and secure environment to prevent injuries.\nAlways tailor the exercise routine to your pet's age, breed, and health condition. Consult your veterinarian if you're unsure about the appropriate level of exercise for your pet."
+          })}>
+            <Text style={styles.blogTitle}>Exercise Tips for Pets</Text>
+            <Text style={styles.blogDesciption}>Posted on: June 1, 2024</Text>
           </TouchableOpacity>
         </>
       );
@@ -151,7 +175,6 @@ const Home = () => {
           </View>
         )}
       />
-
       {selectedImageData && (
         <Modal
           visible={modalVisible}
@@ -248,104 +271,82 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   card: {
-    width: "48%",
-    backgroundColor: "#444",
+    width: '48%',
+    marginBottom: 10,
     borderRadius: 10,
-    marginBottom: 16,
-    overflow: "hidden",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 5,
+    overflow: 'hidden',
+    backgroundColor: "#FFFFFF",
+    elevation: 3,
   },
   cardImage: {
-    width: "100%",
+    width: '100%',
     height: 150,
   },
   overlay: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    padding: 8,
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cardTitle: {
+    fontSize: 16,
+    fontFamily: 'Poppins-Bold',
+    color: "#FFFFFF",
+    textAlign: 'center',
+    padding: 10,
+  },
+  blogCard: {
+    backgroundColor: "#333",
+    borderRadius: 10,
+    padding: 16,
+    marginBottom: 16,
+  },
+  blogTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "white",
+    color: "#fff",
   },
-  cardDescription: {
-    fontSize: 12,
-    color: "#bbb",
+  blogDesciption: {
+    fontSize: 14,
+    color: "#aaa",
   },
   modalContainer: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
-    padding: 20,
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   modalContent: {
-    width: "100%",
-    backgroundColor: "#161622",
-    borderRadius: 5,
-    padding: 20,
+    width: "80%",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 16,
   },
   modalImage: {
     width: "100%",
     height: 200,
-    borderRadius: 10,
     marginBottom: 16,
   },
   modalTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: "bold",
-    color: "#fff",
     marginBottom: 8,
-    textAlign: "center",
   },
   modalDescription: {
     fontSize: 16,
-    color: "#bbb",
-    marginBottom: 16,
-    textAlign: "justify",
+    color: "#333",
   },
   closeButton: {
-    alignSelf: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    marginTop: 16,
+    alignItems: "center",
+    paddingVertical: 8,
     backgroundColor: "orange",
-    borderRadius: 20,
+    borderRadius: 5,
   },
   closeButtonText: {
-    color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
-  },
-  articleCard: {
-    backgroundColor: 'orange',
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
-    borderWidth: 2,
-  },
-  articleTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 8,
-  },
-  articleDesciption: {
-    fontSize: 14,
-    color: '#fff',
+    color: "#fff",
   },
 });
 
 export default Home;
-
