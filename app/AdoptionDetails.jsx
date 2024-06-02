@@ -53,7 +53,9 @@ const AdoptionDetails = () => {
       try {
         const data = await getAdoptionRequests(user.$id, true, Name); // Fetch requests for the specific pet
         // Filter out requests with status "Declined"
-        const filteredData = data.filter((request) => request.status !== "Declined");
+        const filteredData = data.filter(
+          (request) => request.status !== "Declined"
+        );
         setRequests(filteredData);
       } catch (error) {
         Alert.alert("Error", error.message);
@@ -64,13 +66,15 @@ const AdoptionDetails = () => {
     fetchRequests();
   }, [user.$id]);
 
-  const handleDeclineRequest = async (requestId) => {
+  const handleDeclineRequest = async (requestId, petName) => {
     try {
+      await updatePetAdoptionStatus(petName, { adoption_status: "Available" });
       await updateAdoptionRequest(requestId, { status: "Declined" });
       setRequests((prevRequests) =>
         prevRequests.filter((request) => request.$id !== requestId)
       );
       Alert.alert("Success", "Adoption request declined successfully.");
+      navigation.navigate("adopt");
     } catch (error) {
       Alert.alert("Error", error.message);
     }
@@ -134,7 +138,7 @@ const AdoptionDetails = () => {
                 name="arrow-left"
                 size={28}
                 color="#616161"
-                onPress={() => navigation.navigate("adopt")}
+                onPress={() => navigation.navigate("profile")}
               />
             </View>
           </ImageBackground>
@@ -169,7 +173,9 @@ const AdoptionDetails = () => {
               <Text style={{ fontSize: 12, color: "#616161" }}>
                 Type: {species}
               </Text>
-              <Text style={{ fontSize: 13, color: "#616161" }}>Age: {age} </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
+                Age: {age}{" "}
+              </Text>
             </View>
             <View
               style={{
@@ -192,7 +198,9 @@ const AdoptionDetails = () => {
                 marginTop: 5,
               }}
             >
-              <Text style={{ fontSize: 12, color: "#616161" }}>Size: {size}</Text>
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Size: {size}
+              </Text>
               <Text style={{ fontSize: 13, color: "#616161" }}>
                 Php: {adoption_fee}{" "}
               </Text>
@@ -221,9 +229,7 @@ const AdoptionDetails = () => {
               <Text style={{ fontSize: 12, color: "#616161" }}>
                 Status: {adoption_status}
               </Text>
-              <Text style={{ fontSize: 13, color: "#616161" }}>
-                {email}
-              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>{email}</Text>
             </View>
 
             {/* Render location and icon */}
@@ -258,28 +264,29 @@ const AdoptionDetails = () => {
                 {request.message}
               </Text>
               <View style={style.buttonContainer}>
-                <TouchableOpacity
-                  style={style.declineButton}
-                  onPress={() => handleDeclineRequest(request.$id)}
-                >
-                  <Text style={style.buttonText}>Decline</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={style.acceptButton}
-                  onPress={() =>
-                    handleAcceptRequest(request.$id, Name)
-                  }
-                >
-                  <Text style={style.buttonText}>Accept</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={style.completeButton}
-                  onPress={() =>
-                    handleAdoptionComplete(request.$id, Name)
-                  }
-                >
-                  <Text style={style.buttonText}>Complete</Text>
-                </TouchableOpacity>
+                {request.status === "Accepted" ? (
+                  <TouchableOpacity
+                    style={style.completeButton}
+                    onPress={() => handleAdoptionComplete(request.$id, Name)}
+                  >
+                    <Text style={style.buttonText}>Adopted</Text>
+                  </TouchableOpacity>
+                ) : request.status === "Pending" ? (
+                  <TouchableOpacity
+                    style={style.acceptButton}
+                    onPress={() => handleAdoptionComplete(request.$id, Name)}
+                  >
+                    <Text style={style.buttonText}>Accept</Text>
+                  </TouchableOpacity>
+                ) : null}
+                {request.status !== "Declined" && (
+                  <TouchableOpacity
+                    style={style.declineButton}
+                    onPress={() => handleDeclineRequest(request.$id, Name)}
+                  >
+                    <Text style={style.buttonText}>Cancel</Text>
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
           ))}
