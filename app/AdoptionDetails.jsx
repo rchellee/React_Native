@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useRoute } from "@react-navigation/native";
@@ -50,7 +51,7 @@ const AdoptionDetails = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const data = await getAdoptionRequests(user.$id, true); // Fetch requests as owner
+        const data = await getAdoptionRequests(user.$id, true, Name); // Fetch requests for the specific pet
         // Filter out requests with status "Declined"
         const filteredData = data.filter((request) => request.status !== "Declined");
         setRequests(filteredData);
@@ -117,188 +118,146 @@ const AdoptionDetails = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
       <StatusBar backgroundColor="#d0d8dc" />
 
-      <View style={{ height: 480, backgroundColor: "#d0d8dc" }}>
-        <ImageBackground
-          resizeMode="contain"
-          source={{ uri: image }}
-          style={{
-            height: 280,
-            top: 40,
-          }}
-        >
-          {/* Render  Header */}
-          <View style={style.header}>
-            <Icon
-              name="arrow-left"
-              size={28}
-              color="#616161"
-              onPress={() => navigation.navigate("adopt")}
-            />
-          </View>
-        </ImageBackground>
-
-        <View style={style.detailsContainer}>
-          {/* Pet name and gender icon */}
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
+      <ScrollView>
+        <View style={{ height: 480, backgroundColor: "#d0d8dc" }}>
+          <ImageBackground
+            resizeMode="contain"
+            source={{ uri: image }}
+            style={{
+              height: 280,
+              top: 40,
+            }}
           >
-            <Text
-              style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
+            {/* Render  Header */}
+            <View style={style.header}>
+              <Icon
+                name="arrow-left"
+                size={28}
+                color="#616161"
+                onPress={() => navigation.navigate("adopt")}
+              />
+            </View>
+          </ImageBackground>
+
+          <View style={style.detailsContainer}>
+            {/* Pet name and gender icon */}
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
-              {Name}
-            </Text>
-            <Text>
-              {gender === "Female" ? (
-                <Icon name="gender-female" size={25} color="#a8a8a8" />
-              ) : (
-                <Icon name="gender-male" size={25} color="#a8a8a8" />
-              )}
-            </Text>
-          </View>
-
-          {/* Render Pet type and age */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Type: {species}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>Age: {age} </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Breed: {breed}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              Color: {color}{" "}
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>Size: {size}</Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              Php: {adoption_fee}{" "}
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Vaxx: {vaccination_status ? "Yes" : "No"}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              {contact_num}
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Status: {adoption_status}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              {email}
-            </Text>
-          </View>
-
-          {/* Render location and icon */}
-          <View style={{ marginTop: 5, flexDirection: "row" }}>
-            <Icon name="map-marker" color="#306060" size={20} />
-            <Text style={{ fontSize: 14, color: "#a8a8a8", marginLeft: 5 }}>
-              {location}
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Comment container */}
-      <View
-        style={{ marginTop: 100, justifyContent: "space-between", flex: 1 }}
-      >
-        <View>
-          {/* Render user image , name and date */}
-          <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
-            <Image
-              source={{ uri: avatar }}
-              style={{ height: 40, width: 40, borderRadius: 20 }}
-            />
-            <View style={{ flex: 1, paddingLeft: 10 }}>
               <Text
-                style={{ color: "#616161", fontSize: 12, fontWeight: "bold" }}
+                style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
               >
-                {username}
+                {Name}
               </Text>
-              <Text
-                style={{
-                  color: "#a8a8a8",
-                  fontSize: 11,
-                  fontWeight: "bold",
-                  marginTop: 2,
-                }}
-              >
+              <Text>
+                {gender === "Female" ? (
+                  <Icon name="gender-female" size={25} color="#a8a8a8" />
+                ) : (
+                  <Icon name="gender-male" size={25} color="#a8a8a8" />
+                )}
+              </Text>
+            </View>
+
+            {/* Render Pet type and age */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Type: {species}
+              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>Age: {age} </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Breed: {breed}
+              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
+                Color: {color}{" "}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>Size: {size}</Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
+                Php: {adoption_fee}{" "}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Vaxx: {vaccination_status ? "Yes" : "No"}
+              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
+                {contact_num}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Status: {adoption_status}
+              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
                 {email}
               </Text>
             </View>
-            <Text style={{ color: "#a8a8a8", fontSize: 12 }}>{created_at}</Text>
-          </View>
 
-          {/* Render comment text */}
-          <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
-            <Text style={{ color: "#616161", fontSize: 12, marginTop: 10 }}>
-              {description}
-            </Text>
+            {/* Render location and icon */}
+            <View style={{ marginTop: 5, flexDirection: "row" }}>
+              <Icon name="map-marker" color="#306060" size={20} />
+              <Text style={{ fontSize: 14, color: "#a8a8a8", marginLeft: 5 }}>
+                {location}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      {/* Requester Information */}
-      <View style={style.requesterContainer}>
-        <Text style={style.sectionTitle}>Requester Information</Text>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : requests.length === 0 ? (
-          <Text>No requests found.</Text>
-        ) : (
-          requests.map((request) => (
+        {/* Render adoption requests */}
+        <View style={style.requesterContainer}>
+          <Text style={style.sectionTitle}>Adoption Requests</Text>
+          {requests.map((request) => (
             <View key={request.$id} style={style.requesterDetails}>
               <Text style={style.requesterText}>
-                Name: {request.adopterName}
+                <Text style={{ fontWeight: "bold" }}>Name: </Text>
+                {request.adopterName}
               </Text>
               <Text style={style.requesterText}>
-                Contact: {request.adopterContact}
+                <Text style={{ fontWeight: "bold" }}>Contact: </Text>
+                {request.adopterContact}
               </Text>
               <Text style={style.requesterText}>
-                Address: {request.adopterAddress}
+                <Text style={{ fontWeight: "bold" }}>Address: </Text>
+                {request.adopterAddress}
               </Text>
-              <Text style={style.requesterText}>Message: {request.message}</Text>
-            </View>
-          ))
-        )}
-      </View>
-      <View style={style.buttonContainer}>
+              <Text style={style.requesterText}>
+                <Text style={{ fontWeight: "bold" }}>Message: </Text>
+                {request.message}
+              </Text>
+              <View style={style.buttonContainer}>
                 <TouchableOpacity
                   style={style.declineButton}
                   onPress={() => handleDeclineRequest(request.$id)}
@@ -313,52 +272,75 @@ const AdoptionDetails = () => {
                 >
                   <Text style={style.buttonText}>Accept</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                  style={style.completeButton}
+                  onPress={() =>
+                    handleAdoptionComplete(request.$id, Name)
+                  }
+                >
+                  <Text style={style.buttonText}>Complete</Text>
+                </TouchableOpacity>
               </View>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const style = StyleSheet.create({
   header: {
-    marginTop: 40,
-    flexDirection: "row",
-    alignItems: "center",
     paddingHorizontal: 20,
+    flexDirection: "row",
     justifyContent: "space-between",
+    top: 20,
   },
   detailsContainer: {
-    height: 120,
+    height: 140,
     backgroundColor: "#FFF",
     marginHorizontal: 20,
-    flexDirection: "column",
-    padding: 15,
-    borderRadius: 10,
-    justifyContent: "center",
-    elevation: 10,
+    flex: 1,
+    bottom: -60,
+    borderRadius: 18,
+    padding: 20,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.2,
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.1,
     shadowRadius: 10,
-    marginTop: 50,
+    elevation: 5,
   },
   requesterContainer: {
-    paddingHorizontal: 20,
+    marginHorizontal: 20,
     marginTop: 20,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#616161",
+    marginBottom: 10,
   },
   requesterDetails: {
-    backgroundColor: "#f8f8f8",
-    padding: 10,
-    marginVertical: 10,
-    borderRadius: 8,
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
   },
   requesterText: {
     fontSize: 14,
     color: "#616161",
+    marginBottom: 5,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -366,18 +348,28 @@ const style = StyleSheet.create({
     marginTop: 10,
   },
   declineButton: {
-    backgroundColor: "#ff4d4d",
-    padding: 10,
+    backgroundColor: "#FF6347",
     borderRadius: 5,
+    padding: 10,
+    flex: 1,
+    marginRight: 5,
   },
   acceptButton: {
-    backgroundColor: "#4caf50",
-    padding: 10,
+    backgroundColor: "#32CD32",
     borderRadius: 5,
+    padding: 10,
+    flex: 1,
+    marginRight: 5,
+  },
+  completeButton: {
+    backgroundColor: "#1E90FF",
+    borderRadius: 5,
+    padding: 10,
+    flex: 1,
   },
   buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: "#FFF",
+    textAlign: "center",
   },
 });
 
