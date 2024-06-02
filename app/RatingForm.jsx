@@ -11,7 +11,7 @@ const RatingForm = () => {
   const { user } = useGlobalContext();
   const [currentUser, setCurrentUser] = useState(null);
   const route = useRoute();
-  const { petId } = route.params;
+  const { petId, petName } = route.params;
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState('');
   const [loading, setLoading] = useState(true);
@@ -42,6 +42,7 @@ const RatingForm = () => {
         petId,
         userId: user.$id,
         username: user?.username,
+        petName,
         rating,
         feedback,
         timestamp: new Date().toISOString(),
