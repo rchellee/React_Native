@@ -1,7 +1,19 @@
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, FlatList, TouchableOpacity, Alert, Image } from "react-native";
-import { getAdoptionRequests, deleteAdoptionRequest, updatePetAdoptionStatus, getUserRatings } from "../lib/appwrite";
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from "react-native";
+import {
+  getAdoptionRequests,
+  deleteAdoptionRequest,
+  updatePetAdoptionStatus,
+  getUserRatings,
+} from "../lib/appwrite";
 import EmptyState from "../components/EmptyState";
 import { useGlobalContext } from "../context/GlobalProvider";
 import { useNavigation } from "@react-navigation/native";
@@ -34,23 +46,25 @@ const Notifications = () => {
         const ratings = await getUserRatings(user.$id);
         setUserRatings(ratings);
       } catch (error) {
-        console.error("Error fetching user ratings:", error);
+        Alert.alert("Error", error.message);
       }
     };
+
     fetchUserRatings();
   }, [user.$id]);
 
   const hasUserRatedPet = (petId) => {
-    return userRatings.some(rating => rating.petId === petId);
+    return userRatings.some((rating) => rating.petId === petId);
   };
-  
 
   const renderItem = ({ item }) => {
     const petInfo = JSON.parse(item.petInfo);
-  
+
     const handleCancelRequest = async (requestId, petName) => {
       try {
-        await updatePetAdoptionStatus(petName, { adoption_status: "Available" });
+        await updatePetAdoptionStatus(petName, {
+          adoption_status: "Available",
+        });
         await deleteAdoptionRequest(requestId);
         setRequests((prevRequests) =>
           prevRequests.filter((request) => request.$id !== requestId)
@@ -60,12 +74,12 @@ const Notifications = () => {
         Alert.alert("Error", error.message);
       }
     };
-  
+
     const handleRatePet = async (petName) => {
       try {
-        const petId = await getPetIdByName(petName); 
+        const petId = await getPetIdByName(petName);
         if (petId) {
-          navigation.navigate("RatingForm", { petId });
+          navigation.navigate("RatingForm", { petId, petName });
         } else {
           Alert.alert("Error", "Pet ID not found for the given pet name.");
         }
@@ -73,7 +87,7 @@ const Notifications = () => {
         Alert.alert("Error", error.message);
       }
     };
-  
+
     const petId = item.petId;
     const alreadyRated = hasUserRatedPet(petId);
 
@@ -84,45 +98,59 @@ const Notifications = () => {
         <Text>Contact: {item.adopterContact}</Text>
         <Text>Address: {item.adopterAddress}</Text>
         <Text className="mt-2">Message: {item.message}</Text>
-        <Text className="mt-2 text-sm text-gray-500">Requested at: {item.requested_at}</Text>
-        <Text className="mt-2 text-sm text-gray-500">Status: {item.status}</Text>
+        <Text className="mt-2 text-sm text-gray-500">
+          Requested at: {item.requested_at}
+        </Text>
+        <Text className="mt-2 text-sm text-gray-500">
+          Status: {item.status}
+        </Text>
+        <Text className="mt-2 text-sm text-gray-500">Rated: {item.rated}</Text>
         {!alreadyRated && (
           <View className="mt-4">
             <Text className="text-lg font-bold">Pet Information:</Text>
-            <Text>Age: {petInfo.age || 'N/A'}</Text>
-            <Text>Species: {petInfo.species || 'N/A'}</Text>
-            <Text>Breed: {petInfo.breed || 'N/A'}</Text>
-            <Text>Color: {petInfo.color || 'N/A'}</Text>
-            <Text>Gender: {petInfo.gender || 'N/A'}</Text>
-            <Text>Size: {petInfo.size || 'N/A'}</Text>
-            <Text>Adoption Fee: {petInfo.adoption_fee || 'N/A'}</Text>
-            <Text>Vaccination Status: {petInfo.vaccination_status !== "" ? "Yes" : "No"}</Text>
-            <Text>Description: {petInfo.description || 'N/A'}</Text>
-            <Text>Contact Number: {petInfo.contact_num || 'N/A'}</Text>
-            <Text>Location: {petInfo.location || 'N/A'}</Text>
+            <Text>Age: {petInfo.age || "N/A"}</Text>
+            <Text>Species: {petInfo.species || "N/A"}</Text>
+            <Text>Breed: {petInfo.breed || "N/A"}</Text>
+            <Text>Color: {petInfo.color || "N/A"}</Text>
+            <Text>Gender: {petInfo.gender || "N/A"}</Text>
+            <Text>Size: {petInfo.size || "N/A"}</Text>
+            <Text>Adoption Fee: {petInfo.adoption_fee || "N/A"}</Text>
+            <Text>
+              Vaccination Status:{" "}
+              {petInfo.vaccination_status !== "" ? "Yes" : "No"}
+            </Text>
+            <Text>Description: {petInfo.description || "N/A"}</Text>
+            <Text>Contact Number: {petInfo.contact_num || "N/A"}</Text>
+            <Text>Location: {petInfo.location || "N/A"}</Text>
             {petInfo.image && (
-              <Image source={{ uri: petInfo.image }} style={{ width: 100, height: 100 }} />
+              <Image
+                source={{ uri: petInfo.image }}
+                style={{ width: 100, height: 100 }}
+              />
             )}
           </View>
         )}
-        {item.status === "Adopted" && !alreadyRated && (
+        {item.status === "Adopted" && item.rated !== true && (
           <TouchableOpacity
-            onPress={() => handleRatePet(item.PetName)} 
+            onPress={() => handleRatePet(item.PetName)}
             className="mt-4 bg-blue-500 p-2 rounded-lg"
           >
             <Text className="text-white text-center">Rate</Text>
           </TouchableOpacity>
         )}
-        <TouchableOpacity
-          onPress={() => handleCancelRequest(item.$id, item.PetName)}
-          className="mt-4 bg-red-500 p-2 rounded-lg"
-        >
-          <Text className="text-white text-center">Cancel Request</Text>
-        </TouchableOpacity>
+
+        {item.status !== "Adopted" && (
+          <TouchableOpacity
+            onPress={() => handleCancelRequest(item.$id, item.PetName)}
+            className="mt-4 bg-red-500 p-2 rounded-lg"
+          >
+            <Text className="text-white text-center">Cancel Request</Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   };
-  
+
   return (
     <SafeAreaView className="bg-primary flex-1">
       {loading ? (

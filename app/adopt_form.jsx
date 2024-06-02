@@ -38,6 +38,7 @@ const AdoptForm = () => {
     message: "",
     requested_at: "",
     status: "Pending",
+    rated: "False",
   });
 
   const submit = async () => {
@@ -89,7 +90,8 @@ const AdoptForm = () => {
         adopterAddress: "",
         message: "",
         requested_at: "",
-        status: "Pending"
+        status: "Pending",
+        rated: "False"
       });
 
       setUploading(false);

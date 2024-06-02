@@ -275,7 +275,7 @@ const AdoptionDetails = () => {
                 ) : request.status === "Pending" ? (
                   <TouchableOpacity
                     style={style.acceptButton}
-                    onPress={() => handleAdoptionComplete(request.$id, Name)}
+                    onPress={() => handleAcceptRequest(request.$id, Name)}
                   >
                     <Text style={style.buttonText}>Accept</Text>
                   </TouchableOpacity>
