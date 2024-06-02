@@ -61,7 +61,6 @@ const AdoptForm = () => {
         ...form,
         requested_at: currentDate,
         PetName: Name,
-        owner: username,
         userId: user.$id,
         age,
         species,

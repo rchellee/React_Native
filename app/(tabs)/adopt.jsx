@@ -22,15 +22,18 @@ const Adopt = () => {
     setRefreshing(false);
   };
 
+  // Filter out posts with adoption status "Pending" or "Adopted"
+  const filteredPosts = posts.filter(post => post.adoption_status !== "Pending" && post.adoption_status !== "Adopted");
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={posts}
+        data={filteredPosts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <PetList 
             video={item}
-            />
+          />
         )}
         
         ListHeaderComponent={() => (
@@ -60,6 +63,14 @@ const Adopt = () => {
         ListEmptyComponent={() => (
           <EmptyState title="No Pets Found" subtitle="No Pets created yet" />
         )}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={['white']}
+            tintColor={'white'}
+          />
+        }
       />
     </SafeAreaView>
   );

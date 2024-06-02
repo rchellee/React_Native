@@ -11,7 +11,6 @@ import InfoBox from "../../components/InfoBox";
 import MyPet from "../../components/MyPet";
 import Adoption from "../../components/adoption";
 import Notifications from "../../components/Notifications";
-import Pending from "../../components/Pending";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 
@@ -39,8 +38,6 @@ const Profile = () => {
     switch (activeTab) {
       case "My Request":
         return <Notifications />;
-      case "Pending":
-        return <Pending />;
       case "Adoption":
         return (
           <FlatList
@@ -120,13 +117,6 @@ const Profile = () => {
             }
           >
             My Request
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveTab("Pending")}>
-          <Text
-            className={activeTab === "Pending" ? "font-bold" : "text-white"}
-          >
-            Pending
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setActiveTab("Adoption")}>

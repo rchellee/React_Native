@@ -113,6 +113,7 @@ const AdoptionDetails = () => {
       );
 
       Alert.alert("Success", "Adoption Completed.");
+      navigation.navigate("adopt");
     } catch (error) {
       Alert.alert("Error", error.message);
     }
