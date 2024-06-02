@@ -112,31 +112,52 @@ const Home = () => {
       return (
         <>
           <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
-            title: "Understanding Cat Behavior",
+            title: "Understanding Cat",
             description: "Cats exhibit a variety of behaviors that can be puzzling to their owners. Here are some common cat behaviors and their meanings: 1. Purring: Often a sign of contentment, but can also indicate pain or distress. 2. Kneading: A comforting behavior. 3. Scratching: Marking territory and maintaining claw health. 4. Hiding: Seeking safety or comfort. 5. Chattering: Excitement or frustration. 6. Slow blinking: A sign of trust and affection."
           })}>
             <Text style={styles.blogTitle}>Understanding Cat Behavior</Text>
             <Text style={styles.blogDesciption}>Posted on: April 20, 2024</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
-            title: "Healthy Pet Diets",
-            description: "A balanced diet is essential for your pet's health. Just like humans, pets require a mix of proteins, fats, carbohydrates, vitamins, and minerals to thrive. Here are some key points to consider when planning your pet's diet:\n- **High-Quality Proteins**: Ensure that the primary ingredient in your pet's food is a high-quality protein source such as chicken, beef, or fish. Protein is crucial for muscle development and overall health.\n- **Balanced Nutrients**: A good pet diet should include a balanced mix of fats and carbohydrates to provide energy, along with essential vitamins and minerals for overall well-being.\n- **Avoiding Fillers**: Avoid pet foods that contain excessive fillers such as corn, wheat, and soy, which offer little nutritional value.\n- **Tailored Diets**: Consider your pet's age, size, breed, and health conditions when choosing their diet. Puppies, adult dogs, senior dogs, and pets with specific health issues may require specialized diets.\n- **Hydration**: Always provide fresh, clean water for your pet. Proper hydration is vital for their health.\nConsult your veterinarian for recommendations on the best diet for your pet, and consider any special dietary needs they may have."
+            title: "HEALTHY PET DIETS",
+            description: "A balanced diet is essential for your pet's health. Just like humans, pets require a mix of proteins, fats, carbohydrates, vitamins, and minerals to thrive. \n Here are some key points to consider when planning your pet's diet:\n-High-Quality Proteins:\nEnsure that the primary ingredient in your pet's food is a high-quality protein source such as chicken, beef, or fish. Protein is crucial for muscle development and overall health.\n-Balanced Nutrients:\n A good pet diet should include a balanced mix of fats and carbohydrates to provide energy, along with essential vitamins and minerals for overall well-being.\n-Avoiding Fillers:\n Avoid pet foods that contain excessive fillers such as corn, wheat, and soy, which offer little nutritional value.\n-Tailored Diets:\n Consider your pet's age, size, breed, and health conditions when choosing their diet. Puppies, adult dogs, senior dogs, and pets with specific health issues may require specialized diets.\n-Hydration:\n Always provide fresh, clean water for your pet. Proper hydration is vital for their health.\nConsult your veterinarian for recommendations on the best diet for your pet, and consider any special dietary needs they may have."
           })}>
             <Text style={styles.blogTitle}>Healthy Pet Diets</Text>
             <Text style={styles.blogDesciption}>Posted on: May 12, 2024</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
-            title: "Exercise Tips for Pets",
-            description: "Regular exercise is vital for your pet's physical and mental well-being. Here are some tips to ensure your pet gets the exercise they need:\n- **Daily Walks**: For dogs, daily walks are essential. They provide physical exercise and mental stimulation as your dog explores their environment.\n- **Interactive Play**: Engage in interactive play with your pet using toys like balls, frisbees, and tug ropes. This helps to strengthen your bond and keep them active.\n- **Training Sessions**: Incorporate training sessions into playtime. Teaching new commands and tricks can be mentally stimulating and physically engaging for your pet.\n- **Puzzle Toys**: Use puzzle toys and treat dispensers to challenge your pet's mind and keep them occupied.\n- **Socialization**: Arrange playdates with other pets. Social interaction can be an excellent way for your pet to burn off energy.\n- **Safe Environment**: Ensure that your pet exercises in a safe and secure environment to prevent injuries.\nAlways tailor the exercise routine to your pet's age, breed, and health condition. Consult your veterinarian if you're unsure about the appropriate level of exercise for your pet."
+            title: "HERE ARE THE TIPS FOR YOUR PETS",
+            description: "Regular exercise is vital for your pet's physical and mental well-being. Here are some tips to ensure your pet gets the exercise they need:\n-Daily Walks: For dogs, daily walks are essential. They provide physical exercise and mental stimulation as your dog explores their environment.\n-Interactive Play: Engage in interactive play with your pet using toys like balls, frisbees, and tug ropes. This helps to strengthen your bond and keep them active.\n-Training Sessions: Incorporate training sessions into playtime. Teaching new commands and tricks can be mentally stimulating and physically engaging for your pet.\n-Puzzle Toys: Use puzzle toys and treat dispensers to challenge your pet's mind and keep them occupied.\n- Socialization: Arrange playdates with other pets. Social interaction can be an excellent way for your pet to burn off energy.\n-Safe Environment: Ensure that your pet exercises in a safe and secure environment to prevent injuries.\nAlways tailor the exercise routine to your pet's age, breed, and health condition. Consult your veterinarian if you're unsure about the appropriate level of exercise for your pet."
           })}>
             <Text style={styles.blogTitle}>Exercise Tips for Pets</Text>
             <Text style={styles.blogDesciption}>Posted on: June 1, 2024</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            title: "HERE ARE FIVE BENEFITS OF A RAW FOOD DIET FOR DOGS:",
+            description: "Cats exhibit a variety of behaviors that can be puzzling to their owners. Here are some common cat behaviors and their meanings: 1. Purring: Often a sign of contentment, but can also indicate pain or distress. 2. Kneading: A comforting behavior. 3. Scratching: Marking territory and maintaining claw health. 4. Hiding: Seeking safety or comfort. 5. Chattering: Excitement or frustration. 6. Slow blinking: A sign of trust and affection."
+          })}>
+            <Text style={styles.blogTitle}>5 Benefits of a Raw Food Diet for Dogs</Text>
+            <Text style={styles.blogDesciption}>Posted on: May 13, 2024</Text>
+          </TouchableOpacity>
+        </>
+      );
+    } else if (selectedCategory === "Article") {
+      return (
+        <>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            title: "5 Essential Tips for New Pet Owners",
+            description: "Bringing a new pet into your home is an exciting time, but it also comes with a lot of responsibility. Here are 5 essential tips for new pet owners:\n1. Research the Breed: Before getting a pet, research different breeds to find one that matches your lifestyle and living situation.\n2. Prepare Your Home: Pet-proof your home by removing hazards and providing necessary supplies such as food, water, bedding, and toys.\n3. Establish Routine: Pets thrive on routine, so establish a consistent schedule for feeding, walking, and playtime.\n4. Socialize and Train: Proper socialization and training are essential for a well-behaved pet. Start socializing and training your pet from a young age to prevent behavioral issues.\n5. Regular Veterinary Care: Schedule regular check-ups with a veterinarian to keep your pet healthy and up-to-date on vaccinations.\nBy following these tips, you can provide a happy and healthy life for your new furry friend."
+          })}>
+            <Text style={styles.articleTitle}>5 Important Tips for New Pet Owners</Text>
+            <Text style={styles.articleDesciption}>Reviwed on: June 2, 2024</Text>
           </TouchableOpacity>
         </>
       );
     }
     return <Text style={styles.noContent}>No content available for this category.</Text>;
   };
+  
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -255,9 +276,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   description: {
-    fontSize: 16,
+    fontSize: 14,
     color: "white",
-    marginBottom: 16,
+    marginBottom: 14,
     textAlign: "justify",
   },
   noContent: {
@@ -346,6 +367,21 @@ const styles = StyleSheet.create({
   closeButtonText: {
     fontSize: 16,
     color: "#fff",
+  },
+  articleCard: {
+    backgroundColor: "#333",
+    borderRadius: 10,
+    padding: 16,
+    marginBottom: 16,
+  },
+  articleTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  articleDesciption: {
+    fontSize: 14,
+    color: "#aaa",
   },
 });
 
