@@ -94,19 +94,19 @@ const Notifications = () => {
     return (
       <View className="p-4 mb-4 bg-white rounded-lg shadow-md">
         <Text className="text-lg font-bold">{item.PetName}</Text>
-        <Text className="mt-2">Requested by: {item.adopterName}</Text>
+        {/* <Text className="mt-2">Requested by: {item.adopterName}</Text>
         <Text>Contact: {item.adopterContact}</Text>
         <Text>Address: {item.adopterAddress}</Text>
-        <Text className="mt-2">Message: {item.message}</Text>
-        <Text className="mt-2 text-sm text-gray-500">
-          Requested at: {item.requested_at}
-        </Text>
-        <Text className="mt-2 text-sm text-gray-500">
-          Status: {item.status}
-        </Text>
-        <Text className="mt-2 text-sm text-gray-500">Rated: {item.rated}</Text>
+        <Text className="mt-2">Message: {item.message}</Text> */}
+        {/* <Text className="mt-2 text-sm text-gray-500">Rated: {item.rated}</Text> */}
         {!alreadyRated && (
           <View className="mt-4">
+          {petInfo.image && (
+              <Image
+                source={{ uri: petInfo.image }}
+                style={{ width: 100, height: 100 }}
+              />
+            )}
             <Text className="text-lg font-bold">Pet Information:</Text>
             <Text>Age: {petInfo.age || "N/A"}</Text>
             <Text>Species: {petInfo.species || "N/A"}</Text>
@@ -122,15 +122,14 @@ const Notifications = () => {
             <Text>Description: {petInfo.description || "N/A"}</Text>
             <Text>Contact Number: {petInfo.contact_num || "N/A"}</Text>
             <Text>Location: {petInfo.location || "N/A"}</Text>
-            {petInfo.image && (
-              <Image
-                source={{ uri: petInfo.image }}
-                style={{ width: 100, height: 100 }}
-              />
-            )}
+            <Text></Text>
+            <Text style={{ fontWeight: 'bold' }}>Status: {item.status}</Text>
+        <Text className="mt-2 text-sm text-gray-500">
+          Requested at: {item.requested_at}
+        </Text>
           </View>
         )}
-        {item.status === "Adopted" && item.rated !== true && (
+        {item.status === "Adopted" && item.rated !== "True" && (
           <TouchableOpacity
             onPress={() => handleRatePet(item.PetName)}
             className="mt-4 bg-blue-500 p-2 rounded-lg"
@@ -138,6 +137,7 @@ const Notifications = () => {
             <Text className="text-white text-center">Rate</Text>
           </TouchableOpacity>
         )}
+
 
         {item.status !== "Adopted" && (
           <TouchableOpacity

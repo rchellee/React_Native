@@ -36,7 +36,7 @@ const RatingForm = () => {
       Alert.alert('Error', 'Please provide a rating value.');
       return;
     }
-
+  
     try {
       await createRate({
         petId,
@@ -47,7 +47,7 @@ const RatingForm = () => {
         feedback,
         timestamp: new Date().toISOString(),
       });
-
+  
       setRating(0);
       setFeedback('');
       Alert.alert('Success', 'Rating submitted successfully.');
@@ -57,6 +57,7 @@ const RatingForm = () => {
       Alert.alert('Error', error.message || 'Failed to submit rating.');
     }
   };
+ 
 
   if (loading) {
     return <Text>Loading...</Text>;
@@ -64,8 +65,7 @@ const RatingForm = () => {
 
   return (
     <View style={{ alignItems: 'center' }}>
-      <Text style={{ fontSize: 25, color: '#000000', fontWeight: '500', marginVertical: 5, paddingTop: 100}}>
-      
+      <Text style={{ fontSize: 25, color: '#000000', fontWeight: '500', marginVertical: 5, paddingTop: 100 }}>
         Rate Your Experience
       </Text>
       <AirbnbRating
@@ -74,6 +74,7 @@ const RatingForm = () => {
         defaultRating={0}
         size={30}
         onFinishRating={setRating}
+        starContainerStyle={{ marginVertical: 10 }} // Add any additional styling as needed
       />
       <TextInput
         style={{
