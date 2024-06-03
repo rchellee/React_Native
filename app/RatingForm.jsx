@@ -23,7 +23,7 @@ const RatingForm = () => {
         const user = await getCurrentUser();
         setCurrentUser(user);
       } catch (error) {
-        console.error('Error fetching current user:', error);
+       
       } finally {
         setLoading(false);
       }
@@ -53,7 +53,6 @@ const RatingForm = () => {
       Alert.alert('Success', 'Rating submitted successfully.');
       navigation.navigate('adopt');
     } catch (error) {
-      console.error('Error rating the pet:', error);
       Alert.alert('Error', error.message || 'Failed to submit rating.');
     }
   };

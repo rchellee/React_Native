@@ -75,7 +75,7 @@ const Profile = () => {
 
   return (
     <SafeAreaView className="bg-primary h-full">
-      <View className="w-full flex justify-center items-center mt-1 mb-5 px-4">
+      <View className="w-full flex justify-center items-center mt-1 mb-8 px-5">
         <TouchableOpacity
           onPress={logout}
           className="flex w-full items-end mb-10"
@@ -102,7 +102,7 @@ const Profile = () => {
         />
       </View>
 
-      <View className="flex flex-row justify-around w-full mb-4 ">
+      <View className="flex flex-row justify-around w-full mb-1 ">
         <TouchableOpacity onPress={() => setActiveTab("My Pets")}>
           <Text
             className={activeTab === "My Pets" ? "font-bold" : "text-white"}

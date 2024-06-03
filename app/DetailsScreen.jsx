@@ -46,7 +46,7 @@ const DetailsScreen = () => {
         const user = await getCurrentUser();
         setCurrentUser(user);
       } catch (error) {
-        console.error(error);
+       
       } finally {
         setLoading(false);
       }

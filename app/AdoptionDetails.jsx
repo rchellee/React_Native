@@ -126,7 +126,7 @@ const AdoptionDetails = () => {
       <StatusBar backgroundColor="#d0d8dc" />
 
       <ScrollView>
-        <View style={{ height: 450, backgroundColor: "#d0d8dc" }}>
+        <View style={{ height: 450, backgroundColor: "#161622" }}>
         <Text></Text>
         <View style={style.header}>
               <Icon

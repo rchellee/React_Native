@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  StyleSheet,
+  StatusBar,
+  ScrollView,
 } from "react-native";
 import {
   getAdoptionRequests,
@@ -92,8 +95,14 @@ const Notifications = () => {
     const alreadyRated = hasUserRatedPet(petId);
 
     return (
-      <View className="p-4 mb-4 bg-white rounded-lg shadow-md">
-        <Text className="text-lg font-bold">{item.PetName}</Text>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#161622" }}>
+      <StatusBar backgroundColor="#FFF" />
+      <ScrollView>
+      <View style={style.requesterContainer}>
+        <View className="p-4 mb-1 bg-white rounded-lg shadow-md">
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Text style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}>{item.PetName}</Text>
+          </View>
         {/* <Text className="mt-2">Requested by: {item.adopterName}</Text>
         <Text>Contact: {item.adopterContact}</Text>
         <Text>Address: {item.adopterAddress}</Text>
@@ -108,19 +117,26 @@ const Notifications = () => {
               />
             )}
             <Text className="text-lg font-bold">Pet Information:</Text>
-            <Text>Age: {petInfo.age || "N/A"}</Text>
-            <Text>Species: {petInfo.species || "N/A"}</Text>
-            <Text>Breed: {petInfo.breed || "N/A"}</Text>
-            <Text>Color: {petInfo.color || "N/A"}</Text>
-            <Text>Gender: {petInfo.gender || "N/A"}</Text>
-            <Text>Size: {petInfo.size || "N/A"}</Text>
-            <Text>Adoption Fee: {petInfo.adoption_fee || "N/A"}</Text>
-            <Text>
-              Vaccination Status:{" "}
-              {petInfo.vaccination_status !== "" ? "Yes" : "No"}
-            </Text>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+            <Text style={{ fontSize: 12, color: "#616161" }}>Type: {petInfo.species || "N/A"}</Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>Age: {petInfo.age || "N/A"} </Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+            <Text style={{ fontSize: 12, color: "#616161" }}>Breed: {petInfo.breed || "N/A"}</Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>Color: {petInfo.color || "N/A"} </Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+            <Text style={{ fontSize: 12, color: "#616161" }}>Size: {petInfo.size || "N/A"}</Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>Gender: {petInfo.gender || "N/A"} </Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+            <Text style={{ fontSize: 12, color: "#616161" }}>Vaxx: {petInfo.vaccination_status !== "" ? "Yes" : "No"}</Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>{petInfo.contact_num || "N/A"}</Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+            <Text style={{ fontSize: 13, color: "#616161" }}>Php {petInfo.adoption_fee}</Text>
+          </View>
             <Text>Description: {petInfo.description || "N/A"}</Text>
-            <Text>Contact Number: {petInfo.contact_num || "N/A"}</Text>
             <Text>Location: {petInfo.location || "N/A"}</Text>
             <Text></Text>
             <Text style={{ fontWeight: 'bold' }}>Status: {item.status}</Text>
@@ -147,7 +163,11 @@ const Notifications = () => {
             <Text className="text-white text-center">Cancel Request</Text>
           </TouchableOpacity>
         )}
+        </View>
       </View>
+      </ScrollView>
+      </SafeAreaView>
+      
     );
   };
 
@@ -167,5 +187,22 @@ const Notifications = () => {
     </SafeAreaView>
   );
 };
+
+const style = StyleSheet.create({
+  
+  requesterContainer: {
+    borderRadius: 18,
+    marginHorizontal: 25,
+    marginTop: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+  },
+});
 
 export default Notifications;
