@@ -126,17 +126,9 @@ const AdoptionDetails = () => {
       <StatusBar backgroundColor="#d0d8dc" />
 
       <ScrollView>
-        <View style={{ height: 480, backgroundColor: "#d0d8dc" }}>
-          <ImageBackground
-            resizeMode="contain"
-            source={{ uri: image }}
-            style={{
-              height: 280,
-              top: 40,
-            }}
-          >
-            {/* Render  Header */}
-            <View style={style.header}>
+        <View style={{ height: 450, backgroundColor: "#d0d8dc" }}>
+        <Text></Text>
+        <View style={style.header}>
               <Icon
                 name="arrow-left"
                 size={28}
@@ -144,11 +136,23 @@ const AdoptionDetails = () => {
                 onPress={() => navigation.navigate("profile")}
               />
             </View>
+          <ImageBackground
+            resizeMode="contain"
+            source={{ uri: image }}
+            style={{
+              height: 280,
+              top: 60,
+            }}
+          >
+            
           </ImageBackground>
+        </View>
 
-          <View style={style.detailsContainer}>
-            {/* Pet name and gender icon */}
-            <View
+        {/* Render adoption requests */}
+        <View style={style.requesterContainer}>            
+            {requests.map((request) => (
+              <View key={request.$id} style={style.requesterDetails}>
+              <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <Text
@@ -164,8 +168,6 @@ const AdoptionDetails = () => {
                 )}
               </Text>
             </View>
-
-            {/* Render Pet type and age */}
             <View
               style={{
                 flexDirection: "row",
@@ -186,7 +188,7 @@ const AdoptionDetails = () => {
                 justifyContent: "space-between",
                 marginTop: 5,
               }}
-            >
+              >
               <Text style={{ fontSize: 12, color: "#616161" }}>
                 Breed: {breed}
               </Text>
@@ -194,79 +196,8 @@ const AdoptionDetails = () => {
                 Color: {color}{" "}
               </Text>
             </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-              }}
-            >
-              <Text style={{ fontSize: 12, color: "#616161" }}>
-                Size: {size}
-              </Text>
-              <Text style={{ fontSize: 13, color: "#616161" }}>
-                Php: {adoption_fee}{" "}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-              }}
-            >
-              <Text style={{ fontSize: 12, color: "#616161" }}>
-                Vaxx: {vaccination_status ? "Yes" : "No"}
-              </Text>
-              <Text style={{ fontSize: 13, color: "#616161" }}>
-                {contact_num}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-              }}
-            >
-              <Text style={{ fontSize: 12, color: "#616161" }}>
-                Status: {adoption_status}
-              </Text>
-              <Text style={{ fontSize: 13, color: "#616161" }}>{email}</Text>
-            </View>
-
-            {/* Render location and icon */}
-            <View style={{ marginTop: 5, flexDirection: "row" }}>
-              <Icon name="map-marker" color="#306060" size={20} />
-              <Text style={{ fontSize: 14, color: "#a8a8a8", marginLeft: 5 }}>
-                {location}
-              </Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Render adoption requests */}
-        <View style={style.requesterContainer}>
-            <Text style={style.sectionTitle}>Adoption Requests</Text>
-            
-            {requests.map((request) => (
-              <View key={request.$id} style={style.requesterDetails}>
-              <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text
-                style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
-              >
-                {Name}
-              </Text>
-              <Text>
-                {gender === "Female" ? (
-                  <Icon name="gender-female" size={25} color="#a8a8a8" />
-                ) : (
-                  <Icon name="gender-male" size={25} color="#a8a8a8" />
-                )}
-              </Text>
-            </View>
+            <Text></Text>
+            <Text style={style.sectionTitle}>Requested By:</Text>
                 <Text style={style.requesterText}>
                   <Text style={{ fontWeight: "bold" }}>Name: </Text>
                   {request.adopterName}
