@@ -95,6 +95,7 @@ const AdoptionDetails = () => {
       );
 
       Alert.alert("Success", "Adoption request accepted successfully.");
+      navigation.navigate("profile");
     } catch (error) {
       Alert.alert("Error", error.message);
     }
@@ -247,8 +248,25 @@ const AdoptionDetails = () => {
         {/* Render adoption requests */}
         <View style={style.requesterContainer}>
             <Text style={style.sectionTitle}>Adoption Requests</Text>
+            
             {requests.map((request) => (
               <View key={request.$id} style={style.requesterDetails}>
+              <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text
+                style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
+              >
+                {Name}
+              </Text>
+              <Text>
+                {gender === "Female" ? (
+                  <Icon name="gender-female" size={25} color="#a8a8a8" />
+                ) : (
+                  <Icon name="gender-male" size={25} color="#a8a8a8" />
+                )}
+              </Text>
+            </View>
                 <Text style={style.requesterText}>
                   <Text style={{ fontWeight: "bold" }}>Name: </Text>
                   {request.adopterName}
@@ -265,33 +283,50 @@ const AdoptionDetails = () => {
                   <Text style={{ fontWeight: "bold" }}>Message: </Text>
                   {request.message}
                 </Text>
-              <View style={style.buttonContainer}>
-                {request.status === "Accepted" ? (
-                  <TouchableOpacity
-                    style={style.completeButton}
-                    onPress={() => handleAdoptionComplete(request.$id, Name)}
-                  >
-                    <Text style={style.buttonText}>Adopted</Text>
-                  </TouchableOpacity>
-                ) : request.status === "Pending" ? (
-                  <TouchableOpacity
-                    style={style.acceptButton}
-                    onPress={() => handleAcceptRequest(request.$id, Name)}
-                  >
-                    <Text style={style.buttonText}>Accept</Text>
-                  </TouchableOpacity>
-                ) : null}
-                {request.status !== "Declined" && (
-                  <TouchableOpacity
-                    style={style.declineButton}
-                    onPress={() => handleDeclineRequest(request.$id, Name)}
-                  >
-                    <Text style={style.buttonText}>Cancel</Text>
-                  </TouchableOpacity>
-                )}
+                <View style={style.buttonContainer}>
+                  {request.status === "Accepted" ? (
+                    <>
+                      <TouchableOpacity
+                        style={style.completeButton}
+                        onPress={() => handleAdoptionComplete(request.$id, Name)}
+                      >
+                        <Text style={style.buttonText}>Adopted</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={style.declineButton}
+                        onPress={() => handleDeclineRequest(request.$id, Name)}
+                      >
+                        <Text style={style.buttonText}>Cancel</Text>
+                      </TouchableOpacity>
+                    </>
+                  ) : request.status === "Pending" ? (
+                    <>
+                      <TouchableOpacity
+                        style={style.acceptButton}
+                        onPress={() => handleAcceptRequest(request.$id, Name)}
+                      >
+                        <Text style={style.buttonText}>Accept</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={style.declineButton}
+                        onPress={() => handleDeclineRequest(request.$id, Name)}
+                      >
+                        <Text style={style.buttonText}>Cancel</Text>
+                      </TouchableOpacity>
+                    </>
+                  ) : (
+                    <TouchableOpacity
+                      style={style.completeButton}
+                      onPress={() => handleAdoptionComplete(request.$id, Name)}
+                    >
+                      <Text style={style.buttonText}>Adopted</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
               </View>
-            </View>
-          ))}
+            ))}
+
+
         </View>
       </ScrollView>
     </SafeAreaView>
