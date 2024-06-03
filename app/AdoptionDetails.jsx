@@ -15,7 +15,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import {
-  getAdoptionRequests,
+  getAdoptionRequested,
   updateAdoptionRequest,
   updatePetAdoptionStatus,
 } from "../lib/appwrite";
@@ -51,7 +51,7 @@ const AdoptionDetails = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const data = await getAdoptionRequests(user.$id, true, Name); // Fetch requests for the specific pet
+        const data = await getAdoptionRequested(Name); // Fetch requests for the specific pet
         // Filter out requests with status "Declined"
         const filteredData = data.filter(
           (request) => request.status !== "Declined"
@@ -64,7 +64,8 @@ const AdoptionDetails = () => {
       }
     };
     fetchRequests();
-  }, [user.$id]);
+  }, [Name]);
+  
 
   const handleDeclineRequest = async (requestId, petName) => {
     try {
@@ -245,25 +246,25 @@ const AdoptionDetails = () => {
 
         {/* Render adoption requests */}
         <View style={style.requesterContainer}>
-          <Text style={style.sectionTitle}>Adoption Requests</Text>
-          {requests.map((request) => (
-            <View key={request.$id} style={style.requesterDetails}>
-              <Text style={style.requesterText}>
-                <Text style={{ fontWeight: "bold" }}>Name: </Text>
-                {request.adopterName}
-              </Text>
-              <Text style={style.requesterText}>
-                <Text style={{ fontWeight: "bold" }}>Contact: </Text>
-                {request.adopterContact}
-              </Text>
-              <Text style={style.requesterText}>
-                <Text style={{ fontWeight: "bold" }}>Address: </Text>
-                {request.adopterAddress}
-              </Text>
-              <Text style={style.requesterText}>
-                <Text style={{ fontWeight: "bold" }}>Message: </Text>
-                {request.message}
-              </Text>
+            <Text style={style.sectionTitle}>Adoption Requests</Text>
+            {requests.map((request) => (
+              <View key={request.$id} style={style.requesterDetails}>
+                <Text style={style.requesterText}>
+                  <Text style={{ fontWeight: "bold" }}>Name: </Text>
+                  {request.adopterName}
+                </Text>
+                <Text style={style.requesterText}>
+                  <Text style={{ fontWeight: "bold" }}>Contact: </Text>
+                  {request.adopterContact}
+                </Text>
+                <Text style={style.requesterText}>
+                  <Text style={{ fontWeight: "bold" }}>Address: </Text>
+                  {request.adopterAddress}
+                </Text>
+                <Text style={style.requesterText}>
+                  <Text style={{ fontWeight: "bold" }}>Message: </Text>
+                  {request.message}
+                </Text>
               <View style={style.buttonContainer}>
                 {request.status === "Accepted" ? (
                   <TouchableOpacity
