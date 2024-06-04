@@ -136,8 +136,10 @@ const Notifications = () => {
           <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
             <Text style={{ fontSize: 13, color: "#616161" }}>Php {petInfo.adoption_fee}</Text>
           </View>
-            <Text>Description: {petInfo.description || "N/A"}</Text>
+          <Text></Text>
             <Text>Location: {petInfo.location || "N/A"}</Text>
+            <Text >Description: {petInfo.description || "N/A"}</Text>
+            
             <Text></Text>
             <Text style={{ fontWeight: 'bold' }}>Status: {item.status}</Text>
         <Text className="mt-2 text-sm text-gray-500">
