@@ -35,6 +35,7 @@ const Create = () => {
     adoption_status: "Available",
     vaccination_status: false,
     location: "",
+    approval: "Pending",
     image: null,
     created_at: ""
   });
@@ -164,6 +165,7 @@ const Create = () => {
         adoption_fee: 0.0,
         location: "",
         adoption_status: "Available",
+        approval: "Pending",
         image: null,
         created_at: "",
       });
