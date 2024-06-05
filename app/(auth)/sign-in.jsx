@@ -20,6 +20,7 @@ const SignIn = () => {
   const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
+      return;
     }
 
     setSubmitting(true);
@@ -31,7 +32,13 @@ const SignIn = () => {
       setIsLoggedIn(true);
 
       Alert.alert("Success", "User signed in successfully");
-      router.replace("/home");
+
+      // Check if the user is an admin
+      if (result.accountType === 'admin') {
+        router.replace("/adminHome");
+      } else {
+        router.replace("/home");
+      }
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
