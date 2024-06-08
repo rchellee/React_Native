@@ -35,7 +35,7 @@ const SignIn = () => {
 
       // Check if the user is an admin
       if (result.accountType === 'admin') {
-        router.replace("/adminHome");
+        router.replace("/adminProfile");
       } else {
         router.replace("/home");
       }

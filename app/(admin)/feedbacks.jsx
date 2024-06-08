@@ -1,37 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, Alert, ScrollView, Dimensions } from 'react-native';
+import { View, Text, Button, Alert, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useGlobalContext } from '../../context/GlobalProvider';
-import { getCurrentUser, signOut } from '../../lib/appwrite';
-import { useRouter } from 'expo-router';
-import { icons, images } from '../../constants';
+import { signOut, getAllRatings } from '../../lib/appwrite';
+import { AirbnbRating } from 'react-native-ratings';
 
-const feedbacks = () => {
-  const { user, setUser, setIsLoggedIn } = useGlobalContext();
+const Feedbacks = () => {
+  const { setUser, setIsLoggedIn } = useGlobalContext();
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
+    const fetchRatings = async () => {
       try {
-        const currentUser = await getCurrentUser();
-        setUser(currentUser);
+        // Fetch all ratings
+        const allRatings = await getAllRatings();
+        setRatings(allRatings);
       } catch (error) {
-        Alert.alert('Error', 'Failed to fetch user profile');
+        Alert.alert('Error', 'Failed to fetch ratings');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUserProfile();
+    fetchRatings();
   }, []);
 
   const handleSignOut = async () => {
     try {
-      await signOut();
-      setUser(null);
-      setIsLoggedIn(false);
-      router.replace('/sign-in');
+      // Your sign-out logic
     } catch (error) {
       Alert.alert("Error", error.message);
     }
@@ -46,35 +43,32 @@ const feedbacks = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f9fa' }}>
-      <ScrollView contentContainerStyle={{ padding: 20 }}>
-        <View
-          style={{
-            alignItems: 'center',
-            marginBottom: 20,
-          }}
-        >
-          <Image
-            source={user.avatar || images.defaultAvatar}
-            style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 10 }}
-          />
-          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{user.username}</Text>
-          <Text style={{ fontSize: 16, color: '#888' }}>{user.email}</Text>
+    <SafeAreaView className="bg-primary h-full">
+      <ScrollView className="px-4 my-6">
+        <View style={{ marginTop: 20 }}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 40, color: '#fff' }}>WanderPets Feedbacks!</Text>
+          {ratings.length > 0 ? (
+            ratings.map((rating, index) => (
+              <View key={index} style={{ marginBottom: 10, padding: 10, backgroundColor: '#fff', borderRadius: 5 }}>
+                <Text style={{ fontWeight: 'bold' }}>Pet Name: {rating.petName}</Text>
+                <AirbnbRating
+                  count={5}
+                  defaultRating={rating.rating}
+                  size={20}
+                  showRating={false}
+                  isDisabled
+                />
+                <Text>Feedback: {rating.feedback}</Text>
+                <Text style={{ fontSize: 12, color: '#666' }}>Dated rated: {new Date(rating.timestamp).toLocaleString()}</Text>
+              </View>
+            ))
+          ) : (
+            <Text>No ratings available.</Text>
+          )}
         </View>
-
-        <View style={{ marginBottom: 20 }}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>Profile Information</Text>
-          <Text style={{ marginBottom: 5 }}>Username: {user.username}</Text>
-          <Text style={{ marginBottom: 5 }}>Email: {user.email}</Text>
-          <Text style={{ marginBottom: 5 }}>Account Type: {user.accountType}</Text>
-        </View>
-
-        <Button title="Edit Profile" onPress={() => Alert.alert('Edit Profile clicked')} />
-        <View style={{ marginVertical: 10 }} />
-        <Button title="Sign Out" onPress={handleSignOut} color="#ff6347" />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default feedbacks;
+export default Feedbacks;

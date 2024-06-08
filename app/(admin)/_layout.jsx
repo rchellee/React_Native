@@ -38,21 +38,6 @@ const TabsLayout = () => {
         }}
       >
         <Tabs.Screen
-          name="adminHome"
-          options={{
-            title: "Home",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.home}
-                color={color}
-                name="Home"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
           name="request"
           options={{
             title: "Request",
