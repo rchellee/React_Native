@@ -8,12 +8,12 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { useRoute } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
+import { getPetIdByName, deletePet } from "../lib/appwrite"; // Ensure this import matches your project structure
 
-// const DetailsScreen = ({ navigation }) => {
 const MyPetDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -35,22 +35,48 @@ const MyPetDetails = () => {
     username,
     avatar,
     email,
+    approval,
   } = route.params;
+
+  const handleDelete = async () => {
+    try {
+      const petId = await getPetIdByName(Name);
+      await deletePet(petId);
+      Alert.alert("Success", "Pet deleted successfully.");
+      navigation.navigate("adopt");
+    } catch (error) {
+      Alert.alert("Error", "Failed to delete the pet.");
+    }
+  };
+
+  const confirmDelete = () => {
+    Alert.alert(
+      "Confirm Delete",
+      "Are you sure you want to delete this pet?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: handleDelete,
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
       <StatusBar backgroundColor="#d0d8dc" />
-
       <View style={{ height: 480, backgroundColor: "#d0d8dc" }}>
         <ImageBackground
           resizeMode="contain"
           source={{ uri: image }}
-          style={{
-            height: 280,
-            top: 40,
-          }}
+          style={{ height: 280, top: 40 }}
         >
-          {/* Render  Header */}
           <View style={style.header}>
             <Icon
               name="arrow-left"
@@ -62,13 +88,8 @@ const MyPetDetails = () => {
         </ImageBackground>
 
         <View style={style.detailsContainer}>
-          {/* Pet name and gender icon */}
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Text
-              style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
-            >
+          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Text style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}>
               {Name}
             </Text>
             <Text>
@@ -80,115 +101,61 @@ const MyPetDetails = () => {
             </Text>
           </View>
 
-          {/* Render Pet type and age */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Type: {species}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>Age: {age} </Text>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+            <Text style={{ fontSize: 12, color: "#616161" }}>Type: {species}</Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>Age: {age}</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Breed: {breed}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              Color: {color}{" "}
-            </Text>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+            <Text style={{ fontSize: 12, color: "#616161" }}>Breed: {breed}</Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>Color: {color}</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
             <Text style={{ fontSize: 12, color: "#616161" }}>Size: {size}</Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              Php: {adoption_fee}{" "}
-            </Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>Php: {adoption_fee}</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
             <Text style={{ fontSize: 12, color: "#616161" }}>
               Vaxx: {vaccination_status ? "Yes" : "No"}
             </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              {contact_num}
-            </Text>
+            <Text style={{ fontSize: 13, color: "#616161" }}>{contact_num}</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              {email}
-            </Text>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+            <Text style={{ fontSize: 13, color: "#616161" }}>{email}</Text>
           </View>
 
-          {/* Render location and icon */}
-          <View style={{ marginTop: 5, flexDirection: "row" }}>
-            <Icon name="map-marker" color="#306060" size={20} />
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
             <Text style={{ fontSize: 14, color: "#a8a8a8", marginLeft: 5 }}>
-              {location}
+              <Icon name="map-marker" color="#306060" size={20} /> {location}
             </Text>
+            <TouchableOpacity onPress={confirmDelete}>
+              <Icon name="delete" size={28} color="#ff0000" />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
 
-      {/* Comment container */}
-      <View
-        style={{ marginTop: 100, justifyContent: "space-between", flex: 1 }}
-      >
+      <View style={{ marginTop: 100, justifyContent: "space-between", flex: 1 }}>
         <View>
-          {/* Render user image , name and date */}
           <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
-            <Image
-              source={{ uri: avatar }}
-              style={{ height: 40, width: 40, borderRadius: 20 }}
-            />
+            <Image source={{ uri: avatar }} style={{ height: 40, width: 40, borderRadius: 20 }} />
             <View style={{ flex: 1, paddingLeft: 10 }}>
-              <Text
-                style={{ color: "#616161", fontSize: 12, fontWeight: "bold" }}
-              >
+              <Text style={{ color: "#616161", fontSize: 12, fontWeight: "bold" }}>
                 {username}
               </Text>
               <Text
-                style={{
-                  color: "#a8a8a8",
-                  fontSize: 11,
-                  fontWeight: "bold",
-                  marginTop: 2,
-                }}
+                style={{ color: "#a8a8a8", fontSize: 11, fontWeight: "bold", marginTop: 2 }}
               >
-                 {email}
+                {email}
               </Text>
             </View>
             <Text style={{ color: "#a8a8a8", fontSize: 12 }}>{created_at}</Text>
           </View>
           <Text style={style.comment}>{description}</Text>
         </View>
-
-              </View>
+        <Text style={{ fontSize: 13, color: "#616161" }}>
+          Status: {approval} by the Admin
+        </Text>
+      </View>
     </SafeAreaView>
   );
 };
@@ -212,36 +179,11 @@ const style = StyleSheet.create({
     lineHeight: 20,
     marginHorizontal: 20,
   },
-  footer: {
-    height: 100,
-    backgroundColor: "#f5f5f5",
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 30,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  iconCon: {
-    backgroundColor: "#306060",
-    width: 50,
-    height: 50,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 15,
-  },
-  btn: {
-    backgroundColor: "#306060",
-    flex: 1,
-    height: 50,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   header: {
     flexDirection: "row",
     padding: 20,
     justifyContent: "space-between",
   },
 });
+
 export default MyPetDetails;

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, Image, RefreshControl, Text, View } from "react-native";
-
-import { images } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
 import { getAllPosts } from "../../lib/appwrite";
 import EmptyState from "../../components/EmptyState";
@@ -22,8 +20,8 @@ const Adopt = () => {
     setRefreshing(false);
   };
 
-  // Filter out posts with adoption status "Pending" or "Adopted"
-  const filteredPosts = posts.filter(post => post.adoption_status !== "Pending" && post.adoption_status !== "Adopted");
+  // Filter out posts with approval status "Pending" or adoption status "Adopted"
+  const filteredPosts = posts.filter(post => post.approval !== "Pending" && post.adoption_status !== "Adopted");
 
   return (
     <SafeAreaView className="bg-primary h-full">

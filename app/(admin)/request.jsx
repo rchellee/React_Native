@@ -1,53 +1,85 @@
-import React from 'react';
-import { View, Text, Button, Alert, ScrollView, Dimensions } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useGlobalContext } from '../../context/GlobalProvider';
-import { signOut } from '../../lib/appwrite';
-import { useRouter } from 'expo-router';
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Alert,
+  FlatList,
+  Image,
+  RefreshControl,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { getAllPosts } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import ToApprove from "../../components/ToApprove";
+import EmptyState from "../../components/EmptyState"; // Ensure this import if you have an EmptyState component
 
-const request = () => {
-  const { setUser, setIsLoggedIn } = useGlobalContext();
-  const router = useRouter();
+const Request = () => {
+  const { user } = useGlobalContext();
+  const [pets, setPets] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const handleSignOut = async () => {
+  const fetchPets = async () => {
     try {
-      await signOut();
-      setUser(null);
-      setIsLoggedIn(false);
-      router.replace('/sign-in');
+      const allPosts = await getAllPosts();
+      const pendingPets = allPosts.filter(
+        (post) => post.approval === "Pending"
+      );
+      setPets(pendingPets);
     } catch (error) {
       Alert.alert("Error", error.message);
     }
   };
 
+  useEffect(() => {
+    fetchPets();
+  }, []);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchPets();
+    setRefreshing(false);
+  };
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f9fa' }}>
-      <ScrollView>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 20,
-            minHeight: Dimensions.get('window').height - 100,
-          }}
-        >
-          <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20 }}>
-            Admin Dashboard
-          </Text>
+    <SafeAreaView className="bg-primary h-full">
+      <FlatList
+        data={pets}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => <ToApprove key={item.$id} video={item} />}
+        ListHeaderComponent={() => (
+          <View className="my-6 px-4 space-y-6">
+            <View className="justify-between items-start flex-row mb-6">
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image
+                  source={{ uri: user?.avatar }}
+                  className="w-[46px] h-[46px] rounded-lg mr-2"
+                  resizeMode="cover"
+                />
+                <Text className="text-xl font-psemibold text-white">
+                  {user?.username}
+                </Text>
+              </View>
+            </View>
 
-          <View style={{ marginBottom: 20 }}>
-            <Text>Welcome to the admin dashboard!</Text>
-            <Text>Here you can manage users, posts, and other admin tasks.</Text>
+            <View className="w-full flex-1 pt-5 pb-8">
+              <Text className="text-gray-100 text-lg font-pregular mb-3">
+                WanderPets Requests!
+              </Text>
+            </View>
           </View>
-
-          <Button title="Sign Out" onPress={handleSignOut} color="#ff6347" />
-
-          {/* Add more admin-specific components and functionalities here */}
-        </View>
-      </ScrollView>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyState
+            title="No Pets Requested Found"
+            subtitle="You're all done!"
+          />
+        )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      />
     </SafeAreaView>
   );
 };
 
-export default request;
+export default Request;

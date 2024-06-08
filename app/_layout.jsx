@@ -34,14 +34,17 @@ const RootLayout = () => {
     <GlobalProvider>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(admin)" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
+        <Stack.Screen name="ToApproveScreen" options={{ headerShown: false }} />
         <Stack.Screen name="DetailsScreen" options={{ headerShown: false }} />
         <Stack.Screen name="adopt_form" options={{ headerShown: false }} />
         <Stack.Screen name="MyPetDetails" options={{ headerShown: false }} />
         <Stack.Screen name="AdoptionDetails" options={{ headerShown: false }} />
         <Stack.Screen name="RatingForm" options={{ headerShown: false }} />
+  
       </Stack>
     </GlobalProvider>
   );
