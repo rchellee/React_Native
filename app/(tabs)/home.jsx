@@ -69,7 +69,7 @@ const Home = () => {
               description: "Regular veterinary check-ups are crucial to detect and prevent health issues early. Ensure your pet visits the vet at least once a year for a comprehensive health check."
             })}>
               <Image
-                source={require("../../assets/images/petvaccine.jpg")}
+                source={require("../../assets/images/med.jpg")}
                 style={styles.cardImage}
                 resizeMode="cover"
               />
@@ -78,12 +78,12 @@ const Home = () => {
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.card} onPress={() => openModal({
-              image: require("../../assets/images/petvaccine.jpg"),
+              image: require("../../assets/images/med3.jpg"),
               title: "Pet Dental Care",
               description: "Pet dental care is often overlooked but is essential for your pet's overall health. Just like humans, pets need regular dental care to prevent dental diseases such as periodontal disease, tooth decay, and gum infections. Regular brushing of your pet's teeth, providing dental treats, and ensuring your pet has professional cleanings can significantly reduce the risk of dental problems. Dental diseases in pets can lead to pain, difficulty eating, and even more severe health issues if left untreated. Consult your veterinarian for advice on the best dental care practices for your pet and schedule regular dental check-ups."
             })}>
               <Image
-                source={require("../../assets/images/petvaccine.jpg")}
+                source={require("../../assets/images/med2.jpg")}
                 style={styles.cardImage}
                 resizeMode="cover"
               />
@@ -92,12 +92,12 @@ const Home = () => {
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.card} onPress={() => openModal({
-              image: require("../../assets/images/petvaccine.jpg"),
+              image: require("../../assets/images/ill2.jpg"),
               title: "Recognizing Common Pet Illnesses",
               description: "Recognizing the signs of common pet illnesses early can help ensure timely treatment and prevent more serious health issues. Some common illnesses in pets include:\n-Respiratory Infections: Symptoms include coughing, sneezing, nasal discharge, and difficulty breathing. These can be caused by viruses, bacteria, or other pathogens.\n-Gastrointestinal Issues: Look for symptoms such as vomiting, diarrhea, loss of appetite, and weight loss. Causes can range from dietary indiscretion to infections and chronic conditions.\n-Skin Problems: Itching, redness, hair loss, and sores can indicate allergies, parasites, infections, or other skin conditions.\n-Ear Infections: Common signs include head shaking, ear scratching, discharge, and an unpleasant odor from the ears.\n-Urinary Tract Issues: Symptoms include frequent urination, straining, blood in the urine, and accidents in the house.\nIf you notice any of these symptoms, consult your veterinarian promptly for diagnosis and treatment. Early intervention can improve the prognosis and quality of life for your pet."
             })}>
               <Image
-                source={require("../../assets/images/petvaccine.jpg")}
+                source={require("../../assets/images/ill1.jpg")}
                 style={styles.cardImage}
                 resizeMode="cover"
               />
@@ -112,8 +112,8 @@ const Home = () => {
       return (
         <>
           <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
-            title: "Understanding Cat",
-            description: "Cats exhibit a variety of behaviors that can be puzzling to their owners. Here are some common cat behaviors and their meanings: 1. Purring: Often a sign of contentment, but can also indicate pain or distress. 2. Kneading: A comforting behavior. 3. Scratching: Marking territory and maintaining claw health. 4. Hiding: Seeking safety or comfort. 5. Chattering: Excitement or frustration. 6. Slow blinking: A sign of trust and affection."
+            title: "UNDERSTANDING CAT",
+            description: "Cats exhibit a variety of behaviors that can be puzzling to their owners. Here are some common cat behaviors and their meanings:\n 1. Purring: Often a sign of contentment, but can also indicate pain or distress.\n 2. Kneading: A comforting behavior. \n3. Scratching: Marking territory and maintaining claw health. \n4. Hiding: Seeking safety or comfort. \n5. Chattering: Excitement or frustration. \n6. Slow blinking: A sign of trust and affection."
           })}>
             <Text style={styles.blogTitle}>Understanding Cat Behavior</Text>
             <Text style={styles.blogDesciption}>Posted on: April 20, 2024</Text>
@@ -133,31 +133,133 @@ const Home = () => {
             <Text style={styles.blogDesciption}>Posted on: June 1, 2024</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
-            title: "HERE ARE FIVE BENEFITS OF A RAW FOOD DIET FOR DOGS:",
-            description: "Cats exhibit a variety of behaviors that can be puzzling to their owners. Here are some common cat behaviors and their meanings: 1. Purring: Often a sign of contentment, but can also indicate pain or distress. 2. Kneading: A comforting behavior. 3. Scratching: Marking territory and maintaining claw health. 4. Hiding: Seeking safety or comfort. 5. Chattering: Excitement or frustration. 6. Slow blinking: A sign of trust and affection."
+            title: "MEOWS",
+            description: "Kittens have plenty of unique meows and chirps to tell their moms exactly what they need, but wild adult cats typically stop meowing as they grow up and use body language for most of their communication. Domestic cats, however, keep meowing so that we can keep up with their conversation. (Maybe our cats learned to talk back after listening to us tell them about work drama for the hundredth time…) Since meows are a sound cats make for humans, they’re typically a sign that cats want our attention—like when they want snacks or their favorite toy that’s stuck under the couch. If the meows are longer and more plaintive, they might be complaining about something painful—or just saying they stepped in water and their paw is wet. And of course, a meow can be a friendly greeting saying “Hey! You’re finally home!” You might also notice that older cats crank the volume up to 11 on their meows—a side effect of their fading hearing."
           })}>
-            <Text style={styles.blogTitle}>5 Benefits of a Raw Food Diet for Dogs</Text>
+            <Text style={styles.blogTitle}>Understanding All Your Cat’s Meows and Sounds</Text>
+            <Text style={styles.blogDesciption}>Posted on: May 7, 2024</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            description: "When it comes to feeding your cat, there are two basic food options: dry food and wet food. Which one you serve your cat is most likely up to your cat, since they are picky eaters and will choose the one that they want. There are plenty of reasons why you may need your cat to eat dry food. Fortunately, it is possible to make a wet food out of your cat’s dry food if the need arises. To transition your cat to wet food, soaking cats' dry food is a common method. To do this, add one part water to three or four parts food and let the food soak in it. You may need to add more water as it is absorbed to reach the right consistency for your cat, depending on what they like. This method is particularly useful for kitten dry food, as younger cats might find softer food easier to eat. To make the process go faster, you can use a food processor to blend the water with the food. Heads up! This will make a smoother mixture which your cat may enjoy. While using a food processor can create a smooth mixture, remember that most cats prefer soft cat food with a thicker consistency and some chunks, similar to commercial wet foods"
+          })}>
+            <Text style={styles.blogTitle}>How to Soften Dry Cat Food Into Wet Cat Food</Text>
+            <Text style={styles.blogDesciption}>Posted on: January 19, 2024</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            description: "This post is written by holistic veterinarian Dr. Angie Krause, DVM, CVA, CCRT. \nThere are many campaigns that discourage people from feeding their dogs kibble, and I get it. Ideally we would all (pets included) eat a diet of whole foods without packaged or processed components. For both people and dogs, this can be unrealistic depending on lifestyle and budget. While I would love to see every single one of my patients on a home prepared, fresh whole foods diet, there are so many reasons why a small percentage of my practice eat this way. These reasons include cost, lack of time resources, food allergies and digestive issues. If you are feeding your dog kibble, it’s ok. It really is. We are all doing the best we can. If you want to take your pup’s nutrition to the next level, but you are feeling some level of limitation, I’ve got good news. There are a lot of easy and fun ways to add fresh whole foods to their diet, while not breaking the bank or quitting your day job."
+          })}>
+            <Text style={styles.blogTitle}>Why Should I Feed My Dog More Than Kibble: A Healthy Dog Diet</Text>
             <Text style={styles.blogDesciption}>Posted on: May 13, 2024</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            title: "Get Your Pet Comfortable in the Car",
+            description: "1.) Give Them Their Own Seat:\nEvery pet has their favorite spots to hang out in the house, and the same rule applies to your car! They’ll be happier and more secure with their own zone, so set up a blanket, dog or cat bed, crate, or specialized dog car seat just for them.\n2.) Bring the Essentials and their Favorites:\nThink through all the things your dog needs in a day and make sure they get packed into one of your bags. That includes basics like food, water, leashes, and poop bags, just-in-case items like dog tags and vaccination records, and the items which make your best friend happy.\n3.) Keep a Regular Schedule:\nRegularity might sound like a tall order when you’re driving cross country, but it’s the little things that matter most.\n4.)Pick Pet-Friendly Destinations:\nAs much as we wish we could bring our dogs everywhere, not every travel destination matches our enthusiasm. Doing your research while you’re still in the trip planning phase will save you a major headache when you arrive at the state park only to discover that dogs are banned almost everywhere. "
+          })}>
+            <Text style={styles.blogTitle}>Tips & Tricks for the Best Road Trip with Your Pet</Text>
+            <Text style={styles.blogDesciption}>Posted on: June 6, 2024</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            title: "Environmental Enrichment",
+            description: "Adding new cat toys into your home for your cat to discover instantly adds excitement to their day! Offering a variety of toys, from lasers to ribbons to toy mice, simulates having a variety of prey to hunt in the wild.\nHere are some ideas to make your fur baby even happier:\n1. Cat Furniture\n2. Scratching Posts\n3. Take them outside\n4. Play with people\n5. Animal Playmates"
+          })}>
+            <Text style={styles.blogTitle}>Cat Enrichment Ideas to Keep Your Indoor Cat Happy </Text>
+            <Text style={styles.blogDesciption}>Posted on: June 4, 2024</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            title: "What are by-products and what is by-product meal?",
+            description: "By-products in pet food are non-human-edible animal parts, while by-product meal is the dried and ground version, both providing a potent protein source for pet diets. Chicken by product meal in cat food are concentrated, ingredients used in pet food formulations for their high protein content and essential nutrients, as well as their super cheap cost for producers."
+          })}>
+            <Text style={styles.blogTitle}>What is Chicken By-Product Meal in Dog & Cat Food?</Text>
+            <Text style={styles.blogDesciption}>Posted on: January 23, 2024</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.blogCard} onPress={() => openModal({
+            title: "What are by-products and what is by-product meal?",
+            description: "Unlike dogs, cats usually do not eat their food in its entirety as soon as you give it to them. Because of this, cat food often sits out during the day. The largest risk of leaving cat food out is the food spoiling. While fungi or mold takes days to grow and multiply, bacteria are much faster."         
+            })}>
+            <Text style={styles.blogTitle}>How Long Can You Safely Leave Cat Food Out For?</Text>
+            <Text style={styles.blogDesciption}>Posted on: December 29, 2023</Text>
+          </TouchableOpacity>
+          
         </>
       );
     } else if (selectedCategory === "Article") {
       return (
         <>
           <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
-            title: "5 Essential Tips for New Pet Owners",
-            description: "Bringing a new pet into your home is an exciting time, but it also comes with a lot of responsibility. Here are 5 essential tips for new pet owners:\n1. Research the Breed: Before getting a pet, research different breeds to find one that matches your lifestyle and living situation.\n2. Prepare Your Home: Pet-proof your home by removing hazards and providing necessary supplies such as food, water, bedding, and toys.\n3. Establish Routine: Pets thrive on routine, so establish a consistent schedule for feeding, walking, and playtime.\n4. Socialize and Train: Proper socialization and training are essential for a well-behaved pet. Start socializing and training your pet from a young age to prevent behavioral issues.\n5. Regular Veterinary Care: Schedule regular check-ups with a veterinarian to keep your pet healthy and up-to-date on vaccinations.\nBy following these tips, you can provide a happy and healthy life for your new furry friend."
+            description: "What is Heartworm Disease?\nHeartworm disease is caused by the parasite Dirofilaria immitis, a type of roundworm that lives inside the heart and blood vessels of the lungs. Heartworm disease is transmitted by mosquitoes. It is a serious disease that primarily affects the heart and lungs but can also affect the liver, kidney, eye, and central nervous system, and if untreated, can cause death.\n \nSymptoms\nThe symptoms of heartworm disease are subtle and can be easy to miss. As the number of heartworms increases, the symptoms of coughing, lethargy, exercise intolerance, lack of appetite and weight loss become more apparent. However it is best not to wait until symptoms develop since irreversible damage may have already occurred by then.\n \nHow is it treated?\nThe goal of treatment is to kill the heartworms without harming the patient. Fortunately, the treatment options have improved but they still have potential risks. Infected animals usually receive a series of intramuscular injections, hospitalization and then strict confinement to limit exercise for weeks. The fact is, treatment is expensive, time consuming and not without risks. For these reasons the goal should always be prevention rather than treatment of this horrible disease.\n \nPrevention\nThe best way to treat heartworm disease is to prevent it in the first place. Fortunately, there are numerous safe and effective preventative medications available. Heartworm preventative medications are available from your veterinarian in many forms: oral, topical, and injectable. In addition to protecting your pets from heartworm disease, many of the heartworm preventatives also protect your pet against other internal parasites. This is important because it helps prevent the spread of parasites. So not only are you getting heartworm protection for your pet but also peace of mind that your pet has not picked up parasites like roundworms that can be transmitted to other pets and even humans. Finally, before starting preventative medications on pets over 6 months of age, have your veterinarian test them for heartworm infection because serious complications can develop if an infected animal is started on certain preventatives."
           })}>
-            <Text style={styles.articleTitle}>5 Important Tips for New Pet Owners</Text>
-            <Text style={styles.articleDesciption}>Reviwed on: June 2, 2024</Text>
+            <Text style={styles.articleTitle}>What You Need To Know About Heartworm Disease</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: Thursday, June 18, 2015</Text>
+            <Text style={styles.articleDesciption}>Posts by: Dr. Ruth MacPete, DVM</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: "Did you know that cats can have a hyperactive thyroid gland? Also known as hyperthyroidism. It’s a fairly common condition in older cats. In fact, the vast majority of affected cats are older than 10 years of age. Most of the time, the reason is either a benign tumor or benign enlargement of the thyroid gland(s).\n \nWhat is hyperthyroidism?\nHyperthyroidism is when thyroid glands work overtime and produce too much thyroid hormone. Because this hormone controls many organs, it can lead to multiple consequences:\n1. Weight loss, despite an increase in appetite\n2. Vomiting and/or diarrhea\n3. Irritable or aggressive behavior/n4. Increased drinking and urination\n5. Increased heart rate6. A heart murmur\n7. Poor hair coat\n8. Increased activity\n  \nOccasionally, a chubby couch potato kitty with gorgeous hair may turn into a skinny old cat with a rough hair coat, running around the house like a maniac.\n \nHow is hyperthyroidism treated?\n \n1. Methimazole is a medication that fights hyperthyroidism. It is usually given by mouth, every single day. Methimazole can also be compounded into a cream which is applied to the skin or the ear daily (transdermal application).This is a life-long treatment.\n2. I know about at least one special diet that is very low in iodine, and was introduced a few years ago. If your veterinarian recommends this option, this is the only food your cat should eat for good results.\n3. Veterinary endocrinologists consider IV radioactive iodine treatment as the gold standard for hyperthyroidism.\n4. Surgery to remove the tumor is an option, although it is less and less common. It’s a delicate surgery but in good hands, it is highly successful."
+          })}>
+            <Text style={styles.articleTitle}>Thyroid Tumor Surgery in Cats</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: Monday, October 19, 2015</Text>
+            <Text style={styles.articleDesciption}>Posts by: Dr. Peter Kintzer, DVM, DACVIM</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: "Cat Diseases & Conditions A-Z/nPerhaps the most important thing to know about kidney disease in cats is that way too many cats are affected by it. In fact, studies show that 1 in 3 cats suffer from kidney disease, reports Dr. Celeste Clements. Cats can get kidney disease for any number of underlying reasons, and even worse, it’s difficult to spot. Most cats show no outward signs of kidney disease until the problem is very advanced. Even when they do, the first signals of kidney disease in cats are easy to miss, including subtle weight loss, urinating/peeing more often and drinking more water. Therefore, if you notice your cat is peeing on the floor, soaking the litter box, or if your cat is always thirsty, it’s time to visit your veterinarian.\n \nWhat is kidney disease in cats?\nKidney disease in cats is notoriously hard to catch early and can have devastating effects on our feline friends. In general, kidney disease (sometimes called “kidney failure”) happens when your cat’s kidneys stop doing their job as well as they should. (Learn more about what kidneys do for your cat.) This damage, once done, is usually permanent and can be caused by a variety of issues. (Learn more about 10 common causes of kidney disease in cats.)\n \nKidney disease in cats is classified in two primary ways, as:\n1. Chronic kidney disease in cats\n2. Acute kidney injury in cats\nKidney disease quick tips:\n1. Kidney disease is a leading cause of suffering and death in cats,3 and has been so difficult to combat because it was often not detected until most of the damage was done and permanent.\n2. Certain factors like kidney stones, urinary tract infections, or hereditary conditions could make kidney disease more likely.\n3. Encouraging your cat to drink more water can help with kidney health\n4. As cats age, the likelihood of developing kidney disease increases. In fact, more than half of cats over age 15 are afflicted."
+          })}>
+            <Text style={styles.articleTitle}>Kidney Disease in Cats: What Cat Owners Should Know</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: Tuesday, April 5, 2016 </Text>
+            <Text style={styles.articleDesciption}>Posts by: Jason Carr, Former Pet Health Network Editor-in-Chief</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: "Dog Diseases & Conditions A-Z\n \nKidney disease is very common in dogs, and protecting your pooch from kidney disease means you should be prepared to look for problems early. Studies show that 1 in 10 dogs suffer from kidney disease, reports Dr. Celeste Clements. Dogs can get kidney disease for any number of underlying reasons, and even worse, it’s often difficult to spot. Some of the earliest signs of kidney disease in dogs may include subtle weight loss, urinating/peeing more often and drinking a lot more water. Therefore, if you notice your dog is peeing on the floor or asking to go out more, or if your dog is always thirsty, it’s time to visit your veterinarian.\n \nWhat is kidney disease in dogs?\nKidney disease in dogs is notoriously hard to catch early and can have devastating effects on our canine friends. In general, kidney disease (sometimes called “kidney insufficiency or failure”) happens when your dog’s kidneys stop doing their job as well as they should.\n \n1. Chronic kidney disease in dogs\n2. Acute kidney injury in dogs\n \nKidney disease quick tips:\n1. Kidney disease is a leading cause of suffering and death in pets, and has been so difficult to combat because it was often not detected until most of the damage was done and permanent.\n2. Certain factors like kidney stones, urinary tract infections, or other infections, including Lyme disease, or hereditary conditions could make kidney disease more likely.\n2. Treatment options for advanced kidney disease are usually limited to supporting the kidneys and treating the signs of kidney disease as dialysis and kidney transplants are not readily available for dogs.\n3. Encouraging your dog to drink more water can help with kidney health\n4. As dogs age, the likelihood of developing kidney disease increases.\n \nThe IDEXX SDMA™ test is a maker of kidney function and can help identify decline in kidney function and disease months to years earlier than previously possible.[Editor’s Note: IDEXX Laboratories is the parent company of Pet Health Network.] This can allow your veterinarian to take early action to treat some causes of kidney damage, and better support kidney disease."
+          })}>
+            <Text style={styles.articleTitle}>Kidney Disease in Dogs: What Dog Owners Should Know</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: Wednesday, July 22, 2020 </Text>
+            <Text style={styles.articleDesciption}>Posts by: Jason Carr, Former Pet Health Network Editor-in-Chief</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: ""
+          })}>
+            <Text style={styles.articleTitle}>Thyroid Tumor Surgery in Cats</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: </Text>
+            <Text style={styles.articleDesciption}>Posts by:</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: ""
+          })}>
+            <Text style={styles.articleTitle}>Thyroid Tumor Surgery in Cats</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: </Text>
+            <Text style={styles.articleDesciption}>Posts by:</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: ""
+          })}>
+            <Text style={styles.articleTitle}>Thyroid Tumor Surgery in Cats</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: </Text>
+            <Text style={styles.articleDesciption}>Posts by:</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: ""
+          })}>
+            <Text style={styles.articleTitle}>Thyroid Tumor Surgery in Cats</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: </Text>
+            <Text style={styles.articleDesciption}>Posts by:</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: ""
+          })}>
+            <Text style={styles.articleTitle}>Thyroid Tumor Surgery in Cats</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: </Text>
+            <Text style={styles.articleDesciption}>Posts by:</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.articleCard} onPress={() => openModal({
+            description: ""
+          })}>
+            <Text style={styles.articleTitle}>Thyroid Tumor Surgery in Cats</Text>
+            <Text style={styles.articleDesciption}>Reviewed on: </Text>
+            <Text style={styles.articleDesciption}>Posts by:</Text>
           </TouchableOpacity>
         </>
       );
     }
     return <Text style={styles.noContent}>No content available for this category.</Text>;
   };
-  
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -276,7 +378,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   description: {
-    fontSize: 14,
+    fontSize: 15,
     color: "white",
     marginBottom: 14,
     textAlign: "justify",
@@ -321,6 +423,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
+    fontSize: 14,
   },
   blogTitle: {
     fontSize: 18,
@@ -334,27 +437,28 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "justify",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   modalContent: {
-    width: "80%",
+    width: "100%",
+    height: "auto",
     backgroundColor: "#fff",
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 16,
   },
   modalImage: {
     width: "100%",
     height: 200,
-    marginBottom: 16,
+    marginBottom: 13,
   },
   modalTitle: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 8,
   },
   modalDescription: {
-    fontSize: 16,
+    fontSize: 13,
     color: "#333",
   },
   closeButton: {
@@ -383,6 +487,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#aaa",
   },
+  articleCard: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    padding: 16,
+    marginBottom: 16,
+    fontSize: 14,
+
+  },articleTitle:{
+    color:'black',
+    fontSize: 18,
+    fontWeight: "bold",
+  }
 });
 
 export default Home;
