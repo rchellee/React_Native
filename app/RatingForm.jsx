@@ -4,8 +4,7 @@ import { createRate, getCurrentUser } from "../lib/appwrite";
 import { useGlobalContext } from "../context/GlobalProvider";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
-
-import { AirbnbRating } from 'react-native-ratings'; // Import AirbnbRating
+import { AirbnbRating } from 'react-native-ratings';
 
 const RatingForm = () => {
   const { user } = useGlobalContext();
@@ -23,7 +22,7 @@ const RatingForm = () => {
         const user = await getCurrentUser();
         setCurrentUser(user);
       } catch (error) {
-       
+        Alert.alert('Error', 'Failed to fetch user information.');
       } finally {
         setLoading(false);
       }
@@ -73,7 +72,7 @@ const RatingForm = () => {
         defaultRating={0}
         size={30}
         onFinishRating={setRating}
-        starContainerStyle={{ marginVertical: 10 }} // Add any additional styling as needed
+        starContainerStyle={{ marginVertical: 10 }}
       />
       <TextInput
         style={{
