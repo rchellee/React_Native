@@ -20,8 +20,10 @@ const Adopt = () => {
     setRefreshing(false);
   };
 
-  // Filter out posts with approval status "Pending" or adoption status "Adopted"
-  const filteredPosts = posts.filter(post => post.approval !== "Pending" && post.adoption_status !== "Adopted");
+  // Filter out posts with approval status "Pending" or "Rejected" or adoption status "Adopted"
+  const filteredPosts = posts.filter(
+    post => post.approval !== "Pending" && post.approval !== "Rejected" && post.adoption_status !== "Adopted"
+  );
 
   return (
     <SafeAreaView className="bg-primary h-full">

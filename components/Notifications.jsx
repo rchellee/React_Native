@@ -103,11 +103,6 @@ const Notifications = () => {
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
             <Text style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}>{item.PetName}</Text>
           </View>
-        {/* <Text className="mt-2">Requested by: {item.adopterName}</Text>
-        <Text>Contact: {item.adopterContact}</Text>
-        <Text>Address: {item.adopterAddress}</Text>
-        <Text className="mt-2">Message: {item.message}</Text> */}
-        {/* <Text className="mt-2 text-sm text-gray-500">Rated: {item.rated}</Text> */}
         {!alreadyRated && (
           <View className="mt-4">
           {petInfo.image && (
@@ -176,7 +171,7 @@ const Notifications = () => {
   return (
     <SafeAreaView className="bg-primary flex-1">
       {loading ? (
-        <Text>Loading...</Text>
+        <Text className="text-white text-center">Loading...</Text>
       ) : requests.length === 0 ? (
         <EmptyState message="No adoption requests found." />
       ) : (
