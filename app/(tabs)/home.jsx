@@ -78,9 +78,23 @@ const Home = () => {
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.card} onPress={() => openModal({
-              image: require("../../assets/images/med3.jpg"),
-              title: "Pet Dental Care",
-              description: "Pet dental care is often overlooked but is essential for your pet's overall health. Just like humans, pets need regular dental care to prevent dental diseases such as periodontal disease, tooth decay, and gum infections. Regular brushing of your pet's teeth, providing dental treats, and ensuring your pet has professional cleanings can significantly reduce the risk of dental problems. Dental diseases in pets can lead to pain, difficulty eating, and even more severe health issues if left untreated. Consult your veterinarian for advice on the best dental care practices for your pet and schedule regular dental check-ups."
+              image: require("../../assets/images/blog.jpg"),
+              title: "Behavioral Health",
+              description: "Signs of Behavioral Issues:\nChanges in behavior, such as sudden aggression towards people or other animals, excessive anxiety, or destructive behavior like chewing furniture or excessive barking, can be indicators of underlying behavioral issues. These changes may arise due to various factors, including fear, stress, medical conditions, or changes in the pet's environment.\n \nBehavioral Assessments:\nVeterinarians are trained to conduct thorough assessments to understand the underlying causes of behavioral issues in pets. This process involves gathering information about the pet's history, observing their behavior in different contexts, and possibly conducting specific tests to rule out medical conditions that could be contributing to the behavior. Through these assessments, veterinarians can identify triggers and determine the best course of action for addressing the behavior.\n \nConsultation and Training:\nSeeking guidance from professional trainers and behaviorists can be immensely beneficial in addressing behavioral issues and improving the relationship between pets and their owners. These experts have the knowledge and experience to assess the pet's behavior, develop personalized training plans, and teach owners effective techniques for managing and modifying undesirable behaviors. Additionally, they can provide support and encouragement throughout the training process, helping pet owners understand their pet's needs and strengthen their bond through positive reinforcement and communication."
+            })}>
+              <Image
+                source={require("../../assets/images/blog.jpg")}
+                style={styles.cardImage}
+                resizeMode="cover"
+              />
+              <View style={styles.overlay}>
+                <Text style={styles.cardTitle}>Behavioral Health</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.card} onPress={() => openModal({
+              image: require("../../assets/images/ill2.jpg"),
+              title: "Recognizing Common Pet Illnesses",
+              description: "Recognizing the signs of common pet illnesses early can help ensure timely treatment and prevent more serious health issues. Some common illnesses in pets include:\n-Respiratory Infections: Symptoms include coughing, sneezing, nasal discharge, and difficulty breathing. These can be caused by viruses, bacteria, or other pathogens.\n-Gastrointestinal Issues: Look for symptoms such as vomiting, diarrhea, loss of appetite, and weight loss. Causes can range from dietary indiscretion to infections and chronic conditions.\n-Skin Problems: Itching, redness, hair loss, and sores can indicate allergies, parasites, infections, or other skin conditions.\n-Ear Infections: Common signs include head shaking, ear scratching, discharge, and an unpleasant odor from the ears.\n-Urinary Tract Issues: Symptoms include frequent urination, straining, blood in the urine, and accidents in the house.\nIf you notice any of these symptoms, consult your veterinarian promptly for diagnosis and treatment. Early intervention can improve the prognosis and quality of life for your pet."
             })}>
               <Image
                 source={require("../../assets/images/med2.jpg")}
@@ -89,6 +103,48 @@ const Home = () => {
               />
               <View style={styles.overlay}>
                 <Text style={styles.cardTitle}>Pet Dental Care</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.card} onPress={() => openModal({
+              image: require("../../assets/images/nutri2.jpg"),
+              title: "Nutrition and Weight Monitoring",
+              description: "Proper Nutrition:\nJust like humans, pets require a balanced diet to maintain optimal health and longevity. A balanced diet should provide all the essential nutrients, including proteins, carbohydrates, fats, vitamins, and minerals, in the right proportions. The specific dietary requirements vary depending on factors such as the pet's age, breed, activity level, and any underlying health conditions. For example, puppies, adult dogs, and senior dogs have different nutritional needs. Likewise, specific breeds may have unique dietary considerations. Providing a balanced diet tailored to your pet's individual needs ensures they receive the necessary nutrients to thrive and maintain a healthy lifestyle.\n \nNutritional Counseling:\nVeterinarians play a vital role in providing nutritional counseling and guidance to pet owners. They can assess your pet's individual needs, evaluate their current diet, and make recommendations for appropriate diets and feeding strategies. Nutritional counseling may include selecting commercial pet foods that meet specific dietary requirements, recommending prescription diets for pets with medical conditions, or providing guidance on homemade diets. Veterinarians can also offer advice on feeding schedules, portion sizes, and treats to ensure your pet's nutritional needs are met and their weight is managed effectively.\n \nWeight Monitoring:\nRegular weight monitoring is an essential part of pet health care and should be incorporated into routine veterinary check-ups. Veterinarians will assess your pet's body condition score and monitor changes in weight over time. This allows for early detection of any fluctuations or trends that may indicate a need for adjustments to the pet's diet or exercise regimen. By tracking your pet's weight consistently, you can ensure they maintain a healthy body condition and address any weight-related concerns promptly.\n \nProper nutrition and weight management are crucial aspects of pet care that contribute to their overall health, well-being, and longevity. By providing a balanced diet, managing your pet's weight effectively, seeking nutritional counseling from veterinarians, and monitoring their weight regularly, you can help your pet lead a happy, healthy life."
+            })}>
+              <Image
+                source={require("../../assets/images/nutri.jpg")}
+                style={styles.cardImage}
+                resizeMode="cover"
+              />
+              <View style={styles.overlay}>
+                <Text style={styles.cardTitle}>Nutrition and Weight Care</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.card} onPress={() => openModal({
+              image: require("../../assets/images/senior1.jpg"),
+              title: "",
+              description: ""
+            })}>
+              <Image
+                source={require("../../assets/images/senior2.jpg")}
+                style={styles.cardImage}
+                resizeMode="cover"
+              />
+              <View style={styles.overlay}>
+                <Text style={styles.cardTitle}>Senior Pet Check-ups:</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.card} onPress={() => openModal({
+              image: require("../../assets/images/ill2.jpg"),
+                title: "",
+                 description: ""
+            })}>
+              <Image
+                source={require("../../assets/images/med2.jpg")}
+                style={styles.cardImage}
+                resizeMode="cover"
+              />
+              <View style={styles.overlay}>
+                <Text style={styles.cardTitle}>Cardiology Treatment:</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.card} onPress={() => openModal({
