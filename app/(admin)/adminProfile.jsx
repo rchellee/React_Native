@@ -55,17 +55,10 @@ const adminProfile = () => {
 
   return (
     <SafeAreaView className="bg-primary h-full">
-      <Text
-        style={{
-          fontSize: 25,
-          fontWeight: "bold",
-          marginTop: 50,
-          marginLeft: 20,
-          color: "#fff",
-        }}
-      >
-        Welcome back!
-      </Text>
+      
+        <Text className="text-secondary-200 text-xl font-pregular ml-5 mt-5">
+          Welcome Back!{" "}
+        </Text>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
         <View className="w-full flex justify-center items-center mt-1 mb-8 px-5">
           <TouchableOpacity

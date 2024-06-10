@@ -62,8 +62,11 @@ const Request = () => {
             </View>
 
             <View className="w-full flex-1 pt-5 pb-8">
-              <Text className="text-gray-100 text-lg font-pregular mb-3">
-                WanderPets Requests!
+              <Text className="text-secondary-200 text-lg">
+                WanderPets{" "}
+                <Text className="text-gray-100 text-lg font-pregular mb-3">
+                  Requests!
+                </Text>
               </Text>
             </View>
           </View>
