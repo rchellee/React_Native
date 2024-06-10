@@ -20,7 +20,7 @@ const GlobalProvider = ({ children }) => {
           setUser(res);
           // Redirect based on account type
           if (res.accountType === 'admin') {
-            router.replace("/adminHome");
+            router.replace("/adminProfile");
           } else {
             router.replace("/home");
           }
