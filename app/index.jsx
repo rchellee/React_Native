@@ -17,17 +17,18 @@ export default function App() {
         <View className="w-full justify-center items-center h-full px-4">
           <Image
             source={images.logo}
-            className="w-[200px] h-[84px]"
+            className="w-[400px] h-[100px]"
+            resizeMode="contain"
+          />
+          <Text className="mt-10 mb-5"></Text>
+          <Image
+            source={images.cards}
+            className="max-w-[300px] w-full h-[300px]"
             resizeMode="contain"
           />
 
-          <Image
-            source={images.cards}
-            className="max-w-[380px] w-full h-[380px]"
-            // resizeMode="contain"
-          />
-
           <View className="relative mt-1">
+          <Text className="mt-9"></Text>
             <Text className="text-2xl text-white font-bold text-center">
               You can make a{"\n"}
               Difference with{" "}
@@ -42,7 +43,7 @@ export default function App() {
           </View>
 
           <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Find you new best friend. Every fur deserve a FurEver Home
+            Find your new best friend. Every fur deserve a FurEver Home
           </Text>
 
           <CustomButton
