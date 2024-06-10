@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, Alert, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useGlobalContext } from '../../context/GlobalProvider';
-import { getCurrentUser, signOut } from '../../lib/appwrite';
-import { useRouter } from 'expo-router';
-import { icons, images } from '../../constants';
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  Alert,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import { getCurrentUser, signOut } from "../../lib/appwrite";
+import { useRouter } from "expo-router";
+import { icons } from "../../constants";
 import InfoBox from "../../components/InfoBox";
 
 const adminProfile = () => {
@@ -18,7 +25,7 @@ const adminProfile = () => {
         const currentUser = await getCurrentUser();
         setUser(currentUser);
       } catch (error) {
-        Alert.alert('Error', 'Failed to fetch user profile');
+        Alert.alert("Error", "Failed to fetch user profile");
       } finally {
         setLoading(false);
       }
@@ -32,7 +39,7 @@ const adminProfile = () => {
       await signOut();
       setUser(null);
       setIsLoggedIn(false);
-      router.replace('/sign-in');
+      router.replace("/sign-in");
     } catch (error) {
       Alert.alert("Error", error.message);
     }
@@ -40,7 +47,7 @@ const adminProfile = () => {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Loading...</Text>
       </View>
     );
@@ -48,38 +55,46 @@ const adminProfile = () => {
 
   return (
     <SafeAreaView className="bg-primary h-full">
-              <Text style={{ fontSize: 25, fontWeight: 'bold', marginTop: 50, marginLeft: 20, color: '#fff'}}>Welcome back!</Text>
+      <Text
+        style={{
+          fontSize: 25,
+          fontWeight: "bold",
+          marginTop: 50,
+          marginLeft: 20,
+          color: "#fff",
+        }}
+      >
+        Welcome back!
+      </Text>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
-
         <View className="w-full flex justify-center items-center mt-1 mb-8 px-5">
-        <TouchableOpacity
-          onPress={handleSignOut}
-          className="flex w-full items-end mb-10"
-        >
-          <Image
-            source={icons.logout}
-            resizeMode="contain"
-            className="w-6 h-6"
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleSignOut}
+            className="flex w-full items-end mb-10"
+          >
+            <Image
+              source={icons.logout}
+              resizeMode="contain"
+              className="w-6 h-6"
+            />
+          </TouchableOpacity>
 
-        <View className="w-16 h-16 border border-secondary rounded-lg flex justify-center items-center ">
-          <Image
-            source={{ uri: user?.avatar }}
-            className="w-[90%] h-[90%] rounded-lg"
-            resizeMode="cover"
-          />
-        </View>
+          <View className="w-16 h-16 border border-secondary rounded-lg flex justify-center items-center ">
+            <Image
+              source={{ uri: user?.avatar }}
+              className="w-[90%] h-[90%] rounded-lg"
+              resizeMode="cover"
+            />
+          </View>
 
-        <InfoBox
-          title={user?.username}
-          containerStyles="mt-5"
-          titleStyles="text-lg"
-        />
-        <Text style={{ fontSize: 16, color: '#888' }}>{user?.email}</Text>
-                <View style={{ marginBottom: 10 }}>
+          <InfoBox
+            title={user?.username}
+            containerStyles="mt-5"
+            titleStyles="text-lg"
+          />
+          <Text style={{ fontSize: 16, color: "#888" }}>{user?.email}</Text>
+          <View style={{ marginBottom: 10 }}></View>
         </View>
-      </View>
       </ScrollView>
     </SafeAreaView>
   );

@@ -11,7 +11,6 @@ import {
   ScrollView,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-
 import { icons } from "../../constants";
 import { createPetList } from "../../lib/appwrite";
 import FormField from "../../components/FormField";
@@ -37,7 +36,7 @@ const Create = () => {
     location: "",
     approval: "Pending",
     image: null,
-    created_at: ""
+    created_at: "",
   });
 
   // Breeds
@@ -139,11 +138,11 @@ const Create = () => {
 
     setUploading(true);
     try {
-      const currentDate = new Date().toISOString().split('T')[0]; // Get current date and time in ISO format
-    await createPetList({
-      ...form,
-      created_at: currentDate, // Set created_at to the current date and time
-      userId: user.$id,
+      const currentDate = new Date().toISOString().split("T")[0]; // Get current date and time in ISO format
+      await createPetList({
+        ...form,
+        created_at: currentDate, // Set created_at to the current date and time
+        userId: user.$id,
       });
 
       Alert.alert("Success", "Pet details uploaded successfully");

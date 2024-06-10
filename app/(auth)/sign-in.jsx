@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
-
 import { images } from "../../constants";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
@@ -34,7 +33,7 @@ const SignIn = () => {
       Alert.alert("Success", "User signed in successfully");
 
       // Check if the user is an admin
-      if (result.accountType === 'admin') {
+      if (result.accountType === "admin") {
         router.replace("/adminProfile");
       } else {
         router.replace("/home");

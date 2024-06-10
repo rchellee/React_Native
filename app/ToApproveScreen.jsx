@@ -7,6 +7,8 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useRoute } from "@react-navigation/native";
@@ -67,7 +69,7 @@ const ToApproveScreen = () => {
   const handleApprove = async () => {
     try {
       await updatePetAdoptionStatus(Name, { approval: "Approved" });
-      // Navigate to the "request" screen
+      Alert.alert("Success", "The pet has been approved.");
       navigation.navigate("request");
     } catch (error) {
       console.error("Error approving pet:", error);
@@ -77,170 +79,170 @@ const ToApproveScreen = () => {
   const handleReject = async () => {
     try {
       await updatePetAdoptionStatus(Name, { approval: "Rejected" });
-      // Navigate to the "request" screen
+      Alert.alert("Success", "The pet has been rejected.");
       navigation.navigate("request");
     } catch (error) {
-      console.error("Error approving pet:", error);
+      console.error("Error rejecting pet:", error);
     }
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF" }}>
-      <StatusBar backgroundColor="#444444" />
+      <ScrollView>
+        <StatusBar backgroundColor="#444444" />
 
-      <View style={{ height: 480, backgroundColor: "#161622" }}>
-        <ImageBackground
-          resizeMode="contain"
-          source={{ uri: image }}
-          style={{
-            height: 280,
-            top: 40,
-          }}
-        >
+        <View style={{ height: 480, backgroundColor: "#161622" }}>
+          <ImageBackground
+            resizeMode="contain"
+            source={{ uri: image }}
+            style={{
+              height: 280,
+              top: 40,
+            }}
+          ></ImageBackground>
 
-        </ImageBackground>
-
-        <View style={style.detailsContainer}>
-          {/* Pet name and gender icon */}
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Text
-              style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
+          <View style={style.detailsContainer}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
-              {Name}
-            </Text>
-            <Text>
-              {gender === "Female" ? (
-                <Icon name="gender-female" size={25} color="#a8a8a8" />
-              ) : (
-                <Icon name="gender-male" size={25} color="#a8a8a8" />
-              )}
-            </Text>
-          </View>
-
-          {/* Render Pet type and age */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Type: {species}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>Age: {age} </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Breed: {breed}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              Color: {color}{" "}
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>Size: {size}</Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              Php: {adoption_fee}{" "}
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "#616161" }}>
-              Vaxx: {vaccination_status ? "Yes" : "No"}
-            </Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>
-              {contact_num}
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 5,
-            }}
-          >
-            <Text style={{ fontSize: 13, color: "#616161" }}>{email}</Text>
-          </View>
-
-          {/* Render location and icon */}
-          <View style={{ marginTop: 5, flexDirection: "row" }}>
-            <Icon name="map-marker" color="#306060" size={20} />
-            <Text style={{ fontSize: 14, color: "#a8a8a8", marginLeft: 5 }}>
-              {location}
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Comment container */}
-      <View
-        style={{ marginTop: 100, justifyContent: "space-between", flex: 1 }}
-      >
-        <View>
-          {/* Render user image, name, and date */}
-          <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
-            <Image
-              source={{ uri: avatar }}
-              style={{ height: 40, width: 40, borderRadius: 20 }}
-            />
-            <View style={{ flex: 1, paddingLeft: 10 }}>
               <Text
-                style={{ color: "#616161", fontSize: 12, fontWeight: "bold" }}
+                style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
               >
-                {username}
+                {Name}
               </Text>
-              <Text
-                style={{
-                  color: "#a8a8a8",
-                  fontSize: 11,
-                  fontWeight: "bold",
-                  marginTop: 2,
-                }}
-              >
-                {email}
+              <Text>
+                {gender === "Female" ? (
+                  <Icon name="gender-female" size={25} color="#a8a8a8" />
+                ) : (
+                  <Icon name="gender-male" size={25} color="#a8a8a8" />
+                )}
               </Text>
             </View>
-            <Text style={{ color: "#a8a8a8", fontSize: 12 }}>{created_at}</Text>
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Type: {species}
+              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
+                Age: {age}{" "}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Breed: {breed}
+              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
+                Color: {color}{" "}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Size: {size}
+              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
+                Php: {adoption_fee}{" "}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#616161" }}>
+                Vaxx: {vaccination_status ? "Yes" : "No"}
+              </Text>
+              <Text style={{ fontSize: 13, color: "#616161" }}>
+                {contact_num}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
+            >
+              <Text style={{ fontSize: 13, color: "#616161" }}>{email}</Text>
+            </View>
+
+            <View style={{ marginTop: 5, flexDirection: "row" }}>
+              <Icon name="map-marker" color="#306060" size={20} />
+              <Text style={{ fontSize: 14, color: "#a8a8a8", marginLeft: 5 }}>
+                {location}
+              </Text>
+            </View>
           </View>
-          <Text style={style.comment}>{description} </Text>
         </View>
 
-        {/* Render footer */}
-        <View style={style.footer}>
-          <TouchableOpacity
-            style={[style.btn, { backgroundColor: "#161622" }]}
-            onPress={handleApprove}
-          >
-            <Text style={{ color: "#FFF", fontWeight: "bold" }}>Approve</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[style.btn, { backgroundColor: "#8B0000" }]}
-            onPress={handleReject}
-          >
-            <Text style={{ color: "#FFF", fontWeight: "bold" }}>Reject</Text>
-          </TouchableOpacity>
+        <View
+          style={{ marginTop: 100, justifyContent: "space-between", flex: 1 }}
+        >
+          <View>
+            <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
+              <Image
+                source={{ uri: avatar }}
+                style={{ height: 40, width: 40, borderRadius: 20 }}
+              />
+              <View style={{ flex: 1, paddingLeft: 10 }}>
+                <Text
+                  style={{ color: "#616161", fontSize: 12, fontWeight: "bold" }}
+                >
+                  {username}
+                </Text>
+                <Text
+                  style={{
+                    color: "#a8a8a8",
+                    fontSize: 11,
+                    fontWeight: "bold",
+                    marginTop: 2,
+                  }}
+                >
+                  {email}
+                </Text>
+              </View>
+              <Text style={{ color: "#a8a8a8", fontSize: 12 }}>
+                {created_at}
+              </Text>
+            </View>
+            <Text style={style.comment}>{description} </Text>
+          </View>
+
+          <View style={style.footer}>
+            <TouchableOpacity
+              style={[style.btn, { backgroundColor: "#161622" }]}
+              onPress={handleApprove}
+            >
+              <Text style={{ color: "#FFF", fontWeight: "bold" }}>Approve</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[style.btn, { backgroundColor: "#8B0000" }]}
+              onPress={handleReject}
+            >
+              <Text style={{ color: "#FFF", fontWeight: "bold" }}>Reject</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

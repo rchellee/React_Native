@@ -22,7 +22,10 @@ const Adopt = () => {
 
   // Filter out posts with approval status "Pending" or "Rejected" or adoption status "Adopted"
   const filteredPosts = posts.filter(
-    post => post.approval !== "Pending" && post.approval !== "Rejected" && post.adoption_status !== "Adopted"
+    (post) =>
+      post.approval !== "Pending" &&
+      post.approval !== "Rejected" &&
+      post.adoption_status !== "Adopted"
   );
 
   return (
@@ -30,12 +33,7 @@ const Adopt = () => {
       <FlatList
         data={filteredPosts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <PetList 
-            video={item}
-          />
-        )}
-        
+        renderItem={({ item }) => <PetList video={item} />}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
@@ -67,8 +65,8 @@ const Adopt = () => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            colors={['white']}
-            tintColor={'white'}
+            colors={["white"]}
+            tintColor={"white"}
           />
         }
       />

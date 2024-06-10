@@ -1,8 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Image, FlatList, TouchableOpacity, Text, RefreshControl, StyleSheet } from "react-native";
-
+import {
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  Text,
+  RefreshControl,
+  StyleSheet,
+} from "react-native";
 import { icons } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
 import { getUserPosts, signOut } from "../../lib/appwrite";
@@ -40,7 +47,7 @@ const Profile = () => {
       case "Adoption":
         return (
           <FlatList
-            data={posts.filter(post => post.adoption_status === 'Pending')} // Filter posts with adoption status "pending"
+            data={posts.filter((post) => post.adoption_status === "Pending")} // Filter posts with adoption status "pending"
             keyExtractor={(item) => item.$id}
             renderItem={({ item }) => <Adoption video={item} />}
             ListEmptyComponent={() => (
@@ -104,21 +111,33 @@ const Profile = () => {
       <View className="flex flex-row justify-around w-full mb-1">
         <TouchableOpacity onPress={() => setActiveTab("My Pets")}>
           <Text
-            style={activeTab === "My Pets" ? [styles.textActive, styles.fontBold] : styles.textDefault}
+            style={
+              activeTab === "My Pets"
+                ? [styles.textActive, styles.fontBold]
+                : styles.textDefault
+            }
           >
             My Pets
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setActiveTab("My Request")}>
           <Text
-            style={activeTab === "My Request" ? [styles.textActive, styles.fontBold] : styles.textDefault}
+            style={
+              activeTab === "My Request"
+                ? [styles.textActive, styles.fontBold]
+                : styles.textDefault
+            }
           >
             My Request
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setActiveTab("Adoption")}>
           <Text
-            style={activeTab === "Adoption" ? [styles.textActive, styles.fontBold] : styles.textDefault}
+            style={
+              activeTab === "Adoption"
+                ? [styles.textActive, styles.fontBold]
+                : styles.textDefault
+            }
           >
             Adoption
           </Text>
