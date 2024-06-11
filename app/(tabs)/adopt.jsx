@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, Image, RefreshControl, Text, View, StyleSheet } from "react-native";
+import {
+  FlatList,
+  Image,
+  RefreshControl,
+  Text,
+  View,
+  StyleSheet,
+} from "react-native";
 import useAppwrite from "../../lib/useAppwrite";
 import { getAllPosts } from "../../lib/appwrite";
 import EmptyState from "../../components/EmptyState";
@@ -38,17 +45,16 @@ const Adopt = () => {
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
-            <View style={styles.userInfo}>
-              <Image source={images.logo} className="w-[90px] h-[35px] mr-16" />
-              <Image
-                source={{ uri: user?.avatar }}
-                style={styles.avatar}
-                className="w-[70px] h-[50px] ml-16"
-              />
-              <Text style={[styles.username, { fontFamily: "Poppins-Bold" }]}>
-                {user?.username}
-              </Text>
-            </View>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image
+                  source={{ uri: user?.avatar }}
+                  className="w-[46px] h-[46px] rounded-lg mr-2"
+                  resizeMode="cover"
+                />
+                <Text className="text-xl font-psemibold text-white">
+                  {user?.username}
+                </Text>
+              </View>
             </View>
 
             <SearchInput />
@@ -246,6 +252,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
 
 export default Adopt;

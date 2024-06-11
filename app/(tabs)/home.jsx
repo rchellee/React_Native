@@ -672,11 +672,10 @@ const Home = () => {
         ListHeaderComponent={() => (
           <View style={styles.headerContainer}>
             <View style={styles.userInfo}>
-              <Image source={images.logo} className="w-[90px] h-[35px] mr-16" />
               <Image
                 source={{ uri: user?.avatar }}
                 style={styles.avatar}
-                className="w-[70px] h-[50px] ml-16"
+                className="w-[46px] h-[46px] rounded-lg mr-2"
               />
               <Text style={[styles.username, { fontFamily: "Poppins-Bold" }]}>
                 {user?.username}
