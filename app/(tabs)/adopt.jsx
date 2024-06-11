@@ -14,7 +14,6 @@ import EmptyState from "../../components/EmptyState";
 import SearchInput from "../../components/SearchInput";
 import PetList from "../../components/PetList";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { images } from "../../constants";
 
 const Adopt = () => {
   const { user } = useGlobalContext();
@@ -56,7 +55,6 @@ const Adopt = () => {
                 </Text>
               </View>
             </View>
-
             <SearchInput />
           </View>
         )}
