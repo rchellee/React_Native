@@ -65,7 +65,6 @@ const AdoptionDetails = () => {
     };
     fetchRequests();
   }, [Name]);
-  
 
   const handleDeclineRequest = async (requestId, petName) => {
     try {
@@ -127,15 +126,15 @@ const AdoptionDetails = () => {
 
       <ScrollView>
         <View style={{ height: 450, backgroundColor: "#161622" }}>
-        <Text></Text>
-        <View style={style.header}>
-              <Icon
-                name="arrow-left"
-                size={28}
-                color="#616161"
-                onPress={() => navigation.navigate("profile")}
-              />
-            </View>
+          <Text></Text>
+          <View style={style.header}>
+            <Icon
+              name="arrow-left"
+              size={28}
+              color="#616161"
+              onPress={() => navigation.navigate("profile")}
+            />
+          </View>
           <ImageBackground
             resizeMode="contain"
             source={{ uri: image }}
@@ -143,121 +142,120 @@ const AdoptionDetails = () => {
               height: 280,
               top: 60,
             }}
-          >
-            
-          </ImageBackground>
+          ></ImageBackground>
         </View>
 
         {/* Render adoption requests */}
-        <View style={style.requesterContainer}>            
-            {requests.map((request) => (
-              <View key={request.$id} style={style.requesterDetails}>
+        <View style={style.requesterContainer}>
+          {requests.map((request) => (
+            <View key={request.$id} style={style.requesterDetails}>
               <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text
-                style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
               >
-                {Name}
-              </Text>
-              <Text>
-                {gender === "Female" ? (
-                  <Icon name="gender-female" size={25} color="#a8a8a8" />
-                ) : (
-                  <Icon name="gender-male" size={25} color="#a8a8a8" />
-                )}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-              }}
-            >
-              <Text style={{ fontSize: 12, color: "#616161" }}>
-                Type: {species}
-              </Text>
-              <Text style={{ fontSize: 13, color: "#616161" }}>
-                Age: {age}{" "}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-              }}
-              >
-              <Text style={{ fontSize: 12, color: "#616161" }}>
-                Breed: {breed}
-              </Text>
-              <Text style={{ fontSize: 13, color: "#616161" }}>
-                Color: {color}{" "}
-              </Text>
-            </View>
-            <Text></Text>
-            <Text style={style.sectionTitle}>Requested By:</Text>
-                <Text style={style.requesterText}>
-                  <Text style={{ fontWeight: "bold" }}>Name: </Text>
-                  {request.adopterName}
+                <Text
+                  style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
+                >
+                  {Name}
                 </Text>
-                <Text style={style.requesterText}>
-                  <Text style={{ fontWeight: "bold" }}>Contact: </Text>
-                  {request.adopterContact}
-                </Text>
-                <Text style={style.requesterText}>
-                  <Text style={{ fontWeight: "bold" }}>Address: </Text>
-                  {request.adopterAddress}
-                </Text>
-                <Text style={style.requesterText}>
-                  <Text style={{ fontWeight: "bold" }}>Message: </Text>
-                  {request.message}
-                </Text>
-                <View style={style.buttonContainer}>
-                  {request.status === "Accepted" ? (
-                    <>
-                      <TouchableOpacity
-                        style={style.completeButton}
-                        onPress={() => handleAdoptionComplete(request.$id, Name)}
-                      >
-                        <Text style={style.buttonText}>Adopted</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={style.declineButton}
-                        onPress={() => handleDeclineRequest(request.$id, Name)}
-                      >
-                        <Text style={style.buttonText}>Cancel</Text>
-                      </TouchableOpacity>
-                    </>
-                  ) : request.status === "Pending" ? (
-                    <>
-                      <TouchableOpacity
-                        style={style.acceptButton}
-                        onPress={() => handleAcceptRequest(request.$id, Name)}
-                      >
-                        <Text style={style.buttonText}>Accept</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={style.declineButton}
-                        onPress={() => handleDeclineRequest(request.$id, Name)}
-                      >
-                        <Text style={style.buttonText}>Cancel</Text>
-                      </TouchableOpacity>
-                    </>
+                <Text>
+                  {gender === "Female" ? (
+                    <Icon name="gender-female" size={25} color="#a8a8a8" />
                   ) : (
+                    <Icon name="gender-male" size={25} color="#a8a8a8" />
+                  )}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 5,
+                }}
+              >
+                <Text style={{ fontSize: 12, color: "#616161" }}>
+                  Type: {species}
+                </Text>
+                <Text style={{ fontSize: 13, color: "#616161" }}>
+                  Age: {age}{" "}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 5,
+                }}
+              >
+                <Text style={{ fontSize: 12, color: "#616161" }}>
+                  Breed: {breed}
+                </Text>
+                <Text style={{ fontSize: 13, color: "#616161" }}>
+                  Color: {color}{" "}
+                </Text>
+              </View>
+              <Text></Text>
+              <Text style={style.sectionTitle}>Requested By:</Text>
+              <Text style={style.requesterText}>
+                <Text style={{ fontWeight: "bold" }}>Name: </Text>
+                {request.adopterName}
+              </Text>
+              <Text style={style.requesterText}>
+                <Text style={{ fontWeight: "bold" }}>Contact: </Text>
+                {request.adopterContact}
+              </Text>
+              <Text style={style.requesterText}>
+                <Text style={{ fontWeight: "bold" }}>Address: </Text>
+                {request.adopterAddress}
+              </Text>
+              <Text style={style.requesterText}>
+                <Text style={{ fontWeight: "bold" }}>Message: </Text>
+                {request.message}
+              </Text>
+              <View style={style.buttonContainer}>
+                {request.status === "Accepted" ? (
+                  <>
                     <TouchableOpacity
                       style={style.completeButton}
                       onPress={() => handleAdoptionComplete(request.$id, Name)}
                     >
                       <Text style={style.buttonText}>Adopted</Text>
                     </TouchableOpacity>
-                  )}
-                </View>
+                    <TouchableOpacity
+                      style={style.declineButton}
+                      onPress={() => handleDeclineRequest(request.$id, Name)}
+                    >
+                      <Text style={style.buttonText}>Cancel</Text>
+                    </TouchableOpacity>
+                  </>
+                ) : request.status === "Pending" ? (
+                  <>
+                    <TouchableOpacity
+                      style={style.acceptButton}
+                      onPress={() => handleAcceptRequest(request.$id, Name)}
+                    >
+                      <Text style={style.buttonText}>Accept</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={style.declineButton}
+                      onPress={() => handleDeclineRequest(request.$id, Name)}
+                    >
+                      <Text style={style.buttonText}>Cancel</Text>
+                    </TouchableOpacity>
+                  </>
+                ) : (
+                  <TouchableOpacity
+                    style={style.completeButton}
+                    onPress={() => handleAdoptionComplete(request.$id, Name)}
+                  >
+                    <Text style={style.buttonText}>Adopted</Text>
+                  </TouchableOpacity>
+                )}
               </View>
-            ))}
-
-
+            </View>
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -270,23 +268,6 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     top: 20,
-  },
-  detailsContainer: {
-    height: 140,
-    backgroundColor: "#FFF",
-    marginHorizontal: 20,
-    flex: 1,
-    bottom: -60,
-    borderRadius: 18,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
   },
   requesterContainer: {
     marginHorizontal: 20,

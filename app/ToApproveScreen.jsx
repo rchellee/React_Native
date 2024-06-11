@@ -283,11 +283,6 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  header: {
-    flexDirection: "row",
-    padding: 20,
-    justifyContent: "space-between",
-  },
 });
 
 export default ToApproveScreen;

@@ -10,15 +10,39 @@ import {
   SafeAreaView,
   StatusBar,
 } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { useGlobalContext } from "../context/GlobalProvider";
 import { getUserPosts, getPetIdByName, deletePet } from "../lib/appwrite"; // Import the deletePet function
 import useAppwrite from "../lib/useAppwrite";
 import { icons } from "../constants";
 
-const MyPet = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, adoption_status, approval, creator: { username, avatar, email }} }) => {
+const MyPet = ({
+  video: {
+    Name,
+    age,
+    species,
+    breed,
+    color,
+    gender,
+    size,
+    adoption_fee,
+    vaccination_status,
+    description,
+    contact_num,
+    location,
+    image,
+    created_at,
+    adoption_status,
+    approval,
+    creator: { username, avatar, email },
+  },
+}) => {
   const { user } = useGlobalContext();
-  const { data: posts, refetch, isLoading } = useAppwrite(() => getUserPosts(user.$id));
+  const {
+    data: posts,
+    refetch,
+    isLoading,
+  } = useAppwrite(() => getUserPosts(user.$id));
   const [refreshing, setRefreshing] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const navigation = useNavigation();
@@ -47,7 +71,9 @@ const MyPet = ({ video: { Name, age, species, breed, color, gender, size, adopti
       ) : (
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         >
           <View className="flex flex-col items-center px-4 mb-14">
             <View className="flex flex-row gap-3 items-start">
@@ -84,7 +110,11 @@ const MyPet = ({ video: { Name, age, species, breed, color, gender, size, adopti
 
               <View className="pt-2">
                 <TouchableOpacity onPress={() => setShowDelete(!showDelete)}>
-                  <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+                  <Image
+                    source={icons.menu}
+                    className="w-5 h-5"
+                    resizeMode="contain"
+                  />
                 </TouchableOpacity>
               </View>
             </View>
@@ -92,7 +122,29 @@ const MyPet = ({ video: { Name, age, species, breed, color, gender, size, adopti
             <TouchableOpacity
               activeOpacity={0.7}
               className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-              onPress={() => navigation.navigate('MyPetDetails', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, username, avatar, email, approval })}
+              onPress={() =>
+                navigation.navigate("MyPetDetails", {
+                  Name,
+                  age,
+                  species,
+                  breed,
+                  color,
+                  gender,
+                  size,
+                  adoption_fee,
+                  vaccination_status,
+                  description,
+                  adoption_status,
+                  contact_num,
+                  location,
+                  image,
+                  created_at,
+                  username,
+                  avatar,
+                  email,
+                  approval,
+                })
+              }
             >
               <Image
                 source={{ uri: image }}

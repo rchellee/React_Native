@@ -1,9 +1,29 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { icons } from "../constants";
 
-const ToApprove = ({ video: { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, adoption_status, contact_num, location, image, created_at, approval, creator: { username, avatar, email, accountId }} }) => {
+const ToApprove = ({
+  video: {
+    Name,
+    age,
+    species,
+    breed,
+    color,
+    gender,
+    size,
+    adoption_fee,
+    vaccination_status,
+    description,
+    adoption_status,
+    contact_num,
+    location,
+    image,
+    created_at,
+    approval,
+    creator: { username, avatar, email, accountId },
+  },
+}) => {
   const navigation = useNavigation();
 
   // Check if adoption status is "Adopted"
@@ -12,7 +32,6 @@ const ToApprove = ({ video: { Name, age, species, breed, color, gender, size, ad
   }
 
   return (
-    
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
         <View className="flex justify-center items-center flex-row flex-1">
@@ -48,7 +67,29 @@ const ToApprove = ({ video: { Name, age, species, breed, color, gender, size, ad
       <TouchableOpacity
         activeOpacity={0.7}
         className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-        onPress={() => navigation.navigate('ToApproveScreen', { Name, age, species, breed, color, gender, size, adoption_fee, vaccination_status, description, contact_num, location, image, created_at, approval, username, avatar, email, accountId })}
+        onPress={() =>
+          navigation.navigate("ToApproveScreen", {
+            Name,
+            age,
+            species,
+            breed,
+            color,
+            gender,
+            size,
+            adoption_fee,
+            vaccination_status,
+            description,
+            contact_num,
+            location,
+            image,
+            created_at,
+            approval,
+            username,
+            avatar,
+            email,
+            accountId,
+          })
+        }
       >
         <Image
           source={{ uri: image }}

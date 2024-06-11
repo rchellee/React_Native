@@ -31,7 +31,9 @@ const AdoptionRequests = () => {
       <Text>Contact: {item.adopterContact}</Text>
       <Text>Address: {item.adopterAddress}</Text>
       <Text className="mt-2">Message: {item.message}</Text>
-      <Text className="mt-2 text-sm text-gray-500">Requested at: {item.requested_at}</Text>
+      <Text className="mt-2 text-sm text-gray-500">
+        Requested at: {item.requested_at}
+      </Text>
     </View>
   );
 
@@ -43,7 +45,10 @@ const AdoptionRequests = () => {
       {loading ? (
         <Text className="text-white text-center">Loading...</Text>
       ) : requests.length === 0 ? (
-        <EmptyState title="No Requests Found" subtitle="You have no adoption requests." />
+        <EmptyState
+          title="No Requests Found"
+          subtitle="You have no adoption requests."
+        />
       ) : (
         <FlatList
           data={requests}

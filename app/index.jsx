@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View, ScrollView, Image } from "react-native";
 import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import { images } from "../constants";
 import CustomButton from "../components/CustomButton";
 import { useGlobalContext } from "../context/GlobalProvider";
@@ -28,7 +27,7 @@ export default function App() {
           />
 
           <View className="relative mt-1">
-          <Text className="mt-9"></Text>
+            <Text className="mt-9"></Text>
             <Text className="text-2xl text-white font-bold text-center">
               You can make a{"\n"}
               Difference with{" "}

@@ -96,75 +96,132 @@ const Notifications = () => {
 
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "#161622" }}>
-      <StatusBar backgroundColor="#FFF" />
-      <ScrollView>
-      <View style={style.requesterContainer}>
-        <View className="p-4 mb-1 bg-white rounded-lg shadow-md">
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-            <Text style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}>{item.PetName}</Text>
-          </View>
-        {!alreadyRated && (
-          <View className="mt-4">
-          {petInfo.image && (
-              <Image
-                source={{ uri: petInfo.image }}
-                style={{ width: 100, height: 100 }}
-              />
-            )}
-            <Text className="text-lg font-bold">Pet Information:</Text>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
-            <Text style={{ fontSize: 12, color: "#616161" }}>Type: {petInfo.species || "N/A"}</Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>Age: {petInfo.age || "N/A"} </Text>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
-            <Text style={{ fontSize: 12, color: "#616161" }}>Breed: {petInfo.breed || "N/A"}</Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>Color: {petInfo.color || "N/A"} </Text>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
-            <Text style={{ fontSize: 12, color: "#616161" }}>Size: {petInfo.size || "N/A"}</Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>Gender: {petInfo.gender || "N/A"} </Text>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
-            <Text style={{ fontSize: 12, color: "#616161" }}>Vaxx: {petInfo.vaccination_status !== "" ? "Yes" : "No"}</Text>
-            <Text style={{ fontSize: 13, color: "#616161" }}>{petInfo.contact_num || "N/A"}</Text>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
-            <Text style={{ fontSize: 13, color: "#616161" }}>Php {petInfo.adoption_fee}</Text>
-          </View>
-          <Text></Text>
-            <Text>Location: {petInfo.location || "N/A"}</Text>
-            <Text >Description: {petInfo.description || "N/A"}</Text>
-            
-            <Text></Text>
-            <Text style={{ fontWeight: 'bold' }}>Status: {item.status}</Text>
-        <Text className="mt-2 text-sm text-gray-500">
-          Requested at: {item.requested_at}
-        </Text>
-          </View>
-        )}
-        {item.status === "Adopted" && item.rated !== "True" && (
-          <TouchableOpacity
-            onPress={() => handleRatePet(item.PetName)}
-            className="mt-4 bg-blue-500 p-2 rounded-lg"
-          >
-            <Text className="text-white text-center">Rate</Text>
-          </TouchableOpacity>
-        )}
+        <StatusBar backgroundColor="#FFF" />
+        <ScrollView>
+          <View style={style.requesterContainer}>
+            <View className="p-4 mb-1 bg-white rounded-lg shadow-md">
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text
+                  style={{ fontSize: 20, color: "#616161", fontWeight: "bold" }}
+                >
+                  {item.PetName}
+                </Text>
+              </View>
+              {!alreadyRated && (
+                <View className="mt-4">
+                  {petInfo.image && (
+                    <Image
+                      source={{ uri: petInfo.image }}
+                      style={{ width: 100, height: 100 }}
+                    />
+                  )}
+                  <Text className="text-lg font-bold">Pet Information:</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 5,
+                    }}
+                  >
+                    <Text style={{ fontSize: 12, color: "#616161" }}>
+                      Type: {petInfo.species || "N/A"}
+                    </Text>
+                    <Text style={{ fontSize: 13, color: "#616161" }}>
+                      Age: {petInfo.age || "N/A"}{" "}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 5,
+                    }}
+                  >
+                    <Text style={{ fontSize: 12, color: "#616161" }}>
+                      Breed: {petInfo.breed || "N/A"}
+                    </Text>
+                    <Text style={{ fontSize: 13, color: "#616161" }}>
+                      Color: {petInfo.color || "N/A"}{" "}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 5,
+                    }}
+                  >
+                    <Text style={{ fontSize: 12, color: "#616161" }}>
+                      Size: {petInfo.size || "N/A"}
+                    </Text>
+                    <Text style={{ fontSize: 13, color: "#616161" }}>
+                      Gender: {petInfo.gender || "N/A"}{" "}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 5,
+                    }}
+                  >
+                    <Text style={{ fontSize: 12, color: "#616161" }}>
+                      Vaxx: {petInfo.vaccination_status !== "" ? "Yes" : "No"}
+                    </Text>
+                    <Text style={{ fontSize: 13, color: "#616161" }}>
+                      {petInfo.contact_num || "N/A"}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 5,
+                    }}
+                  >
+                    <Text style={{ fontSize: 13, color: "#616161" }}>
+                      Php {petInfo.adoption_fee}
+                    </Text>
+                  </View>
+                  <Text></Text>
+                  <Text>Location: {petInfo.location || "N/A"}</Text>
+                  <Text>Description: {petInfo.description || "N/A"}</Text>
 
+                  <Text></Text>
+                  <Text style={{ fontWeight: "bold" }}>
+                    Status: {item.status}
+                  </Text>
+                  <Text className="mt-2 text-sm text-gray-500">
+                    Requested at: {item.requested_at}
+                  </Text>
+                </View>
+              )}
+              {item.status === "Adopted" && item.rated !== "True" && (
+                <TouchableOpacity
+                  onPress={() => handleRatePet(item.PetName)}
+                  className="mt-4 bg-blue-500 p-2 rounded-lg"
+                >
+                  <Text className="text-white text-center">Rate</Text>
+                </TouchableOpacity>
+              )}
 
-        {item.status !== "Adopted" && (
-          <TouchableOpacity
-            onPress={() => handleCancelRequest(item.$id, item.PetName)}
-            className="mt-4 bg-red-500 p-2 rounded-lg"
-          >
-            <Text className="text-white text-center">Cancel Request</Text>
-          </TouchableOpacity>
-        )}
-        </View>
-      </View>
-      </ScrollView>
+              {item.status !== "Adopted" && (
+                <TouchableOpacity
+                  onPress={() => handleCancelRequest(item.$id, item.PetName)}
+                  className="mt-4 bg-red-500 p-2 rounded-lg"
+                >
+                  <Text className="text-white text-center">Cancel Request</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+        </ScrollView>
       </SafeAreaView>
-      
     );
   };
 
@@ -186,7 +243,6 @@ const Notifications = () => {
 };
 
 const style = StyleSheet.create({
-  
   requesterContainer: {
     borderRadius: 18,
     marginHorizontal: 25,

@@ -3,7 +3,10 @@ import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, Alert, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { createAdoptionRequest, updatePetAdoptionStatus } from "../lib/appwrite";
+import {
+  createAdoptionRequest,
+  updatePetAdoptionStatus,
+} from "../lib/appwrite";
 import FormField from "../components/FormField";
 import CustomButton from "../components/CustomButton";
 import { useGlobalContext } from "../context/GlobalProvider";
@@ -91,7 +94,7 @@ const AdoptForm = () => {
         message: "",
         requested_at: "",
         status: "Pending",
-        rated: "False"
+        rated: "False",
       });
 
       setUploading(false);

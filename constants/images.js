@@ -7,5 +7,13 @@ import logoSmall from "../assets/images/logo1.png";
 import empty from "../assets/images/empty.png";
 import avatar from "../assets/images/avatar.jpg";
 
-
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty, avatar };
+export default {
+  profile,
+  thumbnail,
+  cards,
+  path,
+  logo,
+  logoSmall,
+  empty,
+  avatar,
+};

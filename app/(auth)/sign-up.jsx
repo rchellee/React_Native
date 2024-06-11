@@ -6,7 +6,6 @@ import { images } from "../../constants";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { useGlobalContext } from "../../context/GlobalProvider";
-
 import { createUser } from "../../lib/appwrite";
 
 const SignUp = () => {

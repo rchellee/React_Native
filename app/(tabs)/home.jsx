@@ -13,7 +13,6 @@ import {
 import { useGlobalContext } from "../../context/GlobalProvider";
 import VideoCard from "../../components/VideoCard";
 import { useFonts } from "expo-font";
-import { images } from "../../constants";
 
 const Home = () => {
   const { user } = useGlobalContext();

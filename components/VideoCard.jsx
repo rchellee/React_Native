@@ -1,21 +1,30 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Video } from "expo-av";
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from "@expo/vector-icons";
 
 const VideoCard = ({ source, title, description }) => {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
 
   return (
     <View style={styles.card}>
-      <TouchableOpacity onPress={() => setIsVideoVisible(true)} style={styles.videoContainer}>
+      <TouchableOpacity
+        onPress={() => setIsVideoVisible(true)}
+        style={styles.videoContainer}
+      >
         {!isVideoVisible && (
           <View style={styles.overlay}>
             <MaterialIcons name="play-circle-outline" size={64} color="white" />
           </View>
         )}
         {isVideoVisible && (
-          <Video source={source} style={styles.video} useNativeControls shouldPlay resizeMode="contain" />
+          <Video
+            source={source}
+            style={styles.video}
+            useNativeControls
+            shouldPlay
+            resizeMode="contain"
+          />
         )}
       </TouchableOpacity>
       {title && <Text style={styles.title}>{title}</Text>}

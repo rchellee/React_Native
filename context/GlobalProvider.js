@@ -10,7 +10,7 @@ const GlobalProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter(); // Use the router
+  const router = useRouter();
 
   useEffect(() => {
     getCurrentUser()
@@ -18,8 +18,7 @@ const GlobalProvider = ({ children }) => {
         if (res) {
           setIsLoggedIn(true);
           setUser(res);
-          // Redirect based on account type
-          if (res.accountType === 'admin') {
+          if (res.accountType === "admin") {
             router.replace("/adminProfile");
           } else {
             router.replace("/home");
